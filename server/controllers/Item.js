@@ -11,7 +11,7 @@ export const createItem = async (req, res) => {
   if (!user.businessId) {
     return res.status(401).json({ error: "You are not a business owner" });
   }
-  const {
+  let {
     title,
     category,
     images,
@@ -22,6 +22,7 @@ export const createItem = async (req, res) => {
     available_dates,
   } = req.body;
   try {
+    category = category.toLowerCase().split(" ").join("-");
     const item = await Item.create({
       title,
       category,
@@ -43,7 +44,7 @@ export const createItem = async (req, res) => {
 export const getItems = async (req, res) => {
   try {
     const cat = req.query.category;
-    const items = await Item.find(cat ? { category: cat } : {});
+    const items = await Item.find(cat ? cat !== "all" ? { category: cat } : {} : {});
     res.status(200).send(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

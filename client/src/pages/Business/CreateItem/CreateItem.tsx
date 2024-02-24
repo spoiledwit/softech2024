@@ -8,6 +8,7 @@ import { DateRange } from "react-day-picker";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { sampleCats } from "@/constants";
 import {
   Form,
   FormControl,
@@ -18,13 +19,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Locator from "@/components/Locator/Locator";
-import { categories } from "@/constants";
 import { DatePickerWithRange } from "@/components/DatePicker/DatePicker";
 import axios from "axios";
 
 const formSchema = z.object({
   title: z.string().min(6),
   category: z.string(),
+  content: z.array(z.object({ title: z.string(), markdown: z.string() })),
   images: z.array(z.string()).nonempty(),
   videos: z.array(z.string()).optional(),
   location: z.object({
@@ -41,7 +42,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const CreateItem = () => {
-  const navigate = useNavigate();
   const [images, setImages] = useState<any>([]);
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -55,6 +55,16 @@ const CreateItem = () => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      category: "",
+      content: [{ title: "", markdown: "" }],
+      images: [],
+      videos: [],
+      location: { lat: 0, lng: 0, region: "" },
+      price: "",
+      availableDates: { dates: [] },
+    },
   });
 
   useEffect(() => {
@@ -81,7 +91,6 @@ const CreateItem = () => {
         ]);
       }
     }
-
   }, [location, region, date]);
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
@@ -114,10 +123,12 @@ const CreateItem = () => {
       setLoading(false);
     }
   };
+  
+  form.watch("content");
 
   return (
     <Form {...form}>
-      <div className="flex flex-col w-full min-h-screen items-center pb-32">
+      <div className="flex flex-col w-full min-h-screen items-center pb-[700px]">
         <div className="rounded-lg bg-white shadow-sm">
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -145,6 +156,58 @@ const CreateItem = () => {
                 </FormItem>
               )}
             />
+            <Button
+              type="button"
+              onClick={() => {
+                form.setValue("content", [
+                  ...form.getValues("content"),
+                  { title: "", markdown: "" },
+                ]);
+              }}
+            >
+              Add Content
+            </Button>
+            {form.getValues("content")?.map((content: any, index: number) => (
+              <div key={index}>
+                <FormField
+                  control={form.control}
+                  name={`content.${index}.title`}
+                  render={({ field }: { field: any }) => (
+                    <FormItem>
+                      <FormLabel>Content Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`content.${index}.markdown`}
+                  render={({ field }: { field: any }) => (
+                    <FormItem>
+                      <FormLabel>Content Markdown</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="button"
+                  onClick={() => {
+                    const newContent = form.getValues("content");
+                    newContent.splice(index, 1);
+                    form.setValue("content", newContent);
+                  }}
+                >
+                  Remove Content
+                </Button>
+              </div>
+            ))}
+
             <FormField
               control={form.control}
               name="category"
@@ -156,9 +219,9 @@ const CreateItem = () => {
                     onChange={field.onChange}
                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
-                    {categories.map((category: any) => (
-                      <option key={category.title} value={category.title}>
-                        {category.title}
+                    {sampleCats.map((category: any) => (
+                      <option key={category} value={category}>
+                        {category}
                       </option>
                     ))}
                   </select>
@@ -197,8 +260,7 @@ const CreateItem = () => {
                 selectRegion={setRegion}
               />
             </div>
-            <Button 
-            disabled={loading} className="w-full" type="submit">
+            <Button disabled={loading} className="w-full" type="submit">
               {loading ? <div className="dotFlashing"></div> : <p>Submit</p>}
             </Button>
           </form>

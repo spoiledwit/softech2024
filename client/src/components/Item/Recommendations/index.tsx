@@ -77,7 +77,7 @@ const Recommendations = ({ title, description }: Props) => {
       <div className="flex justify-between items-center mb-2">
         {title}
         <a
-          href="/view-all"
+          href="/category/all"
           className="text-sm md:block hidden font-medium text-yellow-600 hover:text-yellow-500 transition-colors"
         >
           View All
