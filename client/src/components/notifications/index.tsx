@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import useAuthStore from "@/store/authStore";
+import { toReadableDate } from "@/lib/utils";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 export default function Notification() {
@@ -34,9 +35,11 @@ export default function Notification() {
         <div className="grid gap-4 py-4">
           {user?.notifications?.map((notification: any) => (
             <div className="flex flex-row items-center gap-4">
-              <div>
-                <p className="text-lg font-medium">{notification?.content}</p>
-                <p>{notification?.createdAt}</p>
+              <div
+              className="text-sm text-gray-600"
+              >
+                <p>{notification?.content}</p>
+                <p>{toReadableDate(notification?.createdAt)}</p>
               </div>
             </div>
           ))}

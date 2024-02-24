@@ -10,6 +10,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import itemRoutes from "./routes/itemRoute.js";
 import forumRoutes from "./routes/forumRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.use("/order", orderRoutes);
 app.use("/cart", cartRoutes);
 app.use("/forum", forumRoutes);
 app.use("/reply", replyRoutes);
+app.use("/notification", notificationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
