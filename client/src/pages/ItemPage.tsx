@@ -31,7 +31,7 @@ const Item = () => {
   };
 
   return (
-    <div className="min-h-screen pt-6 mt-20 px-8 md:px-16 ">
+    <div className="min-h-screen pt-6 mt- px-8 md:px-16 ">
       {loading ? (
         <div className="flex justify-center items-center mt-32">
           <img src={loadinganimation} alt="loading" />

@@ -55,7 +55,8 @@ const Complaint = ({ item }: { item: ItemType }) => {
             const { message } = values;
             const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/complaint`, {
                 message,
-                itemId: item._id
+                itemId: item._id,
+                businessId: item.businessId,
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`

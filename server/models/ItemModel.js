@@ -38,7 +38,7 @@ const ItemSchema = new mongoose.Schema(
       },
     ],
     available_dates: {
-      all_available: { type: Boolean, default:false },
+      all_available: { type: Boolean, default: false },
       dates: { type: [Date], required: true },
     },
   },

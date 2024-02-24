@@ -23,13 +23,13 @@ const Navbar = () => {
         style={{
           zIndex: 1000,
         }}
-        className="w-full top-0 fixed flex flex-row items-center justify-between p-2 px-16 bg-white dark:bg-white transition-all border-b py-3"
+        className="w-full top-0 fixed flex flex-row items-center justify-between p-2 px-16 bg-white dark:bg-dark transition-all py-3"
       >
         <div className="flex flex-row items-center justify-between w-full">
           <Link to={"/"}>
             <img src={logo} className="w-[65px]" />
           </Link>
-          <div className=" flex-row gap-6 text-lg w-full justify-center xl:flex lg:flex md:flex sm:hidden hidden">
+          <div className=" flex-row gap-6 text-lg w-full justify-center text-black dark:text-white xl:flex lg:flex md:flex sm:hidden hidden">
             {navLinks.map((link) => (
               <Link className="text-sm" to={link.slug}>
                 {link.title}
@@ -38,16 +38,16 @@ const Navbar = () => {
           </div>
 
           <Link to={"/cart"} className="relative md:block xl:block lg:block hidden w-fit p-2">
-            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
+            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px]  h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.cart ? user.cart.length : 0}
             </span>
-            <FiShoppingBag className="text-2xl text-black" />
+            <FiShoppingBag className="text-2xl text-black dark:text-white" />
           </Link>
           <Link to={"/wishlist"} className="relative md:block lg:block xl:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.wishlist ? user.wishlist.length : 0}
             </span>
-            <FaRegHeart className="text-2xl text-black" />
+            <FaRegHeart className="text-2xl text-black dark:text-white" />
           </Link>
           <div>
             <Notification />
@@ -59,12 +59,12 @@ const Navbar = () => {
                   <>
                     <img
                       src={user.picture}
-                      className="xl:w-[60px] lg:w-[70px] md:w-[80px] w-[50px]   object-cover rounded-full"
+                      className="xl:w-[60px] lg:w-[70px] md:w-[80px] w-[50px]  object-cover rounded-full"
                       alt=""
                     />
                   </>
                 ) : (
-                  <BiUser size={25} />
+                  <BiUser size={25} className="dark:text-white" />
                 )}
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -95,13 +95,13 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <div>
-              
+
             </div>
             <span className="cursor-pointer items-center xl:flex lg:flex md:flex hidden">
               {theme == "dark" ? (
                 <BiMoon
                   size={25}
-                  className="text-black dark:text-black"
+                  className="text-black dark:text-white"
                   onClick={() => setTheme("light")}
                 />
               ) : (

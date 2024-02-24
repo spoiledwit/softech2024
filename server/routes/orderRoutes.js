@@ -6,7 +6,8 @@ import {
     getOrdersByBusiness,
     getOrdersByItem,
     updateOrder,
-    deleteOrder
+    deleteOrder,
+    approvePayment
 } from "../controllers/order.js"
 
 import express from "express"
@@ -15,6 +16,7 @@ const router = express.Router()
 
 router.get("/", getOrders)
 router.post("/", createOrder)
+router.get("/approve/:id", approvePayment)
 router.get("/user/:id", getOrdersByUser)
 router.get("/business/:id", getOrdersByBusiness)
 router.get("/item/:id", getOrdersByItem)

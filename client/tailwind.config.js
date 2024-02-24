@@ -21,6 +21,8 @@ module.exports = {
         "primary": "#EAB308",
         "secondary": "#1d1d1d",
         "hover": "#CA8A04",
+        "dark" : "#1a1a1a",
+        "dark-hover": "#1d1d1d"
       },
       keyframes: {
         "accordion-down": {
