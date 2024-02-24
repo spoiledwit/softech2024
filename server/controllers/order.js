@@ -128,14 +128,22 @@ export const getOrdersByBusiness = async (req, res) => {
     const { businessId } = req.params;
     const orders = await Order.find().populate({
       path: "items.itemId",
-      populate: { path: "businessId" },
-    });
-    
-    const businessOrders = orders.filter(
-      (order) => order.items.map((item) => item.itemId.businessId).includes(businessId)
-    );
-    console.log("BUSINESSSS ORDERSSSS:", businessOrders);
-    res.status(200).json(businessOrders);
+      populate: {
+        path: "businessId",
+      },
+    })
+
+    const businessOrder = [];
+
+    orders.forEach((order) => {
+      order.items.forEach((item) => {
+        if (item.itemId.businessId === businessId) {
+          businessOrder.push(order);
+        }
+      });
+    })
+
+    res.status(200).json(businessOrder);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
