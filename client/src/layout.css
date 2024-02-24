@@ -1,0 +1,13 @@
+#outlet::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+
+#outlet::-webkit-scrollbar-thumb {
+    background-color: #2d2d2d;
+}
+
+
+#outlet {
+    overflow-y: scroll;
+}
