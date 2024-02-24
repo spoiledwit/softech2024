@@ -23,7 +23,7 @@ const forum = mongoose.Schema({
     },
     replies: [{
         type: mongoose.Types.ObjectId,
-        ref: "Forum",
+        ref: "Reply",
     }],
     userId: {
         type: mongoose.Types.ObjectId,
