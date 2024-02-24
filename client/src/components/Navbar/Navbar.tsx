@@ -4,6 +4,7 @@ import { BiSun, BiMoon, BiUser } from "react-icons/bi";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { logout } from "@/hooks/auth";
+import { FiShoppingBag } from "react-icons/fI";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,7 +43,15 @@ const Navbar = () => {
               Login
             </Link>
           )}
-
+          <Link
+            to={"/cart"}
+            className="relative md:block hidden w-fit mr-10 p-2"
+          >
+            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
+              {user?.cart ? user.cart.length : 0}
+            </span>
+            <FiShoppingBag className="text-2xl text-black" />
+          </Link>
           <div className="flex flex-row gap-5 w-fit">
             <DropdownMenu>
               <DropdownMenuTrigger>

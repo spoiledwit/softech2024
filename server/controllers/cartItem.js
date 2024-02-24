@@ -17,8 +17,10 @@ export const addItemToCart = async (req, res) => {
 
 export const getCartItems = async (req, res) => {
     try {
-        const user = await AuthModel.findById(req.userId).populate("cart");
-        res.status(200).json(user.cart);
+        const user = await AuthModel.findById(req.userId);
+        const cartIds = user.cart;
+        const cartItems = await CartItem.find({ _id: { $in: cartIds } }).populate("itemId");
+        res.status(200).json(cartItems);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

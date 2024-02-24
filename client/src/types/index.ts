@@ -5,6 +5,7 @@ type User = {
     email: string;
     approved: boolean;
     businessId: string;
+    cart:[],
     createdAt: string;
     updatedAt: string;
 };

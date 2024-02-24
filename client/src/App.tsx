@@ -9,6 +9,7 @@ import Item from "./pages/ItemPage";
 import { useEffect } from "react";
 import BusinessLayout from "./pages/Business/BusinessLayout";
 import BusinessForm from "./pages/Business/BusinessForm";
+import CartPage from "./pages/CartPage";
 
 const App = () => {
 
@@ -28,6 +29,7 @@ const App = () => {
         <Route index element={user ? <Home /> : <Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="cart" element={<CartPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="panel" element={<BusinessLayout />} >
