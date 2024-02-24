@@ -7,7 +7,7 @@ export const login = async (email: string, password: string) => {
     return data;
 };
 
-export const register = async (name: string, email: string, password: string, birthday?:string, state?: string, country?:string, postalCode?:string, phoneNumber?:string, address?:string, city?:string) => {
+export const register = async (name: string, email: string, password: string, birthday?: string, state?: string, country?: string, postalCode?: string, phoneNumber?: string, address?: string, city?: string) => {
     const { data } = await axios.post(`${import.meta.env.VITE_BASE_URI}/auth/register`, { name, email, password, birthday, state, country, postalCode, phoneNumber, address, city });
     return data;
 };

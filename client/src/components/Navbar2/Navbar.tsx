@@ -11,9 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { logout } from "@/hooks/auth";
+import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
-  const { user, theme, setTheme } = useAuthStore();
+  const { user, theme, setTheme, cart } = useAuthStore();
+  console.log(user);
 
   return (
     <>
@@ -38,17 +41,28 @@ const Navbar = () => {
             }
 
           </div>
-          <div className="flex flex-row gap-5 w-fit">
+          <div className="flex flex-row gap-5 w-fit items-center">
+            <Link to={"/cart"} className="relative md:block hidden w-fit mr-10 p-2">
+              <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
+                {cart ? cart.length : 0}
+              </span>
+              <FiShoppingBag className="text-2xl text-black" />
+            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <BiUser size={25} />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
+                <DropdownMenuItem>Hello, {user?.name}</DropdownMenuItem>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
-                <Link to={'/panel'}>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
-                </Link>
+                {
+                  user?.businessId &&
+                  < Link to={'/panel'}>
+                    <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                  </Link>
+                }
                 <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => logout()}>Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <span
@@ -70,7 +84,7 @@ const Navbar = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 };
