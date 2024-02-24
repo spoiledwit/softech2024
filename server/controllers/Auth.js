@@ -73,7 +73,7 @@ export const login = async (req, res) => {
     // Validate password
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      AuthModel.hashedPassword
+      user.hashedPassword
     );
 
     if (!isPasswordCorrect) {
@@ -87,10 +87,9 @@ export const login = async (req, res) => {
       { expiresIn: "10h" }
     );
 
-    console.log(token)
-
     res.status(200).json({ user, token });
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: err.message });
   }
 };
