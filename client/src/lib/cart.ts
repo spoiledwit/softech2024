@@ -10,19 +10,10 @@ export const addToCart = async (cartItem: any) => {
 };
 
 export const deleteCartItem = async (cartItemId: string) => {
-  const res = await axios.delete(`/api/cart`, {
-    data: {
-      cartItemId,
-    },
+  const res = await axios.delete(`${import.meta.env.VITE_BASE_URI}/cart/${cartItemId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
   });
   return res.data;
-};
-
-export const getCart = async () => {
-  try {
-    const res = await axios.get("/api/cart");
-    return res.data;
-  } catch (err) {
-    return err;
-  }
 };

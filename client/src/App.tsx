@@ -13,6 +13,7 @@ import CartPage from "./pages/CartPage";
 import Customers from "./pages/Business/Customers";
 import Items from "./pages/Business/Items";
 import CreateItem from "./pages/Business/CreateItem/CreateItem";
+import CheckoutPage from "./pages/Checkout";
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<CartPage />} />
+        <Route path="checkout" element={<CheckoutPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="panel" element={<BusinessLayout />} >

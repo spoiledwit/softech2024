@@ -59,7 +59,7 @@ export const updateCartItem = async (req, res) => {
 export const removeItemFromCart = async (req, res) => {
     try {
         const user = await AuthModel.findById(req.userId);
-        user.cart = user.cart.filter((cartItem) => cartItem._id !== req.params.id);
+        user.cart = user.cart.filter((cartItem) => cartItem.toString() !== req.params.id.toString());
         await user.save();
 
         const deletedCartItem = await CartItem.findByIdAndRemove(req.params.id);

@@ -9,6 +9,7 @@ type AuthStore = {
     setToken: (token: string | null) => void;
     setTheme: (theme: string | null) => void,
     appendToCart: (id: string) => void;
+    clearCart: () => void;
 };
 
 const useAuthStore = create<AuthStore>((set) => ({
@@ -17,6 +18,15 @@ const useAuthStore = create<AuthStore>((set) => ({
     theme: "dark",
     setUser: (user) => set({ user }),
     setToken: (token) => set({ token }),
+    clearCart: () => {
+        //@ts-ignore
+        set((state) => ({
+            user: {
+                ...state.user,
+                cart: [],
+            },
+        }));
+    },
     appendToCart: (id) => {
           //@ts-ignore
         set((state) => ({
