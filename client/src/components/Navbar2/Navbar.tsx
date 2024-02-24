@@ -16,7 +16,6 @@ import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
   const { user, theme, setTheme, cart } = useAuthStore();
-  console.log(user);
 
   return (
     <>

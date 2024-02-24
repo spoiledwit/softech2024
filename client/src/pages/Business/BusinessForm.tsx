@@ -16,6 +16,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 const formSchema = z.object({
     name: z.string().min(3)
@@ -26,7 +27,7 @@ type FormValues = z.infer<typeof formSchema>;
 const BusinessForm = () => {
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
-    const { setUser } = useAuthStore();
+    const { user, setUser } = useAuthStore();
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
     });
@@ -34,15 +35,20 @@ const BusinessForm = () => {
     const onSubmit: SubmitHandler<FormValues> = async (values) => {
         try {
             setLoading(true);
-            // const data = await login(values.email, values.password);
-            // if (!data.user) {
-            //     throw new Error("An error occurred");
-            // }
-            // setUser(data.user);
-            // localStorage.setItem("token", data.token);
+            await axios.post(`${import.meta.env.VITE_BASE_URI}/business`, {
+                name: values.name
+            },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            ).then((res) => {
+                console.log(res.data);
+            })
             toast({
-                title: "Login successful",
-                description: "You have successfully logged in",
+                title: "Registered as a travel agent!",
+                description: "You have successfully registered as a travel agent",
             });
             redirect('/');
         } catch (error: any) {
@@ -64,42 +70,51 @@ const BusinessForm = () => {
     };
 
     return (
-        <Form {...form}>
-            <div className="flex flex-col w-full h-screen items-center justify-center border-black ">
-                <div className="p-10 rounded-lg bg-white shadow-sm border">
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="w-[400px] space-y-2 max-h-[900px]"
-                    >
-                        <div className="mb-6 w-full space-y-2">
-                            <h1 className="text-center font-semibold text-3xl text-black ">
-                                Become a Travel Agent
-                            </h1>
-                            <p className="text-center text-gray-500 text-sm">
-                                Enter your business name below
-                            </p>
+        <>
+            {
+                user?.businessId ?
+                    <div>
+                        <h1>You are already a registered travel agent</h1>
+                    </ div>
+                    :
+                    < Form {...form}>
+                        <div className="flex flex-col w-full h-screen items-center mt-40  ">
+                            <div className="p-10 rounded-lg bg-white shadow-sm ">
+                                <form
+                                    onSubmit={form.handleSubmit(onSubmit)}
+                                    className="w-[700px] space-y-5 max-h-[900px]"
+                                >
+                                    <div className="mb-6 w-full space-y-2">
+                                        <h1 className="text-center font-semibold text-4xl text-black ">
+                                            Become a Travel Agent
+                                        </h1>
+                                        <p className="text-center text-gray-500 text-lg">
+                                            Enter your business name below
+                                        </p>
+                                    </div>
+                                    <FormField
+                                        disabled={loading}
+                                        control={form.control}
+                                        name="name"
+                                        render={({ field }: { field: any }) => (
+                                            <FormItem>
+                                                <FormLabel>Name</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <Button disabled={loading} className="w-full" type="submit">
+                                        {loading ? <div className="dotFlashing"></div> : <p>Register</p>}
+                                    </Button>
+                                </form>
+                            </div>
                         </div>
-                        <FormField
-                            disabled={loading}
-                            control={form.control}
-                            name="name"
-                            render={({ field }: { field: any }) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button disabled={loading} className="w-full" type="submit">
-                            {loading ? <div className="dotFlashing"></div> : <p>Register</p>}
-                        </Button>
-                    </form>
-                </div>
-            </div>
-        </Form>
+                    </Form >
+            }
+        </>
     );
 };
 
