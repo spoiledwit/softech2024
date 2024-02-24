@@ -74,6 +74,21 @@ export const createItem = async (req, res) => {
   }
 };
 
+export const getMyItems = async (req, res) => {
+  const userId = req.userId;
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthenticated" });
+  }
+
+  try {
+    const items = await Item.find({ businessId: user.businessId });
+    res.status(200).send(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+
 export const getItems = async (req, res) => {
   try {
     const cat = req.query.category;
