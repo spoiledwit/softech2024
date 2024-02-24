@@ -17,12 +17,14 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full flex flex-row items-center justify-between p-4 px-10 bg-white dark:bg-white transition-all">
+      <div className="w-full flex flex-row items-center justify-between p-2 px-10 bg-white dark:bg-white transition-all">
         <div className="flex flex-row items-center justify-between w-full">
-          <img
-            src={logo}
-            className="w-[70px]"
-          />
+          <Link to={'/'}>
+            <img
+              src={logo}
+              className="w-[65px]"
+            />
+          </Link>
           {/* <p className="text-black dark:text-black text-lg w-full">
             Welcome, {user?.name}
           </p> */}
@@ -43,7 +45,9 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                <Link to={'/panel'}>
+                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                </Link>
                 <DropdownMenuItem>Settings</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
