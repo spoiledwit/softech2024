@@ -53,11 +53,11 @@ const Footer = () => {
               </li>
               <li>
                 <FaEnvelope className="inline text-yellow-500  mr-2" />
-                <a href="mailto:test.com"> info@eozmo.com</a>
+                <a href="mailto:test.com"> teamitu@gmail.com</a>
               </li>
               <li>
                 <FaWhatsapp className="inline text-lg mr-2 text-yellow-500 " />
-                <a href="https://wa.me/1234567890"> +1 800-555-5555</a>
+                <a href="https://wa.me/1234567890"> +92 900 76201</a>
               </li>
               <li>
                 <FaMapMarkerAlt className="inline mr-2 text-yellow-500  text-lg" />
@@ -70,13 +70,13 @@ const Footer = () => {
 
           <div>
             <h3 className="text-sm font-medium tracking-wider uppercase text-black">
-              Our <span className=" bg-yellow-500 text-white px-1">Experiences!</span> 
+              Our <span className=" bg-yellow-500 text-white px-1">Experiences!</span>
             </h3>
             <ul className="mt-4 text-sm space-y-2">
-              <li>Desert Safari</li>
-              <li>City Tours</li>
-              <li>Water Sports</li>
-              <li>Theme Parks</li>
+              <li>Historical Sites</li>
+              <li>Natural Wonders</li>
+              <li>Cultural Attractions</li>
+              <li>Adventure Spots</li>
             </ul>
           </div>
 
@@ -94,7 +94,7 @@ const Footer = () => {
         </div>
         <div className="md:col-span-3 mt-12 border-t border-gray-300 pt-8">
           <p className="text-center text-sm">
-            &copy; Eozmo Travel & Tourism 2023. All rights reserved.
+            &copy; Team ITU 2024. All rights reserved.
           </p>
         </div>
       </div>

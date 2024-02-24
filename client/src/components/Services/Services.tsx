@@ -9,7 +9,7 @@ import waterslide from "@/assets/waterslide-398249_1280.jpg";
 import sampleimg from "@/assets/desert.png";
 
 const Services = () => {
-   const sampleCats = [
+  const sampleCats = [
     "Historical Sites",
     "Natural Wonders",
     "Cultural Attractions",
@@ -71,14 +71,14 @@ const Services = () => {
         Embark on an epic journey with us—award-winning desert safaris and
         iconic global attractions await!
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
         {bkdrops.map((item) => (
           <div
-            onClick={()=>{
-                navigate(`/category/${item.title.toLowerCase().split(' ').join('-')}`)
+            onClick={() => {
+              navigate(`/category/${item.title.toLowerCase().split(' ').join('-')}`)
             }}
             key={item.id}
-            className="relative cursor-pointer h-[50vh] md:h-[400px] w-full md:w-[300px] bg-gray-200 rounded-xl overflow-hidden"
+            className="relative cursor-pointer h-[50vh] md:h-[480px] w-full md:w-[350px] lg:w-[400px] lg:h-[520px] xl:w-[350px] xl:h-[480px]  bg-gray-200 rounded-xl overflow-hidden"
             onMouseEnter={() => handleMouseEnter(item.id)}
             onMouseLeave={() => handleMouseLeave(item.id)}
           >

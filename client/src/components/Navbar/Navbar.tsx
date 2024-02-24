@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src={logo} className="w-[65px]" />
           </Link>
-          <div className="flex flex-row gap-6 text-lg w-full justify-center">
+          <div className=" flex-row gap-6 text-lg w-full justify-center xl:flex lg:flex md:flex sm:hidden hidden">
             {navLinks.map((link) => (
               <Link className="text-sm" to={link.slug}>
                 {link.title}
@@ -37,13 +37,13 @@ const Navbar = () => {
             ))}
           </div>
 
-          <Link to={"/cart"} className="relative md:block hidden w-fit p-2">
+          <Link to={"/cart"} className="relative md:block xl:block lg:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.cart ? user.cart.length : 0}
             </span>
             <FiShoppingBag className="text-2xl text-black" />
           </Link>
-          <Link to={"/wishlist"} className="relative md:block hidden w-fit p-2">
+          <Link to={"/wishlist"} className="relative md:block lg:block xl:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.wishlist ? user.wishlist.length : 0}
             </span>
@@ -59,7 +59,7 @@ const Navbar = () => {
                   <>
                     <img
                       src={user.picture}
-                      className="w-[60px] h-[37px] object-cover rounded-full"
+                      className="xl:w-[60px] lg:w-[70px] md:w-[80px] w-[50px]   object-cover rounded-full"
                       alt=""
                     />
                   </>
@@ -68,13 +68,13 @@ const Navbar = () => {
                 )}
               </DropdownMenuTrigger>
               <DropdownMenuContent
-              style={{
-                right: 0,
-                top: "50px",
-                width: "200px",
-                zIndex: 1000,
-              
-              }}>
+                style={{
+                  right: 0,
+                  top: "50px",
+                  width: "200px",
+                  zIndex: 1000,
+
+                }}>
                 <DropdownMenuItem>
                   <Link to={"/profile"}>Profile</Link>
                 </DropdownMenuItem>
@@ -94,7 +94,10 @@ const Navbar = () => {
                 }
               </DropdownMenuContent>
             </DropdownMenu>
-            <span className="cursor-pointer flex items-center">
+            <div>
+              
+            </div>
+            <span className="cursor-pointer items-center xl:flex lg:flex md:flex hidden">
               {theme == "dark" ? (
                 <BiMoon
                   size={25}
