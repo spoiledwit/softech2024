@@ -8,14 +8,25 @@ type AuthStore = {
     setUser: (user: User | null) => void;
     setToken: (token: string | null) => void;
     setTheme: (theme: string | null) => void,
+    cart: any | null;
+    appendToCart: (item: any) => void;
 };
 
 const useAuthStore = create<AuthStore>((set) => ({
     token: "",
     user: null,
     theme: "dark",
+    cart:null,
     setUser: (user) => set({ user }),
     setToken: (token) => set({ token }),
+    appendToCart: (item) => {
+        set((state) => {
+            return {
+                cart: [...state.cart, item],
+            };
+        });
+    }
+    ,
     setTheme: (theme) => {
         set({ theme });
         // set theme to localstorage when switched
