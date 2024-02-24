@@ -57,22 +57,29 @@ const CategoryPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchItems();
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
   const fetchItems = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item?category=${category}`);
       setItems(res.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="py-5 mb-10 flex p-16 pt-24 min-h-screen">
       <div className="flex md:flex-row flex-col gap-6">
-        {items.map((item) => (
+      {loading && <p>Loading....</p>}
+        {!loading && items.map((item) => (
           <Link
             to={`/item/${item._id}`}
             key={item._id?.toString()}

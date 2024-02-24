@@ -15,6 +15,7 @@ const Item = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchItem();
   }, [id]);
 
