@@ -31,6 +31,10 @@ const App = () => {
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="panel" element={<BusinessLayout />} />
+        <Route path="historical-sites" element={<Home />} />
+        <Route path="natural-wonders" element={<Home/>} />
+        <Route path="cultural-attractions" element={<Home />} />
+        <Route path="adventure-spots" element={<Home />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Route>
     </Routes>
