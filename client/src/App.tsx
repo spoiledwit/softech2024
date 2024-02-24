@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import BusinessLayout from "./pages/Business/BusinessLayout";
 import BusinessForm from "./pages/Business/BusinessForm";
 import CartPage from "./pages/CartPage";
+import Customers from "./pages/Business/Customers";
 
 const App = () => {
 
@@ -33,7 +34,7 @@ const App = () => {
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="panel" element={<BusinessLayout />} >
-
+          <Route path="customers" element={<Customers />} />
         </Route>
         <Route path="business-form" element={<BusinessForm />} />
         <Route path="historical-sites" element={<Home />} />
