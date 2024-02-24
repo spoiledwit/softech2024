@@ -54,7 +54,7 @@ const Login = () => {
       });
       navigate("/");
     } catch (error: any) {
-      if (error.response.data) {
+      if (error) {
         return toast({
           title: "An error occurred",
           // description: error.response.data,
