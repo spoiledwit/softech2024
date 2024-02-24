@@ -14,7 +14,7 @@ const Services = () => {
       id: 1,
       img: bkdrop3,
       title: "Desert Adventures",
-      img2: sampleimg,
+      img2: "https://images.unsplash.com/photo-1689101300631-a6d0dc585cde?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 2,
