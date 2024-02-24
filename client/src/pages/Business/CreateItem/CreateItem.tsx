@@ -25,6 +25,7 @@ import axios from "axios";
 const formSchema = z.object({
   title: z.string().min(6),
   category: z.string(),
+  content: z.array(z.object({ title: z.string(), markdown: z.string() })),
   images: z.array(z.string()).nonempty(),
   videos: z.array(z.string()).optional(),
   location: z.object({
@@ -54,6 +55,16 @@ const CreateItem = () => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      category: "",
+      content: [{ title: "", markdown: "" }],
+      images: [],
+      videos: [],
+      location: { lat: 0, lng: 0, region: "" },
+      price: "",
+      availableDates: { dates: [] },
+    },
   });
 
   useEffect(() => {
@@ -80,7 +91,6 @@ const CreateItem = () => {
         ]);
       }
     }
-
   }, [location, region, date]);
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
@@ -113,10 +123,12 @@ const CreateItem = () => {
       setLoading(false);
     }
   };
+  
+  form.watch("content");
 
   return (
     <Form {...form}>
-      <div className="flex flex-col w-full min-h-screen items-center pb-32">
+      <div className="flex flex-col w-full min-h-screen items-center pb-[700px]">
         <div className="rounded-lg bg-white shadow-sm">
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -144,6 +156,58 @@ const CreateItem = () => {
                 </FormItem>
               )}
             />
+            <Button
+              type="button"
+              onClick={() => {
+                form.setValue("content", [
+                  ...form.getValues("content"),
+                  { title: "", markdown: "" },
+                ]);
+              }}
+            >
+              Add Content
+            </Button>
+            {form.getValues("content")?.map((content: any, index: number) => (
+              <div key={index}>
+                <FormField
+                  control={form.control}
+                  name={`content.${index}.title`}
+                  render={({ field }: { field: any }) => (
+                    <FormItem>
+                      <FormLabel>Content Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`content.${index}.markdown`}
+                  render={({ field }: { field: any }) => (
+                    <FormItem>
+                      <FormLabel>Content Markdown</FormLabel>
+                      <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="button"
+                  onClick={() => {
+                    const newContent = form.getValues("content");
+                    newContent.splice(index, 1);
+                    form.setValue("content", newContent);
+                  }}
+                >
+                  Remove Content
+                </Button>
+              </div>
+            ))}
+
             <FormField
               control={form.control}
               name="category"
@@ -196,8 +260,7 @@ const CreateItem = () => {
                 selectRegion={setRegion}
               />
             </div>
-            <Button 
-            disabled={loading} className="w-full" type="submit">
+            <Button disabled={loading} className="w-full" type="submit">
               {loading ? <div className="dotFlashing"></div> : <p>Submit</p>}
             </Button>
           </form>
