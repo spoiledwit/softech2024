@@ -16,7 +16,8 @@ export const getComplaintsByUser = async (req, res) => {
     try {
         const complaints = await Complaint.find({
             userId: req.userId
-        })
+        }).populate("itemId").populate("userId");
+        
         res.status(200).json(complaints);
     } catch (error) {
         res.status(404).json({ message: error.message });
