@@ -67,10 +67,10 @@ const Navbar = () => {
           <div className="flex flex-row gap-5 w-fit">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                {user?.picture ? (<><img src={user.picture} className="w-[80px] h-[37px] object-cover rounded-full" alt="" /></>) : (  <BiUser size={25} />)}
-              
+                {user?.picture ? (<><img src={user.picture} className="w-[80px] h-[37px] object-cover rounded-full" alt="" /></>) : (<BiUser size={25} />)}
+
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="">
                 <DropdownMenuItem>
                   <Link to={"/profile"}>Profile</Link>
                 </DropdownMenuItem>

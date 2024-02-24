@@ -149,7 +149,7 @@ const ForumDetails = ({ params }: Props) => {
 
     return (
         <>
-            <div className='mt-12 mb-10 px-32 '>
+            <div className='mt-24 mb-10 px-32 '>
                 <div className='flex flex-row  gap-2 items-baseline'>
                     {
                         isLoading ?

@@ -30,7 +30,7 @@ const Forums = () => {
 
     return (
         <>
-            <div className='flex flex-row px-32 items-center mt-10 justify-between '>
+            <div className='flex flex-row px-32 items-center mt-24 justify-between '>
                 <div className='flex flex-row items-center gap-7'>
                     <h1 className='text-3xl font-semibold'>All Forum Topics</h1>
                 </div>
@@ -40,7 +40,7 @@ const Forums = () => {
             </div>
             {
                 isLoading ?
-                    Array.from({ length: 4 }).map((_, index) => (
+                    Array.from({ length: 3 }).map((_, index) => (
                         <div key={index} className="flex flex-row justify-between items-center px-32 mt-12">
                             <div className='flex flex-row gap-2 items-center'>
                                 <Skeleton className="h-[50px] bg-primary/20 dark:bg-primary/20 w-[50px] rounded-xl" />
@@ -54,7 +54,7 @@ const Forums = () => {
                     ))
 
                     :
-                    <div className='mt-4 px-32'>
+                    <div className='mt-4 mb-10 px-32'>
                         {
                             forums?.map((forum: ForumType) =>
                                 <Forum forum={forum} />
