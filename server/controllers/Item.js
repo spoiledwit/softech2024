@@ -1,4 +1,4 @@
-import Item from "../models/Item.js";
+import Item from "../models/ItemModel.js";
 import AuthModel from "../models/Auth.js";
 
 export const createItem = async (req, res) => {
