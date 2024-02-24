@@ -2,9 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import AuthModel from "../models/Auth.js";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
 dotenv.config();
-// Register
+
 export const register = async (req, res) => {
   try {
     const {
@@ -18,6 +17,7 @@ export const register = async (req, res) => {
       phoneNumber,
       address,
       city,
+      preferences,
     } = req.body;
 
     // Check if the user exists
@@ -42,16 +42,15 @@ export const register = async (req, res) => {
       postalCode,
       phoneNumber,
       address,
+      preferences,
     });
 
     // Create token
     const token = jwt.sign(
-      { email: user.email, id: user._id },
+      { email: AuthModel.email, id: AuthModel._id },
       process.env.JWT_SECRET,
-      { expiresIn: "5h" }
+      { expiresIn: "10h" }
     );
-
-    
 
     res.status(201).json({ user, token });
   } catch (err) {
@@ -74,7 +73,7 @@ export const login = async (req, res) => {
     // Validate password
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      user.hashedPassword
+      AuthModel.hashedPassword
     );
 
     if (!isPasswordCorrect) {
@@ -83,10 +82,12 @@ export const login = async (req, res) => {
 
     // Create token
     const token = jwt.sign(
-      { email: user.email, id: user._id },
+      { email: AuthModel.email, id: AuthModel._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "10h" }
     );
+
+    console.log(token)
 
     res.status(200).json({ user, token });
   } catch (err) {
@@ -107,8 +108,8 @@ export const forgotPassword = async (req, res) => {
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    user.hashedPassword = encryptedPassword;
-    await user.save();
+    AuthModel.hashedPassword = encryptedPassword;
+    await AuthModel.save();
 
     res.status(200).json({ user });
   } catch (err) {
@@ -133,9 +134,9 @@ export const verify = async (req, res) => {
       return res.status(404).send("User doesn't exist");
     }
 
-    user.approved = true;
+    AuthModel.approved = true;
 
-    await user.save();
+    await AuthModel.save();
 
     res.redirect(process.env.FRONTEND_URI);
   } catch (error) {

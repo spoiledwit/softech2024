@@ -5,7 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: React.ReactNode;
@@ -21,14 +21,14 @@ const Recommendations = ({ title, description }: Props) => {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get("/api/items");
-      setItems(res.data.result);
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item`);
+      setItems(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   return (
     <div className="py-5 mb-10">

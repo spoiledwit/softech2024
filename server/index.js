@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
-import stripeRoutes from "./routes/stripeRoutes.js"
+import itemRoutes from "./routes/itemRoute.js";
 
 dotenv.config();
 
@@ -40,6 +40,7 @@ db.on("disconnected", () => {
 
 // ROUTES
 app.use("/auth", authRoutes);
+app.use("/item", itemRoutes);
 
 
 //Setting up s3
