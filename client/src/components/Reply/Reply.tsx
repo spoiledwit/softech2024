@@ -10,7 +10,7 @@ const Reply = ({ reply }: { reply: ReplyType }) => {
 
     return (
         <>
-            <div className='flex flex-row  rounded justify-between px-4 py-1 border w-full bg-primary bg-opacity-10'>
+            <div className='flex flex-row  rounded justify-between px-4 py-1 w-full bg-primary bg-opacity-10'>
                 <div className='mt-2'>
                     <p className='text-sm font-medium'>{user?.name}</p>
                     <p>{reply.content}</p>

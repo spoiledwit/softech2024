@@ -21,7 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import useAuthStore from '@/store/authStore';
-import { toReadableDate } from '@/lib/utils';
+import { capitalizeFirstLetter, toReadableDate } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 
 interface Props {
@@ -51,15 +51,11 @@ const ForumDetails = ({ params }: Props) => {
             if (!res.data) {
                 console.log(res.data);
             }
-            console.log(res.data.replies);
             setForum(res.data);
-            res.data.replies.forEach(element => {
-                if (res.data.replies.includes(user?._id)) {
-                    console.log("liked");
-                    setIsLiked(true);
-                }
-
-            });
+            console.log(res.data);
+            if (res.data.likes.includes(user?._id)) {
+                setIsLiked(true);
+            }
             setReplies(res.data.replies);
             setIsLoading(false);
         }
@@ -156,7 +152,7 @@ const ForumDetails = ({ params }: Props) => {
                             </>
                             :
                             <>
-                                <h1 className='text-3xl font-semibold'>{forum?.title}</h1>
+                                <h1 className='text-3xl font-semibold'>{capitalizeFirstLetter(forum?.title)}</h1>
                                 <span className='text-md opacity-55 ml-2'>by <span className='font-medium'>{forum?.userId.name}</span></span>
                             </>
                     }
