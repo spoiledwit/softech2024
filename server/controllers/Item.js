@@ -51,3 +51,21 @@ export const getItem = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getItemByBusiness = async (req, res) => {
+  try {
+    const { businessId } = req.params;
+    const items = await Item.find({
+      businessId,
+    });
+
+    if (!items) {
+      return res.status(500).json({ error: "Items not found!" });
+    }
+
+    res.status(200).send(items);
+  }
+  catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
