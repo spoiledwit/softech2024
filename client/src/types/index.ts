@@ -7,6 +7,7 @@ type User = {
     businessId: string;
     cart: [],
     wishlist: [],
+    notifications: [],
     picture: string,
     createdAt: string;
     updatedAt: string;

@@ -6,15 +6,18 @@ import { Link } from "react-router-dom";
 import { logout } from "@/hooks/auth";
 import { FiShoppingBag } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa";
+import Notification from "../notifications";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
+  const [openNotification, setOpenNotification] = useState(false);
 
   return (
     <>
@@ -49,26 +52,38 @@ const Navbar = () => {
               Login
             </Link>
           )}
-          <Link to={"/cart"} className="relative md:block hidden w-fit p-2">
+          <Link
+            to={"/cart"}
+            className="relative md:block hidden w-fit p-2 mr-1"
+          >
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.cart ? user.cart.length : 0}
             </span>
             <FiShoppingBag className="text-2xl text-black" />
           </Link>
-          <Link
-            to={"/wishlist"}
-            className="relative md:block hidden w-fit mr-10 p-2"
-          >
+          <Link to={"/wishlist"} className="relative md:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.wishlist ? user.wishlist.length : 0}
             </span>
             <FaRegHeart className="text-2xl text-black" />
           </Link>
+          <div>
+            <Notification />
+          </div>
           <div className="flex flex-row gap-5 w-fit">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                {user?.picture ? (<><img src={user.picture} className="w-[80px] h-[37px] object-cover rounded-full" alt="" /></>) : (<BiUser size={25} />)}
-
+                {user?.picture ? (
+                  <>
+                    <img
+                      src={user.picture}
+                      className="w-[80px] h-[37px] object-cover rounded-full"
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <BiUser size={25} />
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent className="">
                 <DropdownMenuItem>
