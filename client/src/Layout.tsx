@@ -9,7 +9,7 @@ import SideBar from "./components/Sidebar/SideBar";
 import { useToast } from "./components/ui/use-toast";
 import './layout.css'
 import Footer from "./components/Footer/Footer";
-import Navbar from "./components/Navbar2/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 const Layout = () => {
   const { user } = useAuthStore();

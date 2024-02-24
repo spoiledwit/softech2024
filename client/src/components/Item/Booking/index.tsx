@@ -9,7 +9,6 @@ import { addToCart } from "@/lib/cart";
 const Booking = ({ item }: { item: any }) => {
   const { toast } = useToast();
   const { user, appendToCart, cart } = useAuthStore();
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [booking, setBooking] = useState<boolean>(false);
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -19,7 +18,7 @@ const Booking = ({ item }: { item: any }) => {
 
   const handleAddToCart = async () => {
     if (!user) {
-      navigate("/login")
+      navigate("/login");
       return;
     }
 
@@ -31,25 +30,6 @@ const Booking = ({ item }: { item: any }) => {
       toast({
         title: "Please select a date",
         description: "Please select a date to continue",
-      });
-      return;
-    }
-
-    if (selectedOptions.length !== item.services.length) {
-      toast({
-        title: "Please select all services",
-        description: "Please select all services to continue",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // checking if all options are selected
-    if (selectedOptions.includes("")) {
-      toast({
-        title: "Please select all services",
-        description: "Please select all services to continue",
-        variant: "destructive",
       });
       return;
     }

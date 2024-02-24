@@ -4,8 +4,9 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "@/hooks/auth";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import {
   Form,
@@ -29,6 +30,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const Login = () => {
+
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const { setUser } = useAuthStore();
@@ -49,7 +52,7 @@ const Login = () => {
         title: "Login successful",
         description: "You have successfully logged in",
       });
-      redirect('/');
+      navigate("/");
     } catch (error: any) {
       if (error.response.data) {
         return toast({
