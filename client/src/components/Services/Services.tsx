@@ -1,4 +1,4 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import bkdrop1 from "@/assets/backdrops/1.png";
 import bkdrop2 from "@/assets/backdrops/2.png";
 import bkdrop3 from "@/assets/backdrops/3.png";
@@ -9,29 +9,38 @@ import waterslide from "@/assets/waterslide-398249_1280.jpg";
 import sampleimg from "@/assets/desert.png";
 
 const Services = () => {
+   const sampleCats = [
+    "Historical Sites",
+    "Natural Wonders",
+    "Cultural Attractions",
+    "Adventure Spots",
+    "Hajj and Umrah",
+  ]
+
+  const navigate = useNavigate();
   const bkdrops = [
     {
       id: 1,
       img: bkdrop3,
-      title: "Desert Adventures",
+      title: "Historical Sites",
       img2: sampleimg,
     },
     {
       id: 2,
       img: bkdrop2,
-      title: "Tours & Sightseeing",
+      title: "Natural Wonders",
       img2: burj,
     },
     {
       id: 3,
       img: bkdrop1,
-      title: "Cruises & Sailing",
+      title: "Cultural Attractions",
       img2: cruise,
     },
     {
       id: 4,
       img: bkdrop4,
-      title: "Water Sports",
+      title: "Adventure Spots",
       img2: waterslide,
     },
   ];
@@ -65,6 +74,9 @@ const Services = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
         {bkdrops.map((item) => (
           <div
+            onClick={()=>{
+                navigate(`/category/${item.title.toLowerCase().split(' ').join('-')}`)
+            }}
             key={item.id}
             className="relative cursor-pointer h-[50vh] md:h-[400px] w-full md:w-[300px] bg-gray-200 rounded-xl overflow-hidden"
             onMouseEnter={() => handleMouseEnter(item.id)}
