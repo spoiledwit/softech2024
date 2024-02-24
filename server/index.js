@@ -8,6 +8,8 @@ import businessRoutes from "./routes/businessRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import itemRoutes from "./routes/itemRoute.js";
+import forumRoutes from "./routes/forumRoutes.js";
+import replyRoutes from "./routes/replyRoutes.js";
 
 dotenv.config();
 
@@ -47,7 +49,8 @@ app.use("/item", itemRoutes);
 app.use("/business", businessRoutes);
 app.use("/order", orderRoutes);
 app.use("/cart", cartRoutes);
-
+app.use("/forum", forumRoutes);
+app.use("/reply", replyRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
