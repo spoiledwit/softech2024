@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
 import { BiMessageSquare, BiMessage, BiLike } from 'react-icons/bi'
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useToast } from '@/components/ui/use-toast';
@@ -20,7 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import useAuthStore from '@/store/authStore';
-import { toReadableDate } from '@/lib/utils';
+import { capitalizeFirstLetter, toReadableDate } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 
 interface Props {
@@ -40,6 +41,7 @@ const ForumDetails = ({ params }: Props) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useAuthStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const { id } = useParams();
     const { toast } = useToast();
 
@@ -49,8 +51,11 @@ const ForumDetails = ({ params }: Props) => {
             if (!res.data) {
                 console.log(res.data);
             }
-            console.log(res.data);
             setForum(res.data);
+            console.log(res.data);
+            if (res.data.likes.includes(user?._id)) {
+                setIsLiked(true);
+            }
             setReplies(res.data.replies);
             setIsLoading(false);
         }
@@ -147,7 +152,7 @@ const ForumDetails = ({ params }: Props) => {
                             </>
                             :
                             <>
-                                <h1 className='text-3xl font-semibold'>{forum?.title}</h1>
+                                <h1 className='text-3xl font-semibold'>{capitalizeFirstLetter(forum?.title)}</h1>
                                 <span className='text-md opacity-55 ml-2'>by <span className='font-medium'>{forum?.userId.name}</span></span>
                             </>
                     }
@@ -167,8 +172,19 @@ const ForumDetails = ({ params }: Props) => {
                             <p className='opacity-60'>{forum?.replyCount}</p>
                         </div>
                         <div className='flex flex-row items-center gap-2' onClick={() => handleLike()}>
-                            <BiLike size={20} className='text-primary' />
-                            <p className='opacity-60'>{forum?.likes?.length}</p>
+                            {
+                                isLiked ?
+                                    <>
+                                        <AiFillLike size={20} className='text-primary' />
+                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <AiOutlineLike size={20} className='text-primary' />
+                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                    </>
+
+                            }
                         </div>
                     </div>
                 </div>
