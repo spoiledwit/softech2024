@@ -7,7 +7,7 @@ import { addDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom";
+import VideoUploader from "@/components/Uploaders/VideoUploader";
 import { sampleCats } from "@/constants";
 import {
   Form,
@@ -244,6 +244,9 @@ const CreateItem = () => {
               )}
             />
             <DatePickerWithRange date={date} setDate={setDate} />
+            <h2>
+              Photos Uploader
+            </h2>
             {/* @ts-ignore */}
             <PhotosUploader
               addedPhotos={images}
@@ -251,6 +254,14 @@ const CreateItem = () => {
               onChange={setImages}
               key={++count}
             />
+            {/* <h2>
+              Video Uploader
+            </h2> */}
+            {/* <VideoUploader
+            //@ts-ignore
+              addedVideos={form.getValues("videos")}
+              onChange={(videos: any) => form.setValue("videos", videos)}
+            /> */}
             <div>
               <Locator
                 Location={location}
