@@ -22,7 +22,7 @@ const CartPage = () => {
     if (user) {
       fetchCartItems();
     } else {
-        navigate("/login");
+      navigate("/login");
     }
   }, [user]);
 
@@ -30,8 +30,8 @@ const CartPage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(`${import.meta.env.VITE_BASE_URI}/cart`, {
-        headers:{
-            Authorization:`Bearer ${localStorage.getItem("token")}`
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       });
       setCartItems(data);
@@ -43,9 +43,8 @@ const CartPage = () => {
 
   return (
     <div
-      className={`min-h-screen w-[100vw] overflow-hidden md:flex-row flex-col px-8 md:px-16 flex ${
-        cartItems.length > 0 ? "" : "justify-center items-center"
-      } gap-6 md:gap-16`}
+      className={`min-h-screen w-[100vw] overflow-hidden md:flex-row flex-col px-8 mt-24 md:px-16 flex ${cartItems.length > 0 ? "" : "justify-center items-center"
+        } gap-6 md:gap-16`}
     >
       <div>
         {cartItems.length === 0 && !loading && (

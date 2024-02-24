@@ -127,9 +127,11 @@ export const getOrdersByBusiness = async (req, res) => {
   try {
     const { businessId } = req.params;
     const orders = await Order.find().populate("items.itemId", "businessId");
+    console.log("ORDERSSSSSS: ", orders);
     const businessOrders = orders.filter(
       (order) => order.items.some(item => String(item.itemId.businessId) === businessId)
     );
+    console.log("BUSINESSSS ORDERSSSS:", businessOrders);
     res.status(200).json(businessOrders);
   } catch (error) {
     res.status(404).json({ message: error.message });
