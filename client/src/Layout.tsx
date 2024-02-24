@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import ItemsMap from "./components/maps/itemsMaps";
 import { IoMdClose } from "react-icons/io";
 import { FaRegMap } from "react-icons/fa";
+import {io} from "socket.io-client";
 
 const Layout = () => {
   const { user } = useAuthStore();
@@ -48,8 +49,8 @@ const Layout = () => {
 
   useEffect(() => {
     try {
-      // const socketConnect = io("http://localhost:5000");
-      // setSocket(socketConnect);
+      const socketConnect = io("http://localhost:4000");
+      setSocket(socketConnect);
     } catch (error) {
       console.log(error);
     }

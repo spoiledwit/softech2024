@@ -119,7 +119,6 @@ export const forgotPassword = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     const user = await AuthModel.findById(req.userId);
-    console.log(user);
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -150,7 +149,6 @@ export const updateUser = async (req, res) => {
 export const removeFromWishlist = async (req, res) => {
   try {
     const { itemId } = req.params;
-    console.log(itemId);
     const user = await AuthModel.findById(req.userId);
 
     if (!user) {

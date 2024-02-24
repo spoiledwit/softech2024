@@ -11,7 +11,11 @@ import itemRoutes from "./routes/itemRoute.js";
 import forumRoutes from "./routes/forumRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
-import complaintRouter from "../server/routes/complaintRoutes.js"
+import complaintRouter from "../server/routes/complaintRoutes.js";
+import conversationRoutes from "./routes/conversationRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import { Server } from "socket.io";
+import http from "http";
 
 dotenv.config();
 
@@ -22,8 +26,38 @@ app.use(
   cors({
     credentials: true,
     origin: ["http://localhost:5173", "https://ezifx-crm.vercel.app"],
-  }),
+  })
 );
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
+
+const onlineUsers = [];
+
+io.on("connection", (socket) => {
+  console.log("User connected");
+
+  socket.on("addUser", (userId) => {
+    if (!onlineUsers.some((user) => user.userId === userId)) {
+      onlineUsers.push({ userId, socketId: socket.id });
+    }
+    io.emit("onlineUsers", onlineUsers);
+  });
+
+  socket.on("disconnect", () => {
+    const index = onlineUsers.findIndex((user) => user.socketId === socket.id);
+    if (index !== -1) {
+      onlineUsers.splice(index, 1);
+    }
+    console.log("User disconnected");
+    io.emit("onlineUsers", onlineUsers);
+  });
+});
 
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGO_URI, {
@@ -54,13 +88,13 @@ app.use("/cart", cartRoutes);
 app.use("/forum", forumRoutes);
 app.use("/reply", replyRoutes);
 app.use("/notification", notificationRoutes);
-app.use("/complaint", complaintRouter)
+app.use("/complaint", complaintRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
