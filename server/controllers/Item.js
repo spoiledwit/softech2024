@@ -6,12 +6,12 @@ export const createItem = async (req, res) => {
   if (!userId) {
     return res.status(401).json({ error: "Unauthenticated" });
   }
-  
+
   const user = await AuthModel.findById(userId);
   if (!user.businessId) {
     return res.status(401).json({ error: "You are not a business owner" });
   }
-  const {
+  let {
     title,
     category,
     images,
@@ -22,6 +22,7 @@ export const createItem = async (req, res) => {
     available_dates,
   } = req.body;
   try {
+    category = category.toLowerCase().split(" ").join("-");
     const item = await Item.create({
       title,
       category,
@@ -43,7 +44,7 @@ export const createItem = async (req, res) => {
 export const getItems = async (req, res) => {
   try {
     const cat = req.query.category;
-    const items = await Item.find(cat ? { category: cat } : {});
+    const items = await Item.find(cat ? cat !== "all" ? { category: cat } : {} : {});
     res.status(200).send(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -53,7 +54,10 @@ export const getItems = async (req, res) => {
 export const getItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const item = await Item.findById(id);
+    const item = await Item.findById(id).populate({
+      path: "reviews.user_id",
+      select: "name picture email",
+    })
     if (!item) {
       return res.status(500).json({ error: "Item not found!" });
     }
@@ -92,3 +96,69 @@ export const getItemByBusiness = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const addReview = async (req, res) => {
+  try {
+    const { itemId, review, rating } = req.body;
+    const item = await Item.findByIdAndUpdate(itemId, {
+      $push: {
+        reviews: {
+          user_id: req.userId,
+          review,
+          rating,
+        },
+      },
+    }, { new: true });
+
+    return res.status(200).json(item);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const updateReview = async (req, res) => {
+  try {
+    const { itemId, review, rating } = req.body;
+    const item = await
+      Item.findOneAndUpdate(
+        { _id: itemId, "reviews.user_id": req.userId },
+        {
+          $set: {
+            "reviews.$.review": review,
+            "reviews.$.rating": rating,
+          },
+        },
+        { new: true }
+      );
+
+    return res.status(200).json(item);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const deleteReview = async (req, res) => {
+  try {
+    const { itemId } = req.params;
+    const item = await Item
+      .findOneAndUpdate(
+        {
+          _id: itemId,
+          "reviews.user_id": req.userId
+        },
+        {
+          $pull: {
+            reviews: { user_id: req.userId }
+          }
+        },
+        { new: true }
+      );
+
+    return res.status(200).json(item);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}

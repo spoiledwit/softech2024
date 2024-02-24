@@ -16,7 +16,7 @@ const ItemSchema = new mongoose.Schema(
       },
     ],
     location: {
-      lan: {
+      lat: {
         type: Number,
         required: true,
       },
@@ -32,13 +32,13 @@ const ItemSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     reviews: [
       {
-        user_id: { type: String, required: true },
+        user_id: { type: mongoose.Schema.Types.ObjectId, ref: "Auth" },
         review: { type: String, required: true },
         rating: { type: Number, required: true },
       },
     ],
     available_dates: {
-      all_available: { type: Boolean, required: true },
+      all_available: { type: Boolean, default: false},
       dates: { type: [Date], required: true },
     },
   },

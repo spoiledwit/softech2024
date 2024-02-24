@@ -59,7 +59,7 @@ const CategoryPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchItems();
-  }, []);
+  }, [category]);
 
   const [loading, setLoading] = useState(false);
 
@@ -79,6 +79,7 @@ const CategoryPage = () => {
     <div className="py-5 mb-10 flex p-16 pt-24 min-h-screen">
       <div className="flex md:flex-row flex-col gap-6">
       {loading && <p>Loading....</p>}
+      {!loading && items.length === 0 && <p>No items found.</p>}
         {!loading && items.map((item) => (
           <Link
             to={`/item/${item._id}`}
