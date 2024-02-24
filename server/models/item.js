@@ -16,7 +16,7 @@ const ItemSchema = new mongoose.Schema(
       },
     ],
     location: {
-      lat: {
+      lan: {
         type: Number,
         required: true,
       },
@@ -38,7 +38,7 @@ const ItemSchema = new mongoose.Schema(
       },
     ],
     available_dates: {
-      all_available: { type: Boolean, default:false },
+      all_available: { type: Boolean, required: true },
       dates: { type: [Date], required: true },
     },
   },
