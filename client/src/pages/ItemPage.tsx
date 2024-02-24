@@ -12,9 +12,10 @@ import Recommendations from "@/components/Item/Recommendations";
 const Item = () => {
   const [item, setItem] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchItem();
   }, [id]);
 
@@ -79,7 +80,7 @@ const Item = () => {
                   {item.category}
                 </h2>
                 <PlaceGallery photos={item.images} />
-                <Content content={item.content} />
+                <Content content={item.content} item={item} />
               </div>
               <div className="md:my-32 md:ml-6 w-full">
                 <Booking item={item} />

@@ -128,7 +128,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const { name, picture } = req.body;
+    const { name, picture, preferences } = req.body;
     const user = await AuthModel.findById(req.userId);
     if (name) {
       user.name = name;
@@ -136,6 +136,11 @@ export const updateUser = async (req, res) => {
     if (picture) {
       user.picture = picture;
     }
+
+    if (preferences) {
+      user.preferences = preferences;
+    }
+
     await user.save();
     res.status(201).send("User has been updated!");
   } catch (error) {

@@ -7,6 +7,7 @@ type User = {
     businessId: string;
     cart: [],
     wishlist: [],
+    notifications: [],
     picture: string,
     createdAt: string;
     updatedAt: string;
@@ -33,9 +34,11 @@ interface AvailableDates {
 }
 
 interface ReviewType {
-    user_id: string;
+    userId: string;
     review: string;
     rating: number;
+    createdAt: string;
+    itemId: string;
 }
 
 interface ServiceType {
@@ -156,13 +159,14 @@ type ForumType = {
 
 type ReplyType = {
     content: string;
-    likes: number;
-    dislikes: number;
+    likes: Array<any>;
+    dislikes: Array<any>;
     userId: User;
     createdAt: string;
     forumId: ForumType;
     _id: string;
 }
+
 
 export type {
     CategoryType,
@@ -177,5 +181,5 @@ export type {
     OrderType,
     User,
     ForumType,
-    ReplyType
+    ReplyType,
 };

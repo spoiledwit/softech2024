@@ -18,6 +18,7 @@ import ProfilePage from "./pages/Profile";
 import Forums from "./pages/Forums/Forum";
 import CreateForum from "./components/forum/CreateForum";
 import ForumDetails from "./components/forum/ForumDetails";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
   const { user, theme } = useAuthStore();
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="cart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="forums" element={<Forums />} />

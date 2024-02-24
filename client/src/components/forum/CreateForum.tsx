@@ -81,7 +81,7 @@ const CreateForum = () => {
 
     return (
         <>
-            <div className='w-1/2 mx-auto mt-10 mb-32'>
+            <div className='w-1/2 mx-auto mt-24 mb-32'>
                 <h1 className='text-2xl font-semibold mb-5'>Create Forum</h1>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

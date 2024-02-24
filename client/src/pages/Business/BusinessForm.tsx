@@ -50,7 +50,7 @@ const BusinessForm = () => {
                 title: "Registered as a travel agent!",
                 description: "You have successfully registered as a travel agent",
             });
-            redirect('/');
+            window.location.replace('/panel');
         } catch (error: any) {
             if (error.response.data) {
                 return toast({

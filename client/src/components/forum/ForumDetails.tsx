@@ -149,7 +149,7 @@ const ForumDetails = ({ params }: Props) => {
 
     return (
         <>
-            <div className='mt-12 mb-10 px-32 '>
+            <div className='mt-24 mb-10 px-32 '>
                 <div className='flex flex-row  gap-2 items-baseline'>
                     {
                         isLoading ?
@@ -199,8 +199,8 @@ const ForumDetails = ({ params }: Props) => {
                     isLoading ?
                         <Skeleton className="h-[70px] mt-5 w-full rounded-md" />
                         :
-                        <p className='mb-10 mt-5'>
-                            {forum?.content}
+                        <p className='mb-10 mt-5 text-lg'>
+                            {capitalizeFirstLetter(forum?.content)}
                         </p>
                 }
                 <div>

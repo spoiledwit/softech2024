@@ -36,30 +36,43 @@ const AuthSchema = new mongoose.Schema(
     country: {
       type: String,
     },
-    preferences: [{
-      type: String,
-      default: "",
-    }],
-    cart: [{
-      type: mongoose.Types.ObjectId,
-      ref: "CartItem",
-      default: [],
-    }],
+    preferences: [
+      {
+        type: String,
+      },
+    ],
+    cart: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "CartItem",
+        default: [],
+      },
+    ],
     businessId: {
       type: mongoose.Types.ObjectId,
       ref: "Business",
       default: null,
     },
-    orders: [{
-      type: mongoose.Types.ObjectId,
-      ref: "Order",
-      default: [],
-    }],
-    wishlist: [{
-      type: mongoose.Types.ObjectId,
-      ref: "Item",
-      default: [],
-    }],
+    orders: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Order",
+        default: [],
+      },
+    ],
+    wishlist: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Item",
+        default: [],
+      },
+    ],
+    notifications: [
+      {
+        content: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   {
     timestamps: true,
