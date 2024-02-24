@@ -54,7 +54,10 @@ export const getItems = async (req, res) => {
 export const getItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const item = await Item.findById(id);
+    const item = await Item.findById(id).populate({
+      path: "reviews.user_id",
+      select: "name picture email",
+    })
     if (!item) {
       return res.status(500).json({ error: "Item not found!" });
     }
