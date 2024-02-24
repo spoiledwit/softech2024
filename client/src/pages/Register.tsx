@@ -38,6 +38,7 @@ const formSchema = z
     state: z.string().optional(),
     postalCode: z.string().optional(),
     birthday: z.string().optional(),
+    preferences: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
