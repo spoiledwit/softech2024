@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { create } from "zustand";
 import { User } from "../types";
 
@@ -11,13 +10,14 @@ type AuthStore = {
   setTheme: (theme: string | null) => void;
   appendToCart: (id: string) => void;
   clearCart: () => void;
-  toggleWishlist: (id: string) => void;
+  appendToWishlist: (id: string) => void;
+  removeFromWishlist: (id: string) => void;
 };
 
 const useAuthStore = create<AuthStore>((set) => ({
   token: "",
   user: null,
-  theme: "light",
+  theme: "dark",
   setUser: (user) => set({ user }),
   setToken: (token) => set({ token }),
   clearCart: () => {
@@ -35,8 +35,25 @@ const useAuthStore = create<AuthStore>((set) => ({
       user: {
         ...state.user,
         //@ts-ignore
-        // eslint-disable-next-line no-unsafe-optional-chaining
         cart: [...state.user?.cart, id],
+      },
+    }));
+  },
+  appendToWishlist: (id) => {
+    //@ts-ignore
+    set((state) => ({
+      user: {
+        ...state.user,
+        wishlist: [...state.user?.wishlist, id],
+      },
+    }));
+  },
+  removeFromWishlist: (id) => {
+    //@ts-ignore
+    set((state) => ({
+      user: {
+        ...state.user,
+        wishlist: state.user?.wishlist.filter((item) => item !== id),
       },
     }));
   },
@@ -46,17 +63,6 @@ const useAuthStore = create<AuthStore>((set) => ({
     if (theme) {
       localStorage.theme = theme;
     }
-  },
-  toggleWishlist: (id: string) => {
-    set((state: any) => ({
-      user: {
-        ...state.user,
-        wishlist: state.user?.wishlist.includes(id)
-          ? state.user?.wishlist.filter((item: any) => item !== id)
-          : // eslint-disable-next-line no-unsafe-optional-chaining
-          [...state.user?.wishlist, id],
-      },
-    }));
   },
 }));
 

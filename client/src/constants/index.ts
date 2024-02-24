@@ -22,9 +22,9 @@ export const navLinks = [
     slug: "/adventure-spots",
   },
   {
-    id: "forums",
-    title: "Forums",
-    slug: "/forums",
+    id: "contact",
+    title: "Contact",
+    slug: "/contact",
   },
 
 ];

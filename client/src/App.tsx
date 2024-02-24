@@ -14,22 +14,18 @@ import Customers from "./pages/Business/Customers";
 import Items from "./pages/Business/Items";
 import CreateItem from "./pages/Business/CreateItem/CreateItem";
 import CheckoutPage from "./pages/Checkout";
-import Forum from "./components/forum/Forum";
-import Forums from "./pages/Forums/Forum";
-import CreateForum from "./components/forum/CreateForum";
-import ForumDetails from "./components/forum/ForumDetails";
+import ProfilePage from "./pages/Profile";
 
 const App = () => {
-
   const { user, theme } = useAuthStore();
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  }, [theme])
+  }, [theme]);
 
   return (
     <Routes>
@@ -39,12 +35,10 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
-        <Route path="forums" element={<Forums />} />
-        <Route path="create-forum" element={<CreateForum />} />
-        <Route path="forums/details/:id" element={<ForumDetails />} />
-        <Route path="panel" element={<BusinessLayout />} >
+        <Route path="panel" element={<BusinessLayout />}>
           <Route path="customers" element={<Customers />} />
           <Route path="items" element={<Items />} />
           <Route path="create-item" element={<CreateItem />} />

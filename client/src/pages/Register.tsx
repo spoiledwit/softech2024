@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import loginBg from '@/assets/loginBg2.jpg';
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Progress } from "@/components/ui/progress";
@@ -127,8 +126,7 @@ const Register = () => {
 
   return (
     <Form {...form}>
-      <div className="flex w-full h-screen items-center justify-center ">
-        <img src={loginBg} className="object-cover -z-20 absolute" />
+      <div className="flex w-full h-screen items-center justify-center bg-primary/20">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-[500px] space-y-2 max-h-[900px] shadow bg-white border rounded-xl p-10"
