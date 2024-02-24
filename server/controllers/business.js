@@ -5,20 +5,22 @@ import mongoose from "mongoose"
 export const createBusiness = async (req, res) => {
     try {
         const { name } = req.body;
-        const newBusiness = await new Business({
-            name,
-            userId: req.userId
-        });
-
-        await newBusiness.save();
-
         const user = await AuthModel.find({
             _id: req.userId
         });
 
-        user[0].businessId = newBusiness._id;
-        console.log(user);
-        await user[0].save();
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const newBusiness = await new Business({
+            name,
+            userId: req.userId
+        });
+        await newBusiness.save();
+
+        user.orders.push(newBusiness._id);
+        await user.save();
 
         res.status(201).json(newBusiness);
     } catch (error) {
