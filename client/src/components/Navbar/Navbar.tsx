@@ -35,7 +35,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          {user ? (
+          {/* {user ? (
             <p
               onClick={() => {
                 logout();
@@ -48,7 +48,8 @@ const Navbar = () => {
             <Link className="mr-6" to={"/login"}>
               Login
             </Link>
-          )}
+          )} */}
+
           <Link to={"/cart"} className="relative md:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.cart ? user.cart.length : 0}
@@ -83,8 +84,11 @@ const Navbar = () => {
                     <DropdownMenuItem>Dashboard</DropdownMenuItem>
                   </Link>
                 )}
+                {
+                  user &&
+                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
 
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                }
               </DropdownMenuContent>
             </DropdownMenu>
             <span className="cursor-pointer flex items-center">
