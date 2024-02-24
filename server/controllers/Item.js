@@ -6,7 +6,7 @@ export const createItem = async (req, res) => {
   if (!userId) {
     return res.status(401).json({ error: "Unauthenticated" });
   }
-  
+
   const user = await AuthModel.findById(userId);
   if (!user.businessId) {
     return res.status(401).json({ error: "You are not a business owner" });
@@ -92,3 +92,69 @@ export const getItemByBusiness = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const addReview = async (req, res) => {
+  try {
+    const { itemId, review, rating } = req.body;
+    const item = await Item.findByIdAndUpdate(itemId, {
+      $push: {
+        reviews: {
+          user_id: req.userId,
+          review,
+          rating,
+        },
+      },
+    }, { new: true });
+
+    return res.status(200).json(item);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const updateReview = async (req, res) => {
+  try {
+    const { itemId, review, rating } = req.body;
+    const item = await
+      Item.findOneAndUpdate(
+        { _id: itemId, "reviews.user_id": req.userId },
+        {
+          $set: {
+            "reviews.$.review": review,
+            "reviews.$.rating": rating,
+          },
+        },
+        { new: true }
+      );
+
+    return res.status(200).json(item);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const deleteReview = async (req, res) => {
+  try {
+    const { itemId } = req.params;
+    const item = await Item
+      .findOneAndUpdate(
+        {
+          _id: itemId,
+          "reviews.user_id": req.userId
+        },
+        {
+          $pull: {
+            reviews: { user_id: req.userId }
+          }
+        },
+        { new: true }
+      );
+
+    return res.status(200).json(item);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
