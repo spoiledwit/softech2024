@@ -16,7 +16,6 @@ const Layout = () => {
   const { setSocket, socket } = useSocketStore();
   const { setUser, setToken } = useAuthStore();
   const { toast } = useToast();
-
   useEffect(() => {
     handleLoginBack();
   }, []);

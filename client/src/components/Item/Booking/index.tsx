@@ -8,7 +8,7 @@ import { addToCart } from "@/lib/cart";
 
 const Booking = ({ item }: { item: any }) => {
   const { toast } = useToast();
-  const { user, appendToCart, cart } = useAuthStore();
+  const { user, appendToCart } = useAuthStore();
   const [booking, setBooking] = useState<boolean>(false);
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -34,6 +34,7 @@ const Booking = ({ item }: { item: any }) => {
       return;
     }
 
+
     let calculatedPrice = 10 * adults;
 
     calculatedPrice += calculatedPrice * 0.9 * children;
@@ -49,7 +50,7 @@ const Booking = ({ item }: { item: any }) => {
       totalPrice: calculatedPrice,
     };
 
-    if (cart.find((item: any) => item === cartItem.itemId.toString())) {
+    if (user?.cart.find((item: any) => item === cartItem.itemId.toString())) {
       toast({
         title: "Item already in cart",
         description: "This item is already in cart",
@@ -62,7 +63,7 @@ const Booking = ({ item }: { item: any }) => {
       setBooking(true);
       const res = await addToCart(cartItem);
       if (res) {
-        appendToCart(res.result._id);
+        appendToCart(res._id);
         toast({
           title: "Item added to cart",
           description: "Item added to cart successfully",
