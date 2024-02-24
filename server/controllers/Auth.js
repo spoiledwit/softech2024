@@ -138,9 +138,7 @@ export const toggleWishlistItem = async (req, res) => {
     const index = user.wishlist.findIndex((id) => id === String(itemId));
     if (index === -1) {
       user.wishlist.push(itemId);
-    }
-
-    if (index !== -1) {
+    } else {
       user.wishlist = user.wishlist.filter((id) => id !== String(itemId));
     }
 
