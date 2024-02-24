@@ -21,13 +21,13 @@ const Sidebar = () => {
         {
             id: 1,
             name: "Customers",
-            path: "/admin/customers",
+            path: "/panel/customers",
             icon: <FaUsers />,
         },
         {
             id: 2,
-            name: "Products",
-            path: "/admin/products",
+            name: "Trips",
+            path: "/panel/trips",
             icon: <FaBoxOpen />,
         },
         {
@@ -36,12 +36,12 @@ const Sidebar = () => {
             path: "/admin/orders",
             icon: <FaFileInvoiceDollar />,
         },
-        {
-            id: 4,
-            name: "Settings",
-            path: "/admin/settings",
-            icon: <FaCog />,
-        },
+        // {
+        //     id: 4,
+        //     name: "Settings",
+        //     path: "/admin/settings",
+        //     icon: <FaCog />,
+        // },
     ];
 
     return (
