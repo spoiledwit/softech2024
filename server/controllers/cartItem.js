@@ -1,5 +1,5 @@
-import CartItem from "../models/cart";
-import AuthModel from "../models/Auth";
+import CartItem from "../models/cart.js";
+import AuthModel from "../models/Auth.js";
 
 export const addItemToCart = async (req, res) => {
     try {
@@ -35,14 +35,26 @@ export const getCartItem = async (req, res) => {
 }
 
 export const updateCartItem = async (req, res) => {
-    const { id } = req.params;
-    const { itemId, selectedDate, persons, totalPrice } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No cartItem with id: ${id}`);
-    const updatedCartItem = { itemId, selectedDate, persons, totalPrice, _id: id };
-    res.json(updatedCartItem);
+    try {
+        const { id } = req.params;
+        const { itemId, selectedDate, persons, totalPrice } = req.body;
+        const updatedCartItem = { itemId, selectedDate, persons, totalPrice };
+        const user = await AuthModel.findById(req.userId);
+
+        if (!user.cart.includes(id)) {
+            return res.status(404).json({ message: "Cart item not found" });
+        }
+
+        await CartItem.findByIdAndUpdate
+            (id, updatedCartItem, { new: true });
+
+        res.json(updatedCartItem);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
 
-export const removeItemFromCats = async (req, res) => {
+export const removeItemFromCart = async (req, res) => {
     try {
         const user = await AuthModel.findById(req.userId);
         user.cart = user.cart.filter((cartItem) => cartItem._id !== req.params.id);

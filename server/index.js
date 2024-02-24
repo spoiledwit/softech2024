@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import businessRoutes from "./routes/businessRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 import stripeRoutes from "./routes/stripeRoutes.js"
 
 dotenv.config();
@@ -44,6 +45,7 @@ db.on("disconnected", () => {
 app.use("/auth", authRoutes);
 app.use("/business", businessRoutes);
 app.use("/order", orderRoutes);
+app.use("/cart", cartRoutes);
 
 
 app.get("/", (req, res) => {
