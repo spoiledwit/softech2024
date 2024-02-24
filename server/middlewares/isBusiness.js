@@ -1,6 +1,6 @@
-import AuthModel from "../models/Auth";
+import AuthModel from "../models/Auth.js";
 
-const isBueiness = async (req, res, next) => {
+const isBusiness = async (req, res, next) => {
     try {
         const user = await AuthModel.findById(req.userId);
         if (user.businessId !== null) {
@@ -16,4 +16,4 @@ const isBueiness = async (req, res, next) => {
     }
 }
 
-export default isBueiness;
+export default isBusiness;
