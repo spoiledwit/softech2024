@@ -66,7 +66,7 @@ const Recommendations = ({ title, description }: Props) => {
   const fetchItems = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item`);
-      setItems(res.data);
+      setItems(res.data.slice(0, 4));
     } catch (error) {
       console.log(error);
     }
