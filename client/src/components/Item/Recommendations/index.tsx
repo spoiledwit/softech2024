@@ -5,8 +5,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
+import { toggleWishlist as toggleWishlistBackend } from "@/lib/wishlist";
+import useAuthStore from "@/store/authStore";
 interface Props {
   title: React.ReactNode;
   description: string;
@@ -14,6 +14,26 @@ interface Props {
 
 const Recommendations = ({ title, description }: Props) => {
   const [items, setItems] = useState<any[]>([]);
+  const { user, toggleWishlist } = useAuthStore();
+
+  const checkIfInWishlist = (id: string) => {
+    if (!user) return false;
+    const isWishlisted = user.wishlist.includes(id);
+    return isWishlisted;
+  };
+
+  const handleWishlist = async (id: string) => {
+    if (!user?._id) return;
+    try {
+      console.log("id", id);
+      const res = await toggleWishlistBackend(id);
+      if (res) {
+        toggleWishlist(id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchItems();
@@ -27,8 +47,6 @@ const Recommendations = ({ title, description }: Props) => {
       console.log(error);
     }
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className="py-5 mb-10">
@@ -55,23 +73,28 @@ const Recommendations = ({ title, description }: Props) => {
                 alt={item.title}
                 className="w-full h-full object-cover transition-all duration-200 shadow-sm hover:scale-110"
               />
-              <div className="absolute right-4 top-4 z-10"
-              onClick={(e)=>{
-                e.preventDefault()
-                e.stopPropagation()
-                //@ts-ignore
-                updateWishlist(item._id?.toString())
-              }}
+              <div
+                className="absolute right-4 top-4 z-10"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
+                  handleWishlist(item._id);
+                }}
               >
-                <FaRegHeart className="text-white text-lg" />
+                <FaRegHeart
+                  className={`${"block"} text-black text-lg
+                }`}
+                />
               </div>
               <div className="absolute right-4 top-4">
                 {item?._id && (
                   <FaHeart
                     className={`${
-                      // checkIfInWishlist(item._id?.toString())
-                        // ? "text-red-500"
-                         "text-black opacity-50"
+                      checkIfInWishlist(item._id?.toString())
+                        ? "text-red-500"
+                        : "text-black opacity-50"
                     } text-lg`}
                   />
                 )}

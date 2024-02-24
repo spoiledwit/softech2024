@@ -1,19 +1,19 @@
 import axios from "axios";
 
-export const appendToServerWishlist = async (productId: string) => {
-  try {
-    const res = await axios.post("/api/wishlist", { productId });
-    return res.data;
-  } catch (error) {
-    return error;
-  }
-};
+export const toggleWishlist = async (productId: string) => {
+  const res = await axios.post(
+    `${import.meta.env.VITE_BASE_URI}/auth/wishlist/${productId}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 
-export const removeFromServerWishlist = async (productId: string) => {
-  try {
-    const res = await axios.delete(`/api/wishlist`, { data: { productId } });
-    return res.data;
-  } catch (error) {
-    return error;
+  if (res.status === 200) {
+    return true;
+  } else {
+    return false;
   }
 };

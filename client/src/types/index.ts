@@ -6,6 +6,7 @@ type User = {
     approved: boolean;
     businessId: string;
     cart:[],
+    wishlist: [],
     createdAt: string;
     updatedAt: string;
 };
