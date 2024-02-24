@@ -43,11 +43,6 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-<<<<<<< HEAD
-
-          <Link to={"/cart"} className="relative md:block xl:block lg:block hidden w-fit p-2">
-            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px]  h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
-=======
           <Link
             to={"/chat"}
             className="relative md:block lg:block xl:block hidden w-fit p-2"
@@ -59,7 +54,6 @@ const Navbar = () => {
             className="relative md:block xl:block lg:block hidden w-fit p-2"
           >
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
->>>>>>> db5ebf8 (added messenger)
               {user?.cart ? user.cart.length : 0}
             </span>
             <FiShoppingBag className="text-2xl text-black dark:text-white" />
@@ -112,62 +106,12 @@ const Navbar = () => {
                     <DropdownMenuItem>Dashboard</DropdownMenuItem>
                   </Link>
                 )}
-<<<<<<< HEAD
-                <DropdownMenuItem className="xl:hidden lg:hidden md:hidden block" onClick={(e) => e.preventDefault()}>
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="item-1" className="border-0 p-0">
-                      <AccordionTrigger className="border-0 p-0 no-underline font-normal">Categories</AccordionTrigger>
-                      <Link to={"/category/historical-sites"} className="xl:hidden lg:hidden md:hidden block">
-                        <AccordionContent className="pt-3">
-                          Historical Sites
-                        </AccordionContent>
-                      </Link>
-                      <Link to={"/category/natural-wonders"} className="xl:hidden lg:hidden md:hidden block">
-                        <AccordionContent>
-                          Natural Wonders
-                        </AccordionContent>
-                      </Link>
-                      <Link to={"/category/cultural-attractions"} className="xl:hidden lg:hidden md:hidden block">
-                        <AccordionContent>
-                          Cultural Attractions
-                        </AccordionContent>
-                      </Link>
-                      <Link to={"/category/adventure-spots"} className="xl:hidden lg:hidden md:hidden block">
-                        <AccordionContent className="p-0 pb-1">
-                          Adventure Spots
-                        </AccordionContent>
-                      </Link>
-                    </AccordionItem>
-                  </Accordion>
-                </DropdownMenuItem>
-                <Link to={"/forums"} className="xl:hidden lg:hidden md:hidden block">
-                  <DropdownMenuItem>Forums</DropdownMenuItem>
-                </Link>
-                <Link to={"/wishlist"} className="xl:hidden lg:hidden md:hidden block">
-                  <DropdownMenuItem>Wishlist</DropdownMenuItem>
-                </Link>
-                <Link to={"/cart"} className="xl:hidden lg:hidden md:hidden block">
-                  <DropdownMenuItem>Cart</DropdownMenuItem>
-                </Link>
-                <Link to={"/notifications"} className="xl:hidden lg:hidden md:hidden block">
-                  <DropdownMenuItem>Notifications</DropdownMenuItem>
-                </Link>
-                {
-                  user &&
-=======
                 {user && (
->>>>>>> db5ebf8 (added messenger)
                   <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
-<<<<<<< HEAD
-            <div>
-
-            </div>
-=======
             <div></div>
->>>>>>> db5ebf8 (added messenger)
             <span className="cursor-pointer items-center xl:flex lg:flex md:flex hidden">
               {theme == "dark" ? (
                 <BiMoon
