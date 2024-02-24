@@ -47,7 +47,7 @@ export const register = async (req, res) => {
 
     // Create token
     const token = jwt.sign(
-      { email: AuthModel.email, id: AuthModel._id },
+      { email: user.email, id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "10h" }
     );
@@ -82,7 +82,7 @@ export const login = async (req, res) => {
 
     // Create token
     const token = jwt.sign(
-      { email: AuthModel.email, id: AuthModel._id },
+      { email: user.email, id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "10h" }
     );
@@ -107,8 +107,8 @@ export const forgotPassword = async (req, res) => {
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    AuthModel.hashedPassword = encryptedPassword;
-    await AuthModel.save();
+    user.hashedPassword = encryptedPassword;
+    await user.save();
 
     res.status(200).json({ user });
   } catch (err) {
@@ -119,44 +119,9 @@ export const forgotPassword = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     const user = await AuthModel.findById(req.userId);
+    console.log(user);
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
-export const verify = async (req, res) => {
-  try {
-    const user = await AuthModel.findById(req.params.id);
-
-    if (!user) {
-      return res.status(404).send("User doesn't exist");
-    }
-
-    AuthModel.approved = true;
-
-    await AuthModel.save();
-
-    res.redirect(process.env.FRONTEND_URI);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-}
-
-export const toggleWishlistItem = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await AuthModel.findById(req.userId);
-    const index = user.wishlist.findIndex((id) => id === String(id));
-    if (index === -1) {
-      user.wishlist.push(id);
-    } else {
-      user.wishlist = user.wishlist.filter((id) => id !== String(id));
-    }
-    await user.save();
-    res.status(200).json(user);
-  }
-  catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
