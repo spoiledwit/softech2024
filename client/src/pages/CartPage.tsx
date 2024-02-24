@@ -4,14 +4,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BookingDetails from "@/components/Cart/BookingDetails";
 import CartItem from "@/components/Cart/CartItem";
+import { deleteCartItem } from "@/lib/cart";
 
 const CartPage = () => {
-  const handleRemoveFromPage = (id: string) => {
+  const handleRemoveFromPage = async (id: string) => {
     setCartItems((prev) => prev.filter((item) => item._id !== id));
+    await deleteCartItem(id);
+    window.location.reload();
   };
 
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const { user } = useAuthStore();
+  const { user, setUser } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
