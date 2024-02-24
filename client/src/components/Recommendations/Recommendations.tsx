@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import { ItemType } from "@/types";
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/authStore";
+// import { appendToServerWishlist, removeFromServerWishlist } from "@/lib/actions/wishlist";
 
 interface Props {
   title: React.ReactNode;
@@ -13,22 +15,35 @@ interface Props {
 }
 
 const Recommendations = ({ title, description }: Props) => {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<ItemType[]>([]);
+  // const { checkIfInWishlist, appendToWishlist, removeFromWishlist, auth } = useAuthStore();
 
   useEffect(() => {
-    fetchItems();
+    // fetchItems();
   }, []);
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item`);
-      setItems(res.data);
+      const res = await axios.get("/api/items");
+      setItems(res.data.result);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const navigate = useNavigate();
+  const updateWishlist = (id: string) => {
+    // if (!auth) {
+    //   router.push("/login");
+    //   return;
+    // }
+    // if (checkIfInWishlist(id)) {
+    //   removeFromWishlist(id);
+    //   removeFromServerWishlist(id);
+    // } else {
+    //   appendToWishlist(id);
+    //   appendToServerWishlist(id);
+    // }
+  };
 
   return (
     <div className="py-5 mb-10">
@@ -56,23 +71,23 @@ const Recommendations = ({ title, description }: Props) => {
                 className="w-full h-full object-cover transition-all duration-200 shadow-sm hover:scale-110"
               />
               <div className="absolute right-4 top-4 z-10"
-              onClick={(e)=>{
-                e.preventDefault()
-                e.stopPropagation()
-                //@ts-ignore
-                updateWishlist(item._id?.toString())
-              }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  //@ts-ignore
+                  updateWishlist(item._id?.toString())
+                }}
               >
                 <FaRegHeart className="text-white text-lg" />
               </div>
               <div className="absolute right-4 top-4">
                 {item?._id && (
                   <FaHeart
-                    className={`${
-                      // checkIfInWishlist(item._id?.toString())
-                        // ? "text-red-500"
-                         "text-black opacity-50"
-                    } text-lg`}
+                    className={`
+                      
+                        ? "text-red-500"
+                        : "text-black opacity-50"
+                      } text-lg`}
                   />
                 )}
               </div>
@@ -89,11 +104,10 @@ const Recommendations = ({ title, description }: Props) => {
                   {Array.from({ length: 5 }, (_, index) => (
                     <FaStar
                       key={index}
-                      className={`text-yellow-500 text-xs ${
-                        index < Math.round(4.5)
-                          ? "text-yellow-500"
-                          : "text-gray-300"
-                      }`}
+                      className={`text-yellow-500 text-xs ${index < Math.round(4.5)
+                        ? "text-yellow-500"
+                        : "text-gray-300"
+                        }`}
                     />
                   ))}
                   <p className="text-xs text-gray-600 ml-2">

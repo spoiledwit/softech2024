@@ -79,9 +79,10 @@ const Register = () => {
       navigate("/");
     } catch (error: any) {
       if (error.response.data) {
+        console.log(error.response.data)
         return toast({
           title: "An error occurred",
-          description: error.response.data,
+          // description: error.response.data,
           variant: "destructive",
         });
       }

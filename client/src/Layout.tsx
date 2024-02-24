@@ -7,8 +7,9 @@ import { loginBack } from "./hooks/auth";
 import { Toaster } from "./components/ui/toaster";
 import SideBar from "./components/Sidebar/SideBar";
 import { useToast } from "./components/ui/use-toast";
-import Navbar from "./components/Navbar/Navbar";
 import './layout.css'
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar2/Navbar";
 
 const Layout = () => {
   const { user } = useAuthStore();
@@ -62,8 +63,14 @@ const Layout = () => {
 
   return (
     <>
-    <Toaster />
-    <Outlet />
+      <div>
+        <Navbar />
+      </div>
+      <Toaster />
+      <div className="flex flex-col">
+        <Outlet />
+      </div>
+      <Footer />
     </>
   );
 };
