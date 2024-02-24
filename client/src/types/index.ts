@@ -34,9 +34,11 @@ interface AvailableDates {
 }
 
 interface ReviewType {
-    user_id: string;
+    userId: string;
     review: string;
     rating: number;
+    createdAt: string;
+    itemId: string;
 }
 
 interface ServiceType {
@@ -165,6 +167,7 @@ type ReplyType = {
     _id: string;
 }
 
+
 export type {
     CategoryType,
     userType,
@@ -178,5 +181,5 @@ export type {
     OrderType,
     User,
     ForumType,
-    ReplyType
+    ReplyType,
 };

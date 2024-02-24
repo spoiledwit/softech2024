@@ -25,7 +25,7 @@ const formSchema = z.object({
     content: z.string().min(8),
 });
 
-const ReviewInput = () => {
+const ReviewInput = ({ getReview }: { getReview: any }) => {
     const [forum, setForum] = useState<ForumType>();
     const { user } = useAuthStore();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,7 +53,7 @@ const ReviewInput = () => {
         try {
             setIsSubmitting(true);
             const { content } = values;
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/reply`, {
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/review`, {
                 content,
                 userId: user._id,
                 forumId: forum?._id
@@ -66,6 +66,7 @@ const ReviewInput = () => {
                 throw new Error("An error occurred");
             }
             console.log(res.data);
+            getReview();
 
         } catch (error: any) {
             console.log(error);
