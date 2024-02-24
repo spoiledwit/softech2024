@@ -32,7 +32,7 @@ const ItemSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     reviews: [
       {
-        userId: { type: String, required: true },
+        user_id: { type: String, required: true },
         review: { type: String, required: true },
         rating: { type: Number, required: true },
       },
