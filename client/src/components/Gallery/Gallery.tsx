@@ -83,11 +83,11 @@ const Gallery = () => {
       <p className="mt-3 text-sm max-w-[500px] text-gray-700">
         Each frame captures a story, a memory, and the timeless beauty of our destinations.
       </p>
-      <div className="grid grid-cols-2 md:grid-cols-5 mt-6 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 gap-6">
         {images.map((image) => (
           <div
             key={image.id}
-            className="relative h-[180px] md:h-[240px] rounded-2xl overflow-hidden w-[180px] md:w-[240px]"
+            className="relative h-[180px] md:h-[240px] rounded-2xl overflow-hidden sm:w-[300px] w-full md:w-[240px]"
           >
             <img
               src={image.src}
