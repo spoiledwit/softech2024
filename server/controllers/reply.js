@@ -87,11 +87,13 @@ export const likeReply = async (req, res) => {
         if (!reply) {
             return res.status(404).send("Reply not found");
         }
-        reply.likes.push(userId);
+        if (reply.likes.includes(userId)) {
+            return res.status(400).send("You already liked this reply");
+        }
+        await reply.likes.push(userId);
         await reply.save();
         res.json(reply);
     } catch (err) {
-        console.log(err);
         res.status(500).json({ error: err.message });
     }
 }
@@ -103,17 +105,16 @@ export const dislikeReply = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).send(`No reply with id: ${id}`);
         }
-        const reply = Reply.findById(id);
+        const reply = await Reply.findById(id);
         if (!reply) {
             return res.status(404).send("Reply not found");
         }
-        if (reply.dislikes.includes(userId)) {
-            return res.status(400).send("You already disliked this reply");
-        }
-        reply.dislikes.push(userId);
+        // type in db so its disliks
+        await reply.disliks.push(userId);
         await reply.save();
         res.json(reply);
     } catch (err) {
+        console.log(err);
         res.status(500).json({ error: err.message });
     }
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import React from 'react'
 import { BiMessageSquare, BiMessage, BiLike } from 'react-icons/bi'
+import { capitalizeFirstLetter } from '@/lib/utils';
 
 interface Props {
     forum: ForumType;
@@ -18,9 +19,9 @@ const Forum = ({ forum }: Props) => {
                         <BiMessageSquare className='text-primary' size={30} />
                     </div>
                     <div className='w-full px-3'>
-                        <p className='text-lg font-medium'>{forum.title}</p>
+                        <p className='text-xl font-medium'>{capitalizeFirstLetter(forum.title)}</p>
                         <div className='flex flex-row'>
-                            <p className='overflow-hidden w-1/2 text-nowrap'>{forum.content}</p>
+                            <p className='overflow-hidden w-1/2 text-lg text-nowrap'>{forum.content}</p>
                             <span> ...</span>
                         </div>
                     </div>

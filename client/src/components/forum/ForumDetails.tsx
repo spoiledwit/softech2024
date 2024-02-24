@@ -42,6 +42,7 @@ const ForumDetails = ({ params }: Props) => {
     const { user } = useAuthStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isLiked, setIsLiked] = useState<boolean>(false);
+    const [like, setLike] = useState<number>(0)
     const { id } = useParams();
     const { toast } = useToast();
 
@@ -56,6 +57,7 @@ const ForumDetails = ({ params }: Props) => {
             if (res.data.likes.includes(user?._id)) {
                 setIsLiked(true);
             }
+            setLike(res.data.likes.length);
             setReplies(res.data.replies);
             setIsLoading(false);
         }
@@ -98,7 +100,7 @@ const ForumDetails = ({ params }: Props) => {
                 throw new Error("An error occurred");
             }
             console.log(res.data);
-            // getForum();
+            getForum();
 
         } catch (error: any) {
             console.log(error);
@@ -112,6 +114,7 @@ const ForumDetails = ({ params }: Props) => {
 
     async function handleLike() {
         try {
+            setLike(like + 1);
             if (!user) {
                 toast({
                     title: "Please login to like",
@@ -131,18 +134,24 @@ const ForumDetails = ({ params }: Props) => {
             getForum();
         }
         catch (error) {
+            setLike(like - 1);
             console.log(error);
         }
     }
 
+
+
     useEffect(() => {
-        getForum();
+        setTimeout(() => {
+            getForum();
+
+        }, 1000)
     }, []);
 
 
     return (
         <>
-            <div className='mt-12 px-32 '>
+            <div className='mt-12 mb-10 px-32 '>
                 <div className='flex flex-row  gap-2 items-baseline'>
                     {
                         isLoading ?
@@ -176,12 +185,12 @@ const ForumDetails = ({ params }: Props) => {
                                 isLiked ?
                                     <>
                                         <AiFillLike size={20} className='text-primary' />
-                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                        <p className='opacity-60'>{like}</p>
                                     </>
                                     :
                                     <>
                                         <AiOutlineLike size={20} className='text-primary' />
-                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                        <p className='opacity-60'>{like}</p>
                                     </>
 
                             }
@@ -245,7 +254,7 @@ const ForumDetails = ({ params }: Props) => {
                             <div className='flex flex-col gap-4 mt-5'>
                                 {
                                     replies?.map((reply) =>
-                                        <Reply reply={reply} />
+                                        <Reply reply={reply} getForum={getForum} />
                                     )
                                 }
                             </div>

@@ -30,7 +30,7 @@ const Forums = () => {
 
     return (
         <>
-            <div className='flex flex-row px-32 items-center mt-16 justify-between '>
+            <div className='flex flex-row px-32 items-center mt-10 justify-between '>
                 <div className='flex flex-row items-center gap-7'>
                     <h1 className='text-3xl font-semibold'>All Forum Topics</h1>
                 </div>
