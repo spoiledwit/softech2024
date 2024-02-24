@@ -1,3 +1,4 @@
+import AuthModel from "../models/Auth.js";
 import Business from "../models/business.js";
 import mongoose from "mongoose"
 
@@ -9,6 +10,13 @@ export const createBusiness = async (req, res) => {
             userId: req.userId
         });
         await newBusiness.save();
+
+        const user = AuthModel.find({
+            _id: req.userId
+        })
+
+        user.businessId = newBusiness._id;
+        await user.save();
         res.status(201).json(newBusiness);
     } catch (error) {
         res.status(409).json({ message: error.message });
