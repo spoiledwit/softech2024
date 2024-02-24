@@ -8,6 +8,7 @@ import { DateRange } from "react-day-picker";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { sampleCats } from "@/constants";
 import {
   Form,
   FormControl,
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Locator from "@/components/Locator/Locator";
-import { categories } from "@/constants";
 import { DatePickerWithRange } from "@/components/DatePicker/DatePicker";
 import axios from "axios";
 
@@ -41,7 +41,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const CreateItem = () => {
-  const navigate = useNavigate();
   const [images, setImages] = useState<any>([]);
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -156,9 +155,9 @@ const CreateItem = () => {
                     onChange={field.onChange}
                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
-                    {categories.map((category: any) => (
-                      <option key={category.title} value={category.title}>
-                        {category.title}
+                    {sampleCats.map((category: any) => (
+                      <option key={category} value={category}>
+                        {category}
                       </option>
                     ))}
                   </select>
