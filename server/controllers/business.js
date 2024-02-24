@@ -2,7 +2,6 @@ import Business from "../models/business.js";
 import mongoose from "mongoose"
 
 export const createBusiness = async (req, res) => {
-
     try {
         const { name } = req.body;
         const newBusiness = new Business({
@@ -36,16 +35,36 @@ export const getBusiness = async (req, res) => {
 }
 
 export const updateBusiness = async (req, res) => {
-    const { id } = req.params;
-    const business = req.body;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No business with id: ${id}`);
-    const updatedBusiness = await Business.findByIdAndUpdate(id, { ...business, id }, { new: true });
-    res.json(updatedBusiness);
+    try {
+        const { name } = req.body;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).send(`No business with id: ${id}`);
+        }
+        const business = Business.find({
+            userId: req.userId
+        });
+
+        if (!business) {
+            return res.status(404).send("Business not found");
+        }
+
+        business.name = name;
+        await business.save();
+        res.json(business);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
 
 export const deleteBusiness = async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No business with id: ${id}`);
-    await Business.findByIdAndRemove(id);
-    res.json({ message: "Business deleted successfully." });
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).send(`No business with id: ${id}`);
+        }
+        await Business.findByIdAndRemove(id);
+        res.json({ message: "Business deleted successfully" });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
