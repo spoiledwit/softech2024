@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Complaints = () => {
-    const { user } = useAuthStore();
+    const { user } = useAuthStore();    
     const [items, setItems] = useState([]);
     const [deleting, setDeleting] = useState(false);
 
