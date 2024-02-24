@@ -5,6 +5,7 @@ import useAuthStore from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { addToCart } from "@/lib/cart";
+import Complaint from "@/components/Complaint/Complaint";
 
 const Booking = ({ item }: { item: any }) => {
   const { toast } = useToast();
@@ -101,6 +102,7 @@ const Booking = ({ item }: { item: any }) => {
       >
         {booking ? "Adding to cart..." : "Add to cart"}
       </button>
+      <Complaint item={item} />
     </div>
   );
 };
