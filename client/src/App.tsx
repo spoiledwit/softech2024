@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Layout from "./Layout";
 import useAuthStore from "./store/authStore";
 import ForgotPass from "./pages/ForgotPass";
+import Item from "./pages/ItemPage";
 import { useEffect } from "react";
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route index element={user ? <Home /> : <Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Route>
