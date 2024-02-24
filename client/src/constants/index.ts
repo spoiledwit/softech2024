@@ -4,22 +4,22 @@ export const navLinks = [
   {
     id: "historical sites",
     title: "Historical Sites",
-    slug: "/historical-sites",
+    slug: "/category/historical-sites",
   },
   {
     id: "natural wonders",
     title: "Natural Wonders",
-    slug: "/natural-wonders",
+    slug: "/category/natural-wonders",
   },
   {
     id: "cultural attractions",
     title: "Cultural Attractions",
-    slug: "/cultural-attractions",
+    slug: "/category/cultural-attractions",
   },
   {
     id: "adventure spots",
     title: "Adventure Spots",
-    slug: "/adventure-spots",
+    slug: "/category/adventure-spots",
   },
   {
     id: "forums",
