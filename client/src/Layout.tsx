@@ -48,8 +48,8 @@ const Layout = () => {
 
   useEffect(() => {
     try {
-      const socketConnect = io("http://localhost:5000");
-      setSocket(socketConnect);
+      // const socketConnect = io("http://localhost:5000");
+      // setSocket(socketConnect);
     } catch (error) {
       console.log(error);
     }
