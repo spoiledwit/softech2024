@@ -1,7 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import PhotosUploader from "@/components/Uploaders/PhotoUploader";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { addDays, format } from "date-fns"
+import { DateRange } from "react-day-picker"
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 import {
     Select,
     SelectContent,
@@ -9,7 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Link } from "react-router-dom";
 import { login } from "@/hooks/auth";
@@ -26,6 +37,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Locator from "@/components/Locator/Locator";
 import { categories } from "@/constants";
+import { DatePickerWithRange } from "@/components/DatePicker/DatePicker";
 
 const formSchema = z.object({
     title: z.string().min(6),
@@ -48,12 +60,22 @@ type FormValues = z.infer<typeof formSchema>;
 const CreateItem = () => {
 
     const navigate = useNavigate();
+    const [images, setImages] = useState([]);
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
     const { setUser } = useAuthStore();
+    let count = 0;
+    const [date, setDate] = useState<DateRange | undefined>({
+        from: new Date(2022, 0, 20),
+        to: addDays(new Date(2022, 0, 20), 20),
+    })
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
     });
+
+    useEffect(() => {
+        console.log(images);
+    }, [images]);
 
     const onSubmit: SubmitHandler<FormValues> = async (values) => {
         try {
@@ -142,6 +164,22 @@ const CreateItem = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            disabled={loading}
+                            control={form.control}
+                            name="price"
+                            render={({ field }: { field: any }) => (
+                                <FormItem>
+                                    <FormLabel>Price</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <DatePickerWithRange date={date} setDate={setDate} key={1} />
+                        <PhotosUploader addedPhotos={images} maxPhotos={3} onChange={() => setImages} key={++count} />
                         <div>
                             {/* <Locator /> */}
                         </div>
