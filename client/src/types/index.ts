@@ -5,7 +5,7 @@ type User = {
     email: string;
     approved: boolean;
     businessId: string;
-    cart:[],
+    cart: [],
     createdAt: string;
     updatedAt: string;
 };
@@ -20,6 +20,7 @@ interface SubcategoryType {
 interface CategoryType {
     _id?: any;
     title: string;
+    value: string;
     image: string;
     subcategories: SubcategoryType[];
 }

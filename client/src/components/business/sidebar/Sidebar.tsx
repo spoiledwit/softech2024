@@ -26,8 +26,8 @@ const Sidebar = () => {
         },
         {
             id: 2,
-            name: "Trips",
-            path: "/panel/trips",
+            name: "Items",
+            path: "/panel/items",
             icon: <FaBoxOpen />,
         },
         {

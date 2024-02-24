@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/table"
 import axios from 'axios'
 import useAuthStore from '@/store/authStore'
+import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 
-const Customers = () => {
+const Items = () => {
 
     const { user } = useAuthStore();
     const [orders, setOrders] = useState([]);
@@ -33,7 +35,12 @@ const Customers = () => {
 
     return (
         <>
-            <h1 className='text-2xl font-semibold mb-3'>Orders</h1>
+            <div className='flex w-full flex-row mb-3 justify-between'>
+                <h1 className='text-2xl font-semibold mb-3'>Items</h1>
+                <Link to={`/panel/create-item`}>
+                    <Button className=''>Create item</Button>
+                </Link>
+            </div>
             <Table>
                 <TableCaption>A list of your orders</TableCaption>
                 <TableHeader className='hover:bg-secondary bg-secondary'>
@@ -61,4 +68,4 @@ const Customers = () => {
     )
 }
 
-export default Customers
+export default Items 

@@ -11,6 +11,8 @@ import BusinessLayout from "./pages/Business/BusinessLayout";
 import BusinessForm from "./pages/Business/BusinessForm";
 import CartPage from "./pages/CartPage";
 import Customers from "./pages/Business/Customers";
+import Items from "./pages/Business/Items";
+import CreateItem from "./pages/Business/CreateItem/CreateItem";
 
 const App = () => {
 
@@ -35,6 +37,8 @@ const App = () => {
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="panel" element={<BusinessLayout />} >
           <Route path="customers" element={<Customers />} />
+          <Route path="items" element={<Items />} />
+          <Route path="create-item" element={<CreateItem />} />
         </Route>
         <Route path="business-form" element={<BusinessForm />} />
         <Route path="historical-sites" element={<Home />} />

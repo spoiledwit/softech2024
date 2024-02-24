@@ -29,9 +29,11 @@ export const navLinks = [
 
 ];
 
+
 export const categories: CategoryType[] = [
   {
     title: "Desert Adventures",
+    value: "desertAdventures",
     image: "https://eozmo.vercel.app/_next/static/media/desertsafari.4d0581b1.jpeg",
     subcategories: [
       {
@@ -55,16 +57,19 @@ export const categories: CategoryType[] = [
   {
     title: "Cruises & Sailing",
     image: "https://eozmo.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcruise.52e66f29.png&w=640&q=75",
+    value: "desertAdventures",
     subcategories: []
   },
   {
     title: "Water Sports",
+    value: "desertAdventures",
     image: "https://eozmo.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwaterslide-398249_1280.cc086bea.jpg&w=640&q=75",
     subcategories: []
   },
   {
     title: "Tours & Sightseeing",
     image: "https://eozmo.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fburj.38927013.jpg&w=640&q=75",
+    value: "desertAdventures",
     subcategories: []
   },
 ];
