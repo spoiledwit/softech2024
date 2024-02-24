@@ -62,26 +62,8 @@ const Layout = () => {
 
   return (
     <>
-      {user && (
-        <div>
-          <Navbar />
-        </div>
-      )}
-
-      <div className="min-h-screen flex relative w-full">
-        <Toaster />
-        {user && (
-          <>
-            <div className="w-[350px]">
-              <SideBar />
-            </div>
-          </>
-        )}
-
-        <div className="w-full h-screen" id="outlet">
-          <Outlet />
-        </div>
-      </div>
+    <Toaster />
+    <Outlet />
     </>
   );
 };
