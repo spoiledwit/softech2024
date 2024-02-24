@@ -14,6 +14,9 @@ import Customers from "./pages/Business/Customers";
 import Items from "./pages/Business/Items";
 import CreateItem from "./pages/Business/CreateItem/CreateItem";
 import CheckoutPage from "./pages/Checkout";
+import Forum from "./components/forum/Forum";
+import Forums from "./pages/Forums/Forum";
+import CreateForum from "./components/forum/CreateForum";
 
 const App = () => {
 
@@ -37,6 +40,8 @@ const App = () => {
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
+        <Route path="forums" element={<Forums />} />
+        <Route path="create-forum" element={<CreateForum />} />
         <Route path="panel" element={<BusinessLayout />} >
           <Route path="customers" element={<Customers />} />
           <Route path="items" element={<Items />} />
