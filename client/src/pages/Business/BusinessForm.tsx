@@ -72,11 +72,7 @@ const BusinessForm = () => {
     return (
         <>
             {
-                user?.businessId ?
-                    <div>
-                        <h1>You are already a registered travel agent</h1>
-                    </ div>
-                    :
+                user?.businessId == null ?
                     < Form {...form}>
                         <div className="flex flex-col w-full h-screen items-center mt-40  ">
                             <div className="p-10 rounded-lg bg-white shadow-sm ">
@@ -113,6 +109,10 @@ const BusinessForm = () => {
                             </div>
                         </div>
                     </Form >
+                    :
+                    <div>
+                        <h1>You are already a registered travel agent</h1>
+                    </ div>
             }
         </>
     );
