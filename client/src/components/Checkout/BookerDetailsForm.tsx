@@ -48,17 +48,23 @@ const BookerDetails = () => {
     try {
       setIsSubmitting(true);
       const userId = user?._id;
-      await axios.post(`${import.meta.env.VITE_BASE_URI}/order`, {booker_details:values, userId }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URI}/order`,
+        { booker_details: values, userId },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
       toast({
         title: "Order has been placed",
         description: "Thank you for your order",
       });
       clearCart();
-      navigate("/");
+      const url = res.data.url;
+      console.log(url)
+      window.open(url, "_blank");
     } catch (error: any) {
       toast({
         variant: "destructive",

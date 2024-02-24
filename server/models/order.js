@@ -68,6 +68,10 @@ const orderSchema = new mongoose.Schema ({
     type: String,
     default: "pending",
   },
+  stripe_price_id: {
+    type:String,
+    default: "",
+  }
 });
 
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);

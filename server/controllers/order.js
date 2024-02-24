@@ -1,6 +1,7 @@
 import Order from "../models/order.js";
 import CartItem from "../models/cart.js";
 import AuthModel from "../models/Auth.js";
+import { createCheckoutSession, createPrice } from "../utils/stripeActions.js";
 import mongoose from "mongoose";
 
 export const createOrder = async (req, res) => {
@@ -29,9 +30,38 @@ export const createOrder = async (req, res) => {
       { $push: { orders: newOrder._id } },
       { new: true }
     );
-    res.status(201).json(newOrder);
+    // creating a stripe price Id for the total_price
+    const priceId = await createPrice(
+      newOrder.total_price * 100,
+      `
+    Order Id Starting with ${newOrder._id.toString().slice(0, 5)}****
+    `
+    );
+    newOrder.stripe_price_id = priceId;
+    await newOrder.save();
+    const url = await createCheckoutSession(
+      priceId,
+      `http://localhost:4000/order/approve/${newOrder._id}/`,
+      `http://localhost:5173?payment=failed`
+    );
+    res.status(201).json({ url });
   } catch (error) {
+    console.log(error)
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const approvePayment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    order.payment_status = "successfull";
+    order.order_status = "confirmed";
+    await order.save();
+    console.log(order);
+    res.redirect(`http://localhost:5173?payment=successfull&orderId=${id}-test`);
+  } catch (error) {
+    res.redirect(`http://localhost:5173?payment=failed`);
   }
 };
 
