@@ -139,8 +139,6 @@ const ForumDetails = ({ params }: Props) => {
         }
     }
 
-
-
     useEffect(() => {
         setTimeout(() => {
             getForum();
