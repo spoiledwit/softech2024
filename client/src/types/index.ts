@@ -155,9 +155,10 @@ type ForumType = {
 
 type ReplyType = {
     content: string;
-    likes: number;
-    dislikes: number;
+    likes: Array<any>;
+    dislikes: Array<any>;
     userId: User;
+    createdAt: string;
     forumId: ForumType;
     _id: string;
 }

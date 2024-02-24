@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
 import { BiMessageSquare, BiMessage, BiLike } from 'react-icons/bi'
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useToast } from '@/components/ui/use-toast';
@@ -40,6 +41,7 @@ const ForumDetails = ({ params }: Props) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useAuthStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const { id } = useParams();
     const { toast } = useToast();
 
@@ -49,8 +51,15 @@ const ForumDetails = ({ params }: Props) => {
             if (!res.data) {
                 console.log(res.data);
             }
-            console.log(res.data);
+            console.log(res.data.replies);
             setForum(res.data);
+            res.data.replies.forEach(element => {
+                if (res.data.replies.includes(user?._id)) {
+                    console.log("liked");
+                    setIsLiked(true);
+                }
+
+            });
             setReplies(res.data.replies);
             setIsLoading(false);
         }
@@ -167,8 +176,19 @@ const ForumDetails = ({ params }: Props) => {
                             <p className='opacity-60'>{forum?.replyCount}</p>
                         </div>
                         <div className='flex flex-row items-center gap-2' onClick={() => handleLike()}>
-                            <BiLike size={20} className='text-primary' />
-                            <p className='opacity-60'>{forum?.likes?.length}</p>
+                            {
+                                isLiked ?
+                                    <>
+                                        <AiFillLike size={20} className='text-primary' />
+                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <AiOutlineLike size={20} className='text-primary' />
+                                        <p className='opacity-60'>{forum?.likes?.length}</p>
+                                    </>
+
+                            }
                         </div>
                     </div>
                 </div>
