@@ -1,25 +1,28 @@
 import Reply from '../models/reply.js';
 import Forum from '../models/forum.js';
 import Item from '../models/Item.js'
+import Review from '../models/Review.js'
 import mongoose from 'mongoose';
 
 export const createReview = async (req, res) => {
     const { rating, itemId, review } = req.body;
     const userId = req.userId;
     try {
-        const review = await Reply.create({
+        const newReview = await Review.create({
             review,
             rating,
             userId,
             itemId,
         });
 
-        const item = await Item.findById(itemId);
-        item.reviews.push(review._id);
-        await item.save();
 
-        res.status(200).send(review);
+        // const item = await Item.findById(itemId);
+        // item.reviews.push(newReview._id);
+        // await item.save();
+
+        res.status(200).send(newReview);
     } catch (err) {
+        console.log(err);
         res.status(500).json({ error: err.message });
     }
 }

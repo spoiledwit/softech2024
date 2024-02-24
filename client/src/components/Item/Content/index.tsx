@@ -67,11 +67,12 @@ const Content = ({ content, item }: Props) => {
         </div>
       ))}
       <div className="">
-        <ReviewInput getReview={getReview} />
+        <h3 className="text-2xl text-primary font-semibold">Leave a review</h3>
+        <ReviewInput getReview={getReview} item={item} />
         <div>
           {
             reviews?.map((review) =>
-              <Review review={review}  />
+              <Review review={review} />
             )
           }
         </div>

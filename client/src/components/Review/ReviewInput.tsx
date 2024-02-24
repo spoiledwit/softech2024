@@ -1,4 +1,4 @@
-import { ForumType, ReplyType } from '@/types';
+import { ForumType, ItemType, ReplyType } from '@/types';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
@@ -22,10 +22,10 @@ import { Textarea } from '@/components/ui/textarea';
 import useAuthStore from '@/store/authStore';
 
 const formSchema = z.object({
-    content: z.string().min(8),
+    review: z.string().min(8),
 });
 
-const ReviewInput = ({ getReview }: { getReview: any }) => {
+const ReviewInput = ({ getReview, item }: { getReview: any, item: ItemType }) => {
     const [forum, setForum] = useState<ForumType>();
     const { user } = useAuthStore();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,7 +35,7 @@ const ReviewInput = ({ getReview }: { getReview: any }) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            content: "",
+            review: "",
         },
     });
 
@@ -52,11 +52,12 @@ const ReviewInput = ({ getReview }: { getReview: any }) => {
 
         try {
             setIsSubmitting(true);
-            const { content } = values;
+            const { review } = values;
             const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/review`, {
-                content,
+                review,
+                rating: 2,
                 userId: user._id,
-                forumId: forum?._id
+                itemId: item._id
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -85,7 +86,7 @@ const ReviewInput = ({ getReview }: { getReview: any }) => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-4">
                         <FormField
                             control={form.control}
-                            name="content"
+                            name="review"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
