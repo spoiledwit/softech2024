@@ -17,7 +17,7 @@ type AuthStore = {
 const useAuthStore = create<AuthStore>((set) => ({
   token: "",
   user: null,
-  theme: "dark",
+  theme: "light",
   setUser: (user) => set({ user }),
   setToken: (token) => set({ token }),
   clearCart: () => {
@@ -54,7 +54,7 @@ const useAuthStore = create<AuthStore>((set) => ({
         wishlist: state.user?.wishlist.includes(id)
           ? state.user?.wishlist.filter((item: any) => item !== id)
           : // eslint-disable-next-line no-unsafe-optional-chaining
-            [...state.user?.wishlist, id],
+          [...state.user?.wishlist, id],
       },
     }));
   },

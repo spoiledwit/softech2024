@@ -29,20 +29,12 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          {user ? (
-            <p
-              onClick={() => {
-                logout();
-              }}
-              className=" whitespace-nowrap mr-6 cursor-pointer"
-            >
-              Sign Out {user?.name}
-            </p>
-          ) : (
+          {
+            !user &&
             <Link className="mr-6" to={"/login"}>
               Login
             </Link>
-          )}
+          }
           <Link
             to={"/cart"}
             className="relative md:block hidden w-fit mr-10 p-2"
@@ -69,8 +61,11 @@ const Navbar = () => {
                       <DropdownMenuItem>Dashboard</DropdownMenuItem>
                     </Link>
                 }
+                {
+                  user &&
+                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
 
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                }
               </DropdownMenuContent>
             </DropdownMenu>
             <span className="cursor-pointer">

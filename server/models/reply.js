@@ -7,15 +7,15 @@ const replySchema = mongoose.Schema({
     },
     likes: [{
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
     }],
     disliks: [{
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
     }],
     userId: {
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
         required: true,
     },
     forumId: {
