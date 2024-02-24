@@ -96,9 +96,9 @@ export const deleteOrder = async (req, res) => {
 export const getOrdersByBusiness = async (req, res) => {
   try {
     const { businessId } = req.params;
-    const Orders = await Order.find().populate("items.itemId", "businessId");
-    const businessOrders = Orders.filter(
-      (Order) => Order.items.itemId.businessId === businessId
+    const orders = await Order.find().populate("items.itemId", "businessId");
+    const businessOrders = orders.filter(
+      (order) => order.items.some(item => String(item.itemId.businessId) === businessId)
     );
     res.status(200).json(businessOrders);
   } catch (error) {
