@@ -10,6 +10,9 @@ import { useEffect } from "react";
 import BusinessLayout from "./pages/Business/BusinessLayout";
 import BusinessForm from "./pages/Business/BusinessForm";
 import CartPage from "./pages/CartPage";
+import Customers from "./pages/Business/Customers";
+import Items from "./pages/Business/Items";
+import CreateItem from "./pages/Business/CreateItem/CreateItem";
 import CheckoutPage from "./pages/Checkout";
 
 const App = () => {
@@ -34,7 +37,11 @@ const App = () => {
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
-        <Route path="panel" element={<BusinessLayout />} />
+        <Route path="panel" element={<BusinessLayout />} >
+          <Route path="customers" element={<Customers />} />
+          <Route path="items" element={<Items />} />
+          <Route path="create-item" element={<CreateItem />} />
+        </Route>
         <Route path="business-form" element={<BusinessForm />} />
         <Route path="historical-sites" element={<Home />} />
         <Route path="natural-wonders" element={<Home />} />

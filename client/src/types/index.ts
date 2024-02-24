@@ -21,6 +21,7 @@ interface SubcategoryType {
 interface CategoryType {
     _id?: any;
     title: string;
+    value: string;
     image: string;
     subcategories: SubcategoryType[];
 }

@@ -4,7 +4,7 @@ import { BiSun, BiMoon, BiUser } from "react-icons/bi";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { logout } from "@/hooks/auth";
-import { FiShoppingBag } from "react-icons/fI";
+import { FiShoppingBag } from "react-icons/fi";
 import {
   DropdownMenu,
   DropdownMenuContent,

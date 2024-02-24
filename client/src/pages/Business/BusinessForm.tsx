@@ -110,8 +110,16 @@ const BusinessForm = () => {
                         </div>
                     </Form >
                     :
-                    <div>
-                        <h1>You are already a registered travel agent</h1>
+                    <div className="flex flex-col gap-5 items-center justify-center p-40">
+                        <h1 className="text-3xl font-semibold">You are already a registered travel agent</h1>
+                        <div className="flex flex-row gap-5">
+                            <Link to={'/panel'}>
+                                <Button className="bg-transparent text-black border border-black hover:bg-black hover:text-white">Go to panel</Button>
+                            </Link>
+                            <Link to={'/'}>
+                                <Button>Go home</Button>
+                            </Link>
+                        </div>
                     </ div>
             }
         </>
