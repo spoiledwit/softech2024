@@ -1,4 +1,5 @@
 import Reply from '../models/reply.js';
+import Forum from '../models/forum.js';
 
 export const createReply = async (req, res) => {
     const { content, userId, forumId } = req.body;
@@ -8,6 +9,12 @@ export const createReply = async (req, res) => {
             userId,
             forumId,
         });
+
+        const forum = await Forum.findById(forumId);
+        forum.replies.push(reply._id);
+        forum.replyCount = forum.replyCount + 1;
+        await forum.save();
+
         res.status(200).send(reply);
     } catch (err) {
         res.status(500).json({ error: err.message });
