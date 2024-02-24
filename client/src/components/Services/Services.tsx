@@ -134,7 +134,7 @@ const Services = () => {
               );
             }}
             key={item.id}
-            className="relative cursor-pointer h-[50vh] md:h-[480px] w-full md:w-[350px] lg:w-[450px] lg:h-[520px] xl:w-[350px] xl:h-[480px]  bg-gray-200 rounded-xl overflow-hidden"
+            className="relative cursor-pointer h-[50vh] md:h-[400px] w-[300px]  bg-gray-200 rounded-xl overflow-hidden"
             onMouseEnter={() => handleMouseEnter(item.id)}
             onMouseLeave={() => handleMouseLeave(item.id)}
           >
