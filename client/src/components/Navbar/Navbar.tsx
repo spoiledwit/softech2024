@@ -3,10 +3,9 @@ import { categories } from "@/constants";
 import { FiShoppingBag } from "react-icons/fi";
 // import {  } from "react-icons/fa";
 import { otherNavItems } from "@/constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { Link } from "react-router-dom";;
-import { useEffect } from "react";
 import useAuthStore from "@/store/authStore";
 import MobileNav from "./MobileNav";
 
@@ -42,18 +41,16 @@ const Navbar = () => {
   return (
     <div
       className="bg-white shadow-md fixed z-10 w-full"
-      style={{
-        zIndex: 1000,
-      }}
+    // style={{
+    //   zIndex: 1000,
+    // }}
     >
       <div className="container mx-auto py-3 flex items-center justify-between">
         <Link to={"/"}>
           <img
             src={logo}
             alt="Eozmo Logo"
-            width={70}
-            height={70}
-            className="object-contain"
+            className="object-contain w-[40px]"
           />
         </Link>{" "}
         <div className="md:flex hidden gap-6 text-sm">

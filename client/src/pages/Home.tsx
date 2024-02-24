@@ -6,7 +6,6 @@ import img3 from "@/assets/waterslide-398249_1280.jpg";
 import img4 from "@/assets/burj.jpg";
 // import { FaLocationDot } from "react-icons/fa";
 import { IoIosBookmark } from "react-icons/io";
-import Image from "next/image";
 import locator from "@/assets/locator.png";
 import { motion } from "framer-motion";
 // import SearchBar from "@/components/Home/SearchBar";
@@ -14,8 +13,11 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import Link from "next/link";
+import { Link } from 'react-router-dom';
 import { GoArrowRight } from "react-icons/go";
+import Services from '@/components/Services/Services';
+import Recommendations from '@/components/Recommendations/Recommendations';
+import Gallery from '@/components/Gallery/Gallery';
 
 const Home = () => {
 
@@ -107,83 +109,99 @@ const Home = () => {
   });
 
   return (
-    <div>
-      <h1>Hello there</h1>
-      <Navbar />
-{/*       
-
-      <div className={`flex w-full relative h-screen overflow-hidden`}>
-        <div className="flex gap-6 w-full">
-          <div className="w-full h-screen items-center justify-center overflow-hidden relative flex md:pl-16 px-8">
-            <motion.img
-              src={selectedSlides[currentSlide].image}
-              alt="slide"
-              key={currentSlide}
-              className="absolute top-0 left-0 w-full h-full object-cover"
-              initial={{ scale: 1.3 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 5, ease: "easeOut" }}
-            />
-            <div
-              className=" flex flex-col justify-center items-center h-full relative z-10 max-w-[600px] mt-6"
-              style={{
-                zIndex: 10,
-              }}
-            >
-              <motion.h2
-                className="text-white font-medium text-center text-3xl md:text-5xl"
+    <>
+      <div>
+        <div className={`flex w-full relative h-screen`}>
+          <div className="flex gap-6 w-full">
+            <div className="w-full h-screen items-center justify-center overflow-hidden relative flex md:pl-16 px-8">
+              <motion.img
+                src={selectedSlides[currentSlide].image}
+                alt="slide"
                 key={currentSlide}
-                initial={{ scale: 1.9 }}
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                initial={{ scale: 1.3 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: 5, ease: "easeOut" }}
+              />
+              <div
+                className=" flex flex-col justify-center items-center h-full relative z-10 max-w-[600px] mt-6"
+                style={{
+                  zIndex: 10,
+                }}
               >
-                {selectedSlides[currentSlide].title}
-              </motion.h2>
-              <p className="text-white mt-3 text-center text-sm">
-                {selectedSlides[currentSlide].description}
-              </p>
-              <Link
-                href={selectedSlides[currentSlide].link}
-                className="text-white font-medium mt-12 md:mt-4 bg-yellow-500 transition-all duration-200 hover:bg-yellow-600 text-center items-center flex justify-center text-sm w-fit px-5 h-[45px] min-w-[170px] rounded-md"
+                <motion.h2
+                  className="text-white font-medium text-center text-3xl md:text-5xl"
+                  key={currentSlide}
+                  initial={{ scale: 1.9 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  {selectedSlides[currentSlide].title}
+                </motion.h2>
+                <p className="text-white mt-3 text-center text-sm">
+                  {selectedSlides[currentSlide].description}
+                </p>
+                <Link
+                  to={selectedSlides[currentSlide].link}
+                  className="text-white font-medium mt-12 md:mt-4 bg-yellow-500 transition-all duration-200 hover:bg-yellow-600 text-center items-center flex justify-center text-sm w-fit px-5 h-[45px] min-w-[170px] rounded-md"
+                >
+                  {slides[currentSlide].ctaText}
+                  <GoArrowRight className="text-xl ml-2" />
+                </Link>
+              </div>
+              <img
+                src={locator}
+                alt="locator"
+                width={200}
+                height={200}
+                style={{
+                  zIndex: 10,
+                }}
+                className="ml-[-20px] md:block hidden right-16 bottom-10 absolute"
+              />
+              <div
+                className="hidden left-16 md:flex items-center absolute bottom-10 text-white"
+                style={{
+                  zIndex: 10,
+                }}
               >
-                {slides[currentSlide].ctaText}
-                <GoArrowRight className="text-xl ml-2" />
-              </Link>
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${index === currentSlide
+                      ? "bg-white"
+                      : "bg-gray-400 bg-opacity-75"
+                      }`}
+                    onClick={() => setCurrentSlide(index)}
+                  />
+                ))}
+              </div>
+              <div className="absolute  bottom-0 left-0 w-full h-full bg-black bg-opacity-50" />
             </div>
-            <img
-              src={locator}
-              alt="locator"
-              width={200}
-              height={200}
-              style={{
-                zIndex: 10,
-              }}
-              className="ml-[-20px] md:block hidden right-16 bottom-10 absolute"
-            />
-            <div
-              className="hidden left-16 md:flex items-center absolute bottom-10 text-white"
-              style={{
-                zIndex: 10,
-              }}
-            >
-              {slides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${index === currentSlide
-                    ? "bg-white"
-                    : "bg-gray-400 bg-opacity-75"
-                    }`}
-                  onClick={() => setCurrentSlide(index)}
-                />
-              ))}
-            </div>
-            <div className="absolute  bottom-0 left-0 w-full h-full bg-black bg-opacity-50" />
           </div>
         </div>
-      </div> */}
-
-
-    </div>
+      </div>
+      <Services />
+      <div
+        className="px-8 md:px-16"
+      >
+        <Recommendations
+          title={
+            <>
+              <h2 className="text-2xl font-medium text-yellow-600">
+                <span className="bg-yellow-500 text-white px-2 italic">
+                  Recommended
+                </span>{" "}
+                for you!
+              </h2>
+            </>
+          }
+          description="Dive into a world of discovery, with handpicked experiences that promise
+        to delight, surprise, and inspire."
+        />
+        <Gallery />
+      </div>
+    </>
   )
 }
 

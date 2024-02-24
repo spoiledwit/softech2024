@@ -8,6 +8,8 @@ import { Toaster } from "./components/ui/toaster";
 import SideBar from "./components/Sidebar/SideBar";
 import { useToast } from "./components/ui/use-toast";
 import './layout.css'
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar2/Navbar";
 
 const Layout = () => {
   const { user } = useAuthStore();
@@ -61,9 +63,14 @@ const Layout = () => {
 
   return (
     <>
-      {/* <h1>Hello there</h1> */}
+      <div>
+        <Navbar />
+      </div>
       <Toaster />
-      <Outlet />
+      <div className="flex flex-col">
+        <Outlet />
+      </div>
+      <Footer />
     </>
   );
 };
