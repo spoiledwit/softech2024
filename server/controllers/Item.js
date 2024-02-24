@@ -1,5 +1,8 @@
 import Item from "../models/ItemModel.js";
 import AuthModel from "../models/Auth.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const createItem = async (req, res) => {
   const userId = req.userId;
@@ -22,6 +25,7 @@ export const createItem = async (req, res) => {
     available_dates,
   } = req.body;
   try {
+    const cat = category;
     category = category.toLowerCase().split(" ").join("-");
     const item = await Item.create({
       title,
@@ -34,6 +38,35 @@ export const createItem = async (req, res) => {
       price,
       available_dates,
     });
+
+    const users = await AuthModel.find({ preferences: { $in: [cat] } });
+    console.log(`sending mails to ${users.length} users`);
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "tbcgulfmarketing@gmail.com",
+        pass: "gyqj dwxp nrmo qobv",
+      },
+    });
+    {
+      users.map(async (user) => {
+        const mailOptions = {
+          from: "tbcgulfmarketing@gmail.com",
+          to: user.email,
+          subject: "New Tourist Attraction",
+          text: `
+        Hi ${user.name},
+        A new tourist attraction has been added to the ${cat} category.
+        `,
+        };
+        await transporter.sendMail(mailOptions);
+        user.notifications.push({
+          content: `A new tourist attraction has been added to the ${cat} category.`,
+          createdAt: new Date(),
+        });
+        await user.save();
+      });
+    }
     res.status(200).send(item);
   } catch (err) {
     console.log(err);
@@ -44,7 +77,9 @@ export const createItem = async (req, res) => {
 export const getItems = async (req, res) => {
   try {
     const cat = req.query.category;
-    const items = await Item.find(cat ? cat !== "all" ? { category: cat } : {} : {});
+    const items = await Item.find(
+      cat ? (cat !== "all" ? { category: cat } : {}) : {}
+    );
     res.status(200).send(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -57,7 +92,7 @@ export const getItem = async (req, res) => {
     const item = await Item.findById(id).populate({
       path: "reviews.user_id",
       select: "name _id picture email",
-    })
+    });
     if (!item) {
       return res.status(500).json({ error: "Item not found!" });
     }
@@ -85,7 +120,7 @@ export const getItemByBusiness = async (req, res) => {
     const { businessId } = req.params;
     const items = await Item.find({
       businessId,
-    })
+    });
 
     if (!items) {
       return res.status(500).json({ error: "Items not found!" });
@@ -100,65 +135,65 @@ export const getItemByBusiness = async (req, res) => {
 export const addReview = async (req, res) => {
   try {
     const { itemId, review, rating } = req.body;
-    const item = await Item.findByIdAndUpdate(itemId, {
-      $push: {
-        reviews: {
-          user_id: req.userId,
-          review,
-          rating,
+    const item = await Item.findByIdAndUpdate(
+      itemId,
+      {
+        $push: {
+          reviews: {
+            user_id: req.userId,
+            review,
+            rating,
+          },
         },
       },
-    }, { new: true });
+      { new: true }
+    );
 
     return res.status(200).json(item);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 export const updateReview = async (req, res) => {
   try {
     const { itemId, review, rating } = req.body;
-    const item = await
-      Item.findOneAndUpdate(
-        { _id: itemId, "reviews.user_id": req.userId },
-        {
-          $set: {
-            "reviews.$.review": review,
-            "reviews.$.rating": rating,
-          },
+    const item = await Item.findOneAndUpdate(
+      { _id: itemId, "reviews.user_id": req.userId },
+      {
+        $set: {
+          "reviews.$.review": review,
+          "reviews.$.rating": rating,
         },
-        { new: true }
-      );
+      },
+      { new: true }
+    );
 
     return res.status(200).json(item);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 export const deleteReview = async (req, res) => {
   try {
     const { itemId } = req.params;
-    const item = await Item
-      .findOneAndUpdate(
-        {
-          _id: itemId,
-          "reviews.user_id": req.userId
+    const item = await Item.findOneAndUpdate(
+      {
+        _id: itemId,
+        "reviews.user_id": req.userId,
+      },
+      {
+        $pull: {
+          reviews: { user_id: req.userId },
         },
-        {
-          $pull: {
-            reviews: { user_id: req.userId }
-          }
-        },
-        { new: true }
-      );
+      },
+      { new: true }
+    );
 
     return res.status(200).json(item);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
