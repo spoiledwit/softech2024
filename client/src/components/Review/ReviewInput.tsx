@@ -43,8 +43,8 @@ const ReviewInput = () => {
 
         if (!user) {
             toast({
-                title: "Please login to comment",
-                description: "You need to login to leave a comment",
+                title: "Please login to review",
+                description: "You need to login to leave a review",
                 variant: "destructive"
             })
             return;
@@ -90,7 +90,7 @@ const ReviewInput = () => {
                                     <FormControl>
                                         <Textarea
                                             disabled={user ? false : true}
-                                            placeholder={user ? "Leave a comment..." : "Please login to comment"}
+                                            placeholder={user ? "Leave a review..." : "Please login to review"}
                                             className="resize-none"
                                             {...field}
                                         />
@@ -100,7 +100,7 @@ const ReviewInput = () => {
                             )}
                         />
                         <Button type="submit" disabled={user ? false : true} className='bg-transparent border border-primary hover:text-white hover:bg-primary text-primary mr-auto'>
-                            {isSubmitting ? "Submitting..." : "Comment"}
+                            {isSubmitting ? "Submitting..." : "Submit"}
                         </Button>
                     </form>
                 </Form>
