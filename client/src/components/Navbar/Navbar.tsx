@@ -19,9 +19,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import useLanguageStore from "@/store/languageStore";
 
 const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
+  const { language, setLanguage } = useLanguageStore();
 
   return (
     <>
@@ -132,6 +134,15 @@ const Navbar = () => {
                 <Link to={"/notifications"} className="xl:hidden lg:hidden md:hidden block">
                   <DropdownMenuItem>Notifications</DropdownMenuItem>
                 </Link>
+                <Link to={"/surprise-me"}>
+                  <DropdownMenuItem>Surprise me</DropdownMenuItem>
+                </Link>
+                {
+                  language == 'en' ?
+                    <DropdownMenuItem onClick={() => setLanguage("urdu")}>Switch language to Urdu</DropdownMenuItem>
+                    :
+                    <DropdownMenuItem onClick={() => setLanguage("en")}>Switch language to English</DropdownMenuItem>
+                }
                 {
                   user &&
                   <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>

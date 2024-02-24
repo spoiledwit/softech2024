@@ -1,4 +1,4 @@
-import { createItem, getItems, getItem, getItemByBusiness, addReview, updateReview, deleteReview, analytics } from "../controllers/Item.js";
+import { createItem, getItems, getItem, getItemByBusiness, addReview, updateReview, deleteReview, analytics, generateSurprise } from "../controllers/Item.js";
 import verifyToken from "../middlewares/verifyToken.js";
 import express from "express";
 
@@ -10,6 +10,7 @@ router.get("/:id", getItem);
 router.get("/analytics/:id", verifyToken, analytics);
 router.get("/business/:businessId", getItemByBusiness);
 router.post("/", verifyToken, createItem);
+router.get("/surprise/:budget", verifyToken, generateSurprise);
 router.post("/review", verifyToken, addReview);
 router.patch("/review/:itemId", verifyToken, updateReview);
 router.delete("/review/:itemId", verifyToken, deleteReview);

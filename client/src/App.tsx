@@ -22,6 +22,7 @@ import CategoryPage from "./pages/CategoryPage";
 import Complaints from "./components/business/complaints/Complaints";
 import Orders from "./pages/Business/Orders";
 import BusinessDashboard from "./pages/Business/BusinessDashboard";
+import SurpriseMe from "./pages/SurpriseMe/SurpriseMe";
 
 const App = () => {
   const { user, theme } = useAuthStore();
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="forums" element={<Forums />} />
+        <Route path="surprise-me" element={<SurpriseMe />} />
         <Route path="create-forum" element={<CreateForum />} />
         <Route path="forums/details/:id" element={<ForumDetails />} />
         <Route path="panel" element={<BusinessLayout />}>

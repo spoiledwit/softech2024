@@ -224,3 +224,19 @@ export const analytics = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const generateSurprise = async (req, res) => {
+  try {
+    const { budget } = req.params;
+    const userId = req.userId;
+
+    const user = await AuthModel.findById(userId);
+    const items = await Item.find(
+      cat ? (cat !== "all" ? { category: cat } : {}) : {}
+    );
+
+    res.status(200).send(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

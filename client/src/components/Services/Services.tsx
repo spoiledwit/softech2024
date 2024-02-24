@@ -125,7 +125,7 @@ const Services = () => {
         )}
       </p>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 grid-flow-row  mt-6"> */}
-      <div className="flex flex-row justify-evenly flex-wrap gap-4  mt-6">
+      <div className="flex flex-row    justify-evenly items-center flex-wrap gap-4  mt-6">
         {bkdrops.map((item) => (
           <div
             onClick={() => {
