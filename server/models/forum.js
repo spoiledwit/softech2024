@@ -11,11 +11,11 @@ const forum = mongoose.Schema({
     },
     likes: [{
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
     }],
     disliks: [{
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
     }],
     replyCount: {
         type: Number,
@@ -23,11 +23,11 @@ const forum = mongoose.Schema({
     },
     replies: [{
         type: mongoose.Types.ObjectId,
-        ref: "Forum",
+        ref: "Reply",
     }],
     userId: {
         type: mongoose.Types.ObjectId,
-        ref: "User",
+        ref: "Auth",
         required: true,
     }
 }, {
