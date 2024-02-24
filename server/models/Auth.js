@@ -39,7 +39,6 @@ const AuthSchema = new mongoose.Schema(
     preferences: [
       {
         type: String,
-        default: "",
       },
     ],
     cart: [
