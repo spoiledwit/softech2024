@@ -11,6 +11,7 @@ import itemRoutes from "./routes/itemRoute.js";
 import forumRoutes from "./routes/forumRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import complaintRouter from "../server/routes/complaintRoutes.js"
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ app.use("/cart", cartRoutes);
 app.use("/forum", forumRoutes);
 app.use("/reply", replyRoutes);
 app.use("/notification", notificationRoutes);
+app.use("/complaint", complaintRouter)
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
