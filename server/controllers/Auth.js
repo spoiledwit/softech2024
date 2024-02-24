@@ -125,3 +125,27 @@ export const getUser = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const toggleWishlistItem = async (req, res) => {
+  try {
+    const { itemId } = req.params;
+    const user = await AuthModel.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).send("User doesn't exist");
+    }
+
+    const index = user.wishlist.findIndex((id) => id === String(itemId));
+    if (index === -1) {
+      user.wishlist.push(itemId);
+    }
+
+    if (index !== -1) {
+      user.wishlist = user.wishlist.filter((id) => id !== String(itemId));
+    }
+
+    await user.save();
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
