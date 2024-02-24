@@ -7,7 +7,6 @@ import { loginBack } from "./hooks/auth";
 import { Toaster } from "./components/ui/toaster";
 import SideBar from "./components/Sidebar/SideBar";
 import { useToast } from "./components/ui/use-toast";
-import Navbar from "./components/Navbar/Navbar";
 import './layout.css'
 
 const Layout = () => {
@@ -62,8 +61,9 @@ const Layout = () => {
 
   return (
     <>
-    <Toaster />
-    <Outlet />
+      {/* <h1>Hello there</h1> */}
+      <Toaster />
+      <Outlet />
     </>
   );
 };
