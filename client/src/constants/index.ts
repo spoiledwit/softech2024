@@ -2,24 +2,24 @@ import { CategoryType } from "@/types";
 
 export const navLinks = [
   {
-    id: "home",
-    title: "Home",
-    slug: "/",
+    id: "historical sites",
+    title: "Historical Sites",
+    slug: "/historical-sites",
   },
   {
-    id: "blog",
-    title: "Blog",
-    slug: "/blog",
+    id: "natural wonders",
+    title: "Natural Wonders",
+    slug: "/natural-wonders",
   },
   {
-    id: "services",
-    title: "Services",
-    slug: "/services",
+    id: "cultural attractions",
+    title: "Cultural Attractions",
+    slug: "/cultural-attractions",
   },
   {
-    id: "about",
-    title: "About",
-    slug: "/about",
+    id: "adventure spots",
+    title: "Adventure Spots",
+    slug: "/adventure-spots",
   },
   {
     id: "contact",

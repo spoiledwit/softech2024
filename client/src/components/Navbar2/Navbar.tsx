@@ -1,6 +1,16 @@
 import useAuthStore from "@/store/authStore";
-import { BiSun, BiMoon } from "react-icons/bi";
+import { navLinks } from "@/constants";
+import { BiSun, BiMoon, BiUser } from "react-icons/bi";
 import logo from '@/assets/logo.png'
+import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
@@ -16,26 +26,45 @@ const Navbar = () => {
           {/* <p className="text-black dark:text-black text-lg w-full">
             Welcome, {user?.name}
           </p> */}
-          <div>
-              
+          <div className="flex flex-row gap-6 text-lg w-full justify-center">
+            {
+              navLinks.map((link) => (
+                <Link to={link.slug}>
+                  {link.title}
+                </Link>
+              ))
+            }
+
           </div>
-          <span
-            className="cursor-pointer"
-          >
-            {theme == "dark" ? (
-              <BiMoon
-                size={25}
-                className="text-black dark:text-black"
-                onClick={() => setTheme("light")}
-              />
-            ) : (
-              <BiSun
-                size={25}
-                onClick={() => setTheme("dark")}
-                className={"text-black dark:text-black"}
-              />
-            )}
-          </span>
+          <div className="flex flex-row gap-5 w-fit">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <BiUser size={25} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <span
+              className="cursor-pointer"
+            >
+              {theme == "dark" ? (
+                <BiMoon
+                  size={25}
+                  className="text-black dark:text-black"
+                  onClick={() => setTheme("light")}
+                />
+              ) : (
+                <BiSun
+                  size={25}
+                  onClick={() => setTheme("dark")}
+                  className={"text-black dark:text-black"}
+                />
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </>
