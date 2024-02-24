@@ -84,7 +84,7 @@ const Recommendations = ({ title, description }: Props) => {
         </a>
       </div>
       <p className="text-gray-600 mb-6 text-sm max-w-[550px]">{description}</p>
-      <div className="flex md:flex-row flex-col gap-6">
+      <div className="flex md:flex-row flex-wrap flex-col gap-6">
         {items.map((item) => (
           <Link
             to={`/item/${item._id}`}
@@ -116,11 +116,10 @@ const Recommendations = ({ title, description }: Props) => {
               <div className="absolute right-4 top-4">
                 {item?._id && (
                   <FaHeart
-                    className={`${
-                      checkIfInWishlist(item._id?.toString())
-                        ? "text-red-500"
-                        : "text-black opacity-50"
-                    } text-lg`}
+                    className={`${checkIfInWishlist(item._id?.toString())
+                      ? "text-red-500"
+                      : "text-black opacity-50"
+                      } text-lg`}
                   />
                 )}
               </div>
@@ -137,11 +136,10 @@ const Recommendations = ({ title, description }: Props) => {
                   {Array.from({ length: 5 }, (_, index) => (
                     <FaStar
                       key={index}
-                      className={`text-yellow-500 text-xs ${
-                        index < Math.round(4.5)
-                          ? "text-yellow-500"
-                          : "text-gray-300"
-                      }`}
+                      className={`text-yellow-500 text-xs ${index < Math.round(4.5)
+                        ? "text-yellow-500"
+                        : "text-gray-300"
+                        }`}
                     />
                   ))}
                   <p className="text-xs text-gray-600 ml-2">

@@ -30,9 +30,9 @@ const Forums = () => {
 
     return (
         <>
-            <div className='flex flex-row px-32 items-center mt-24 justify-between '>
+            <div className='flex flex-row xl:px-32 lg:px-32 md:px-32 px-5 items-center mt-24 justify-between '>
                 <div className='flex flex-row items-center gap-7'>
-                    <h1 className='text-3xl font-semibold'>All Forum Topics</h1>
+                    <h1 className='md:text-3xl text-xl font-semibold'>All Forum Topics</h1>
                 </div>
                 <Link to={'/create-forum'} className='flex flex-row justify-center rounded-full hover:bg-primary/20 items-center transition-all cursor-pointer p-1' title='Create a new forum'>
                     <BiPlus size={30} className='self-center' />
@@ -54,7 +54,7 @@ const Forums = () => {
                     ))
 
                     :
-                    <div className='mt-4 mb-10 px-32'>
+                    <div className='mt-4 mb-10 md:px-32 px-5'>
                         {
                             forums?.map((forum: ForumType) =>
                                 <Forum forum={forum} />

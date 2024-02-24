@@ -77,8 +77,8 @@ const CategoryPage = () => {
   };
 
   return (
-    <div className="py-5 mb-10 flex p-16 pt-24 min-h-screen">
-      <div className="flex md:flex-row flex-col gap-6">
+    <div className="py-5 mb-10 flex px-4 md:px-10 lg:px-16 xl:p-16 xl:justify-normal lg:justify-normal md:justify-center justify-center pt-24 mt-12 min-h-screen">
+      <div className="flex md:flex-row flex-wrap xl:justify-normal lg:justify-normal md:justify-normal justify-center  flex-col gap-6">
         {loading &&
           <>
             {
@@ -96,7 +96,7 @@ const CategoryPage = () => {
           <Link
             to={`/item/${item._id}`}
             key={item._id?.toString()}
-            className="bg-gradient-to-br w-full md:w-[300px] cursor-pointer relative from-gray-50 h-[330px] to-white rounded-xl overflow-hidden border flex flex-col items-center"
+            className="bg-gradient-to-br w-full  md:w-[300px] cursor-pointer relative from-gray-50 h-[330px] to-white rounded-xl overflow-hidden border  flex flex-col items-center"
           >
             <div className="h-[200px] overflow-hidden w-full">
               <img

@@ -13,6 +13,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
@@ -23,11 +29,11 @@ const Navbar = () => {
         style={{
           zIndex: 1000,
         }}
-        className="w-full top-0 fixed flex flex-row items-center justify-between p-2 px-16 bg-white dark:bg-dark transition-all py-3"
+        className="w-full top-0 fixed flex flex-row items-center justify-between p-2 xl:px-16 lg:px-16 md:px-16 px-5 bg-white dark:bg-dark transition-all py-3"
       >
         <div className="flex flex-row items-center justify-between w-full">
           <Link to={"/"}>
-            <img src={logo} className="w-[65px]" />
+            <img src={logo} className="xl:w-[65px] lg:w-[65px] md:w-[65px]  w-[45px]" />
           </Link>
           <div className=" flex-row gap-6 text-lg w-full justify-center text-black dark:text-white xl:flex lg:flex md:flex sm:hidden hidden">
             {navLinks.map((link) => (
@@ -59,7 +65,7 @@ const Navbar = () => {
                   <>
                     <img
                       src={user.picture}
-                      className="xl:w-[60px] lg:w-[70px] md:w-[80px] w-[50px]  object-cover rounded-full"
+                      className="xl:w-[60px] lg:w-[70px] md:w-[80px] w-[45px]  object-cover rounded-full"
                       alt=""
                     />
                   </>
@@ -87,6 +93,45 @@ const Navbar = () => {
                     <DropdownMenuItem>Dashboard</DropdownMenuItem>
                   </Link>
                 )}
+                <DropdownMenuItem className="xl:hidden lg:hidden md:hidden block" onClick={(e) => e.preventDefault()}>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1" className="border-0 p-0">
+                      <AccordionTrigger className="border-0 p-0 no-underline font-normal">Categories</AccordionTrigger>
+                      <Link to={"/category/historical-sites"} className="xl:hidden lg:hidden md:hidden block">
+                        <AccordionContent className="pt-3">
+                          Historical Sites
+                        </AccordionContent>
+                      </Link>
+                      <Link to={"/category/natural-wonders"} className="xl:hidden lg:hidden md:hidden block">
+                        <AccordionContent>
+                          Natural Wonders
+                        </AccordionContent>
+                      </Link>
+                      <Link to={"/category/cultural-attractions"} className="xl:hidden lg:hidden md:hidden block">
+                        <AccordionContent>
+                          Cultural Attractions
+                        </AccordionContent>
+                      </Link>
+                      <Link to={"/category/adventure-spots"} className="xl:hidden lg:hidden md:hidden block">
+                        <AccordionContent className="p-0 pb-1">
+                          Adventure Spots
+                        </AccordionContent>
+                      </Link>
+                    </AccordionItem>
+                  </Accordion>
+                </DropdownMenuItem>
+                <Link to={"/forums"} className="xl:hidden lg:hidden md:hidden block">
+                  <DropdownMenuItem>Forums</DropdownMenuItem>
+                </Link>
+                <Link to={"/wishlist"} className="xl:hidden lg:hidden md:hidden block">
+                  <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                </Link>
+                <Link to={"/cart"} className="xl:hidden lg:hidden md:hidden block">
+                  <DropdownMenuItem>Cart</DropdownMenuItem>
+                </Link>
+                <Link to={"/notifications"} className="xl:hidden lg:hidden md:hidden block">
+                  <DropdownMenuItem>Notifications</DropdownMenuItem>
+                </Link>
                 {
                   user &&
                   <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
