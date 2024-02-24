@@ -1,10 +1,7 @@
-import { ForumType, ItemType, ReplyType } from '@/types';
+import { ItemType } from '@/types';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Skeleton } from "@/components/ui/skeleton"
-import { BiMessageSquare, BiMessage, BiLike } from 'react-icons/bi'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
-import { Input } from "@/components/ui/input"
+import { Skeleton } from "`@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { useToast } from '@/components/ui/use-toast';
 import {

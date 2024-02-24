@@ -53,7 +53,7 @@ const Complaint = ({ item }: { item: ItemType }) => {
         try {
             setIsSubmitting(true);
             const { message } = values;
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/item/review`, {
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/complaint`, {
                 message,
                 itemId: item._id
             }, {
@@ -66,8 +66,8 @@ const Complaint = ({ item }: { item: ItemType }) => {
             }
             console.log(res.data);
             toast({
-                title: "Added review",
-                description: "Successfully added a review"
+                title: "Submitted query!",
+                description: "Successfully submitted a query"
             })
             window.location.reload();
 
@@ -75,7 +75,7 @@ const Complaint = ({ item }: { item: ItemType }) => {
             console.log(error);
             toast({
                 title: "Error occurred",
-                description: "An error occurred while submitting review",
+                description: "An error occurred while submitting query",
                 variant: "destructive"
             })
             return;

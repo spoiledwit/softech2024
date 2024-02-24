@@ -1,4 +1,4 @@
-import Complaint from "../models/complaint";
+import Complaint from "../models/complaint.js";
 
 export const createComplaint = async (req, res) => {
     try {
@@ -17,7 +17,7 @@ export const getComplaintsByUser = async (req, res) => {
         const complaints = await Complaint.find({
             userId: req.userId
         }).populate("itemId").populate("userId");
-        
+
         res.status(200).json(complaints);
     } catch (error) {
         res.status(404).json({ message: error.message });
