@@ -182,3 +182,22 @@ export const appendToWishlist = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const addReview = async(req, res) => {
+  try {
+    const { itemId, review, rating } = req.body;
+    const user = await AuthModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).send("User doesn't exist");
+    }
+    const newReview = {
+      itemId,
+      review,
+      rating,
+    };
+    user.reviews.push(newReview);
+    await user.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
