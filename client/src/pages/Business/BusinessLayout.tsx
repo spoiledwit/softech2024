@@ -1,8 +1,16 @@
 import Sidebar from '@/components/business/sidebar/Sidebar'
+import useAuthStore from '@/store/authStore'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, redirect } from 'react-router-dom'
 
 const BusinessLayout = () => {
+    const { user } = useAuthStore();
+    console.log(user);
+
+    if (user?.businessId == null) {
+        window.location.href = '/';
+    }
+
     return (
         <>
             <div className='flex flex-row'>

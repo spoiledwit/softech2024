@@ -59,9 +59,17 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
-                <Link to={"/panel"}>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
-                </Link>
+                {
+                  user?.businessId == null ?
+                    <Link to={"/business-form"}>
+                      <DropdownMenuItem>Become a travel agent</DropdownMenuItem>
+                    </Link>
+                    :
+                    <Link to={"/panel"}>
+                      <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                    </Link>
+                }
+
                 <DropdownMenuItem>Settings</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
