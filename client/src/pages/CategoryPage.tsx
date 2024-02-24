@@ -6,6 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -78,8 +79,19 @@ const CategoryPage = () => {
   return (
     <div className="py-5 mb-10 flex p-16 pt-24 min-h-screen">
       <div className="flex md:flex-row flex-col gap-6">
-      {loading && <p>Loading....</p>}
-      {!loading && items.length === 0 && <p>No items found.</p>}
+        {loading &&
+          <>
+            {
+              Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="flex flex-col gap-3 ">
+                  <Skeleton className="h-[200px] bg-primary/20 dark:bg-primary/20 w-2/3 rounded-xl" />
+                  <Skeleton className="h-[50px] bg-primary/20 dark:bg-primary/20 w-[400px] rounded-xl" />
+                </div>
+              ))
+            }
+          </>
+        }
+        {!loading && items.length === 0 && <p>No items found.</p>}
         {!loading && items.map((item) => (
           <Link
             to={`/item/${item._id}`}
@@ -111,11 +123,10 @@ const CategoryPage = () => {
               <div className="absolute right-4 top-4">
                 {item?._id && (
                   <FaHeart
-                    className={`${
-                      checkIfInWishlist(item._id?.toString())
-                        ? "text-red-500"
-                        : "text-black opacity-50"
-                    } text-lg`}
+                    className={`${checkIfInWishlist(item._id?.toString())
+                      ? "text-red-500"
+                      : "text-black opacity-50"
+                      } text-lg`}
                   />
                 )}
               </div>
@@ -132,11 +143,10 @@ const CategoryPage = () => {
                   {Array.from({ length: 5 }, (_, index) => (
                     <FaStar
                       key={index}
-                      className={`text-yellow-500 text-xs ${
-                        index < Math.round(4.5)
-                          ? "text-yellow-500"
-                          : "text-gray-300"
-                      }`}
+                      className={`text-yellow-500 text-xs ${index < Math.round(4.5)
+                        ? "text-yellow-500"
+                        : "text-gray-300"
+                        }`}
                     />
                   ))}
                   <p className="text-xs text-gray-600 ml-2">
@@ -151,7 +161,7 @@ const CategoryPage = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

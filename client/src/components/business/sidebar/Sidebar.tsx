@@ -36,12 +36,12 @@ const Sidebar = () => {
             path: "/admin/orders",
             icon: <FaFileInvoiceDollar />,
         },
-        // {
-        //     id: 4,
-        //     name: "Settings",
-        //     path: "/admin/settings",
-        //     icon: <FaCog />,
-        // },
+        {
+            id: 4,
+            name: "Complaints",
+            path: "/panel/complaints",
+            icon: <FaCog />,
+        },
     ];
 
     return (

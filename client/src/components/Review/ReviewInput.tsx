@@ -1,7 +1,6 @@
 import { ItemType } from '@/types';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Skeleton } from "`@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
 import { useToast } from '@/components/ui/use-toast';
 import {

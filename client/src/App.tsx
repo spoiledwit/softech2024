@@ -19,6 +19,7 @@ import Forums from "./pages/Forums/Forum";
 import CreateForum from "./components/forum/CreateForum";
 import ForumDetails from "./components/forum/ForumDetails";
 import CategoryPage from "./pages/CategoryPage";
+import Complaints from "./components/business/complaints/Complaints";
 
 const App = () => {
   const { user, theme } = useAuthStore();
@@ -49,6 +50,8 @@ const App = () => {
         <Route path="panel" element={<BusinessLayout />}>
           <Route path="customers" element={<Customers />} />
           <Route path="items" element={<Items />} />
+          <Route path="orders" element={<Items />} />
+          <Route path="complaints" element={<Complaints />} />
           <Route path="create-item" element={<CreateItem />} />
         </Route>
         <Route path="business-form" element={<BusinessForm />} />
