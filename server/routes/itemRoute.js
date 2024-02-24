@@ -1,4 +1,4 @@
-import { createItem, getItems, getItem, getItemByBusiness } from "../controllers/Item.js";
+import { createItem, getItems, getItem, getItemByBusiness, addReview } from "../controllers/Item.js";
 import verifyToken from "../middlewares/verifyToken.js";
 import express from "express";
 
@@ -9,5 +9,6 @@ router.get("/", getItems);
 router.get("/:id", getItem);
 router.get("/business/:businessId", getItemByBusiness);
 router.post("/", verifyToken, createItem);
+router.post("/review", verifyToken, addReview);
 
 export default router;
