@@ -36,7 +36,7 @@ export default function Notification() {
           {user?.notifications?.map((notification: any) => (
             <div className="flex flex-row items-center gap-4">
               <div
-                className="text-sm text-gray-600"
+                className="text-sm text-gray-600 dark:text-white/80"
               >
                 <p>{notification?.content}</p>
                 <p>{toReadableDate(notification?.createdAt)}</p>

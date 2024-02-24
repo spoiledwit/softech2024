@@ -12,6 +12,7 @@ import axios from "axios";
 import useAuthStore from "@/store/authStore";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 const Orders = () => {
   const { user } = useAuthStore();
@@ -62,35 +63,33 @@ const Orders = () => {
         <TableCaption>A list of your orders</TableCaption>
         <TableHeader className="hover:bg-secondary bg-secondary">
           <TableRow className="bg-secondary hover:bg-secondary">
-            <TableHead className="w-[100px]">Cover</TableHead>
-            <TableHead className="w-[100px]">id</TableHead>
-            <TableHead className="w-[100px]">Business Id</TableHead>
-            <TableHead className="w-[100px]">Title</TableHead>
-            <TableHead className="w-[100px]">Price</TableHead>
+            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead className="w-[100px]">Name</TableHead>
+            <TableHead className="w-[100px]">Payment Method</TableHead>
+            <TableHead className="w-[100px]">Payment Status</TableHead>
+            <TableHead className="w-[100px]">Total Items</TableHead>
+            <TableHead className="w-[100px]">Total Price</TableHead>
             <TableHead className="w-[100px]">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {orders?.map((item: any) => (
             <TableRow key={item._id} className="">
-              <TableCell className="font-medium">
-                <img
-                  className="w-10 h-10 object-cover rounded-full"
-                  src={item.images[0]}
-                  alt=""
-                />
-              </TableCell>
               <TableCell className="font-medium">{item._id}</TableCell>
-              <TableCell className="font-medium">{item.businessId}</TableCell>
-              <TableCell className="font-medium">{item.title}</TableCell>
-              <TableCell className="font-medium">{item.price}</TableCell>
-              <Button
-                disabled={deleting}
-                onClick={() => deleteItem(item._id)}
-                className="bg-red-500 text-white"
-              >
-                {deleting ? "Deleting..." : "Delete"}
-              </Button>
+              <TableCell className="font-medium">{item.booker_details.name}</TableCell>
+              <TableCell className="font-medium">{capitalizeFirstLetter(item.payment_method)}</TableCell>
+              <TableCell className="font-medium">{capitalizeFirstLetter(item.payment_status)}</TableCell>
+              <TableCell className="font-medium">{item.items.length}</TableCell>
+              <TableCell className="font-medium">{item.total_price}</TableCell>
+              <div className="p-1">
+                <Button
+                  disabled={deleting}
+                  onClick={() => deleteItem(item._id)}
+                  className="bg-red-500 text-white"
+                >
+                  {deleting ? "Deleting..." : "Delete"}
+                </Button>
+              </div>
             </TableRow>
           ))}
         </TableBody>
