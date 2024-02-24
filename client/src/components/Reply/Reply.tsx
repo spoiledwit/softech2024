@@ -1,12 +1,36 @@
 import { toReadableDate } from '@/lib/utils'
 import useAuthStore from '@/store/authStore'
 import { ReplyType } from '@/types'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import { BiCalendar, BiDislike, BiLike, } from 'react-icons/bi'
 
 const Reply = ({ reply }: { reply: ReplyType }) => {
 
     const { user } = useAuthStore();
+
+    async function likeReply() {
+        try {
+            const res = await axios.patch(`${import.meta.env.VITE_BASE_URI}/reply/${reply._id}/like`,
+                {
+                    userId: user?._id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            if (!res.data) {
+                console.log(res.data);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    
+
 
     return (
         <>
@@ -22,7 +46,7 @@ const Reply = ({ reply }: { reply: ReplyType }) => {
                     </div>
                     <div className='flex flex-row gap-3'>
                         <div className='flex flex-row gap-2'>
-                            <BiLike size={20} className='text-primary cursor-pointer' />
+                            <BiLike size={20} className='text-primary cursor-pointer' onClick={likeReply} />
                             <p className='text-sm'>{reply.likes?.length}</p>
                         </div>
                         <div className='flex flex-row gap-2'>
