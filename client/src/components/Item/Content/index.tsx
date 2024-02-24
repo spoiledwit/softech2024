@@ -5,6 +5,7 @@ import { useState } from "react";
 import ReviewInput from "@/components/Review/ReviewInput";
 import axios from "axios";
 import Review from "@/components/Review/Review";
+import { ReviewType } from "@/types";
 
 interface Props {
   content: {
@@ -17,11 +18,11 @@ interface Props {
 const Content = ({ content, item }: Props) => {
   const [open, setOpen] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(item.reviews);
 
   async function getReview() {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/review/${item._id}`, {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/review/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -36,6 +37,7 @@ const Content = ({ content, item }: Props) => {
 
   useEffect(() => {
     getReview();
+    console.log(reviews);
   }, [])
 
 
@@ -69,9 +71,9 @@ const Content = ({ content, item }: Props) => {
       <div className="">
         <h3 className="text-2xl text-primary font-semibold">Leave a review</h3>
         <ReviewInput getReview={getReview} item={item} />
-        <div>
+        <div className="flex flex-col gap-3 mt-5">
           {
-            reviews?.map((review) =>
+            reviews?.map((review: ReviewType) =>
               <Review review={review} />
             )
           }

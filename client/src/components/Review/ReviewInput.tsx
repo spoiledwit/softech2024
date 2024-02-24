@@ -26,7 +26,6 @@ const formSchema = z.object({
 });
 
 const ReviewInput = ({ getReview, item }: { getReview: any, item: ItemType }) => {
-    const [forum, setForum] = useState<ForumType>();
     const { user } = useAuthStore();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { toast } = useToast();
@@ -53,10 +52,9 @@ const ReviewInput = ({ getReview, item }: { getReview: any, item: ItemType }) =>
         try {
             setIsSubmitting(true);
             const { review } = values;
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/review`, {
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/item/review`, {
                 review,
                 rating: 2,
-                userId: user._id,
                 itemId: item._id
             }, {
                 headers: {
@@ -67,10 +65,20 @@ const ReviewInput = ({ getReview, item }: { getReview: any, item: ItemType }) =>
                 throw new Error("An error occurred");
             }
             console.log(res.data);
+            toast({
+                title: "Added review",
+                description: "Successfully added a review"
+            })
             getReview();
+            window.location.reload();
 
         } catch (error: any) {
             console.log(error);
+            toast({
+                title: "Error occurred",
+                description: "An error occurred while submitting review",
+                variant: "destructive"
+            })
             return;
         }
         finally {
