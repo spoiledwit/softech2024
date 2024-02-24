@@ -15,7 +15,7 @@ const Sidebar = () => {
         {
             id: 0,
             name: "Dashboard",
-            path: "/admin/dashboard",
+            path: "/panel",
             icon: <FaTachometerAlt />,
         },
         {
@@ -33,7 +33,7 @@ const Sidebar = () => {
         {
             id: 3,
             name: "Orders",
-            path: "/admin/orders",
+            path: "/panel/orders",
             icon: <FaFileInvoiceDollar />,
         },
         {

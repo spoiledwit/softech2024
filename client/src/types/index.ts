@@ -57,6 +57,7 @@ interface ItemType {
     title: string;
     category: string;
     subcategory: string;
+    businessId: string;
     city: string;
     images: string[];
     content: [

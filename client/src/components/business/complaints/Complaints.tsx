@@ -12,17 +12,25 @@ import axios from "axios";
 import useAuthStore from "@/store/authStore";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { toReadableDate } from "@/lib/utils";
 
 const Complaints = () => {
-    const { user } = useAuthStore();    
+    const { user } = useAuthStore();
     const [items, setItems] = useState([]);
     const [deleting, setDeleting] = useState(false);
+    const [complaints, setComplaints] = useState([]);
 
     async function getAllComplaints() {
         try {
             const res = await axios.get(
-                `${import.meta.env.VITE_BASE_URI}/item/business/${user?.businessId}`
+                `${import.meta.env.VITE_BASE_URI}/complaint/${user?.businessId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            }
             );
+            console.log(res.data);
+            setComplaints(res.data);
             setItems(res.data);
         } catch (error) {
             console.log(error);
@@ -65,12 +73,13 @@ const Complaints = () => {
                         <TableHead className="w-[100px]">ID</TableHead>
                         <TableHead className="w-[100px]">User name</TableHead>
                         <TableHead className="w-[100px]">Message</TableHead>
+                        <TableHead className="w-[100px]">For item</TableHead>
                         <TableHead className="w-[100px]">Created At</TableHead>
                         <TableHead className="w-[100px]">Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {items?.map((item: any) => (
+                    {complaints?.map((item: any) => (
                         <TableRow key={item._id} className="">
                             {/* <TableCell className="font-medium">
                                 <img
@@ -79,17 +88,18 @@ const Complaints = () => {
                                     alt=""
                                 />
                             </TableCell> */}
-                            <TableCell className="font-medium">{item._id}</TableCell>
-                            <TableCell className="font-medium">{item.businessId}</TableCell>
-                            <TableCell className="font-medium">{item.title}</TableCell>
-                            <TableCell className="font-medium">{item.price}</TableCell>
+                            <TableCell className="font-medium">{item?._id}</TableCell>
+                            <TableCell className="font-medium">{item.userId.name}</TableCell>
+                            <TableCell className="font-medium">{item.message}</TableCell>
+                            <TableCell className="font-medium">{item.itemId.title}</TableCell>
+                            <TableCell className="font-medium">{toReadableDate(item.createdAt)}</TableCell>
                             <div className="grid grid-2 grid-cols-2 gap-2 justify-start items-start p-1">
                                 <Button
                                     disabled={deleting}
-                                    onClick={() => deleteItem(item._id)}
+                                    // onClick={() => deleteItem(item._id)}
                                     className="border border-black bg-transparent hover:text-white  text-black"
                                 >
-                                    {deleting ? "Deleting..." : "Delete"}
+                                    {deleting ? "Chatting..." : "Chat"}
                                 </Button>
                                 <Button
                                     disabled={deleting}
