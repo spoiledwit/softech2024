@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema < OrderType > ({
-  businessId: {
-    type: mongoose.Types.ObjectId, ref: "Business",
-    required: true,
-  },
+const orderSchema = new mongoose.Schema ({
   userId: {
     type: mongoose.Types.ObjectId, ref: "User",
     required: true,
@@ -74,4 +70,5 @@ const orderSchema = new mongoose.Schema < OrderType > ({
   },
 });
 
-export default mongoose.models.Order || mongoose.model("Order", orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
+export default Order;

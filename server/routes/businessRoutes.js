@@ -4,7 +4,7 @@ import {
     getBusinesses,
     updateBusiness,
     deleteBusiness
-} from "../controllers/business"
+} from "../controllers/business.js"
 
 import verifyToken from "../middlewares/verifyToken.js";
 import isBusiness from "../middlewares/isBusiness.js";
