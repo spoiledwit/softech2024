@@ -26,7 +26,7 @@ export const getForums = async (req, res) => {
 export const getForum = async (req, res) => {
     try {
         const { id } = req.params;
-        const forum = await Forum.findById(id);
+        const forum = await Forum.findById(id).populate({ path: "replies", populate: { path: "userId" } });
         if (!forum) {
             return res.status(500).json({ error: "Forum not found!" });
         }
