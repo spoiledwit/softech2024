@@ -14,6 +14,11 @@ const complaintSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item",
         required: true,
+    },
+    businessId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Business",
+        required: true,
     }
 }, {
     timestamps: true,
