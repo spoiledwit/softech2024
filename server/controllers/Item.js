@@ -42,7 +42,8 @@ export const createItem = async (req, res) => {
 
 export const getItems = async (req, res) => {
   try {
-    const items = await Item.find();
+    const cat = req.query.category;
+    const items = await Item.find(cat ? { category: cat } : {});
     res.status(200).send(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
