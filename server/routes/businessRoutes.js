@@ -3,7 +3,8 @@ import {
     getBusiness,
     getBusinesses,
     updateBusiness,
-    deleteBusiness
+    deleteBusiness,
+    analytics
 } from "../controllers/business.js"
 
 import verifyToken from "../middlewares/verifyToken.js";
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.post("/", verifyToken, createBusiness);
 router.get("/", getBusinesses);
+router.get("/analytics", analytics);
 router.get("/:id", getBusiness);
 router.patch("/:id", verifyToken, isBusiness, updateBusiness);
 router.delete("/:id", verifyToken, isBusiness, deleteBusiness);

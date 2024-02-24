@@ -212,3 +212,15 @@ export const deleteReview = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const analytics = async (req, res) => {
+  try {
+    const items = await Item.find({
+      businessId: req.params.id,
+    });
+
+    res.status(200).json(items.length);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

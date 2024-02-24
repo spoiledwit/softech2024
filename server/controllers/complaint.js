@@ -45,3 +45,15 @@ export const getComplaintsByBusiness = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const analytics = async (req, res) => {
+    try {
+        const complaints = await Complaint.find({
+            businessId: req.params.id
+        })
+
+        res.status(200).json(complaints.length);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}

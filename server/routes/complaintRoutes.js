@@ -2,7 +2,8 @@ import {
     createComplaint,
     deleteComplaint,
     getComplaintsByBusiness,
-    getComplaintsByUser
+    getComplaintsByUser,
+    analytics
 } from "../controllers/complaint.js"
 
 import express from "express"
@@ -13,6 +14,7 @@ const router = express.Router()
 router.post("/", verifyToken, createComplaint)
 router.get("/", verifyToken, getComplaintsByUser)
 router.delete("/", verifyToken, deleteComplaint)
+router.get("/analytics", verifyToken, analytics)
 router.get("/:id", verifyToken, getComplaintsByBusiness)
 
 export default router;

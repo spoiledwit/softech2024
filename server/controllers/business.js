@@ -84,3 +84,12 @@ export const deleteBusiness = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const analytics = async (req, res) => {
+  try {
+    const count = await Business.countDocuments();
+    res.status(200).json(count);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}

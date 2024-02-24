@@ -96,9 +96,13 @@ export const deleteOrder = async (req, res) => {
 export const getOrdersByBusiness = async (req, res) => {
   try {
     const { businessId } = req.params;
-    const orders = await Order.find().populate("items.itemId", "businessId");
+    const orders = await Order.find().populate({
+      path: "items.itemId",
+      populate: { path: "businessId" },
+    });
+    
     const businessOrders = orders.filter(
-      (order) => order.items.some(item => String(item.itemId.businessId) === businessId)
+      (order) => order.items.map((item) => item.itemId.businessId).includes(businessId)
     );
     res.status(200).json(businessOrders);
   } catch (error) {
