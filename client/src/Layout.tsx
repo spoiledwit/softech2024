@@ -48,8 +48,8 @@ const Layout = () => {
 
   useEffect(() => {
     try {
-      const socketConnect = io("http://localhost:5000");
-      setSocket(socketConnect);
+      // const socketConnect = io("http://localhost:5000");
+      // setSocket(socketConnect);
     } catch (error) {
       console.log(error);
     }
@@ -63,12 +63,12 @@ const Layout = () => {
 
   return (
     <>
-      {
-        user &&
-        <div>
-          <Navbar />
-        </div>
-      }
+      {/* {
+        user && */}
+      <div>
+        <Navbar />
+      </div>
+      {/* } */}
       <Toaster />
       <div className="flex flex-col">
         <Outlet />

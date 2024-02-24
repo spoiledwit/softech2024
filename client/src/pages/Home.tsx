@@ -16,7 +16,7 @@ import {
 import { Link } from 'react-router-dom';
 import { GoArrowRight } from "react-icons/go";
 import Services from '@/components/Services/Services';
-import Recommendations from '@/components/Recommendations/Recommendations';
+import Recommendations from '@/components/Item/Recommendations';
 import Gallery from '@/components/Gallery/Gallery';
 
 const Home = () => {
