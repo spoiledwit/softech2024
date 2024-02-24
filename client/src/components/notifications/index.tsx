@@ -25,7 +25,7 @@ export default function Notification() {
           <IoMdNotificationsOutline className="text-3xl text-black" />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] max-h-[300px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
         </DialogHeader>
