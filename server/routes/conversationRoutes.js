@@ -4,8 +4,8 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/", createConversation);
+router.post("/", verifyToken, createConversation);
 router.get("/:firstUserId/:secondUserId", getConversation);
-router.get("/:userId", verifyToken, getMyConversations);
+router.get("/", verifyToken, getMyConversations);
 
 export default router;

@@ -2,7 +2,12 @@ import Message from "../models/Message.js";
 
 export const createMessage = async (req, res) => {
     try {
-        const newMessage = new Message(req.body);
+        const conversationId = req.params.conversationId;
+        const newMessage = new Message({
+            conversationId,
+            sender: req.body.sender,
+            text: req.body.text,
+        });
         const savedMessage = await newMessage.save();
         res.status(200).json(savedMessage);
     } catch (error) {
