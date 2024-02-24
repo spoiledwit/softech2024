@@ -63,12 +63,12 @@ const Layout = () => {
 
   return (
     <>
-      {/* {
-        user && */}
-      <div>
-        <Navbar />
-      </div>
-      {/* } */}
+      {
+        user &&
+        <div>
+          <Navbar />
+        </div>
+      }
       <Toaster />
       <div className="flex flex-col">
         <Outlet />

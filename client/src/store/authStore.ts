@@ -16,7 +16,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     token: "",
     user: null,
     theme: "dark",
-    cart:null,
+    cart: null,
     setUser: (user) => set({ user }),
     setToken: (token) => set({ token }),
     appendToCart: (item) => {

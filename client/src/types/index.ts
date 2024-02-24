@@ -4,6 +4,7 @@ type User = {
     name: string;
     email: string;
     approved: boolean;
+    businessId: string;
     createdAt: string;
     updatedAt: string;
 };
