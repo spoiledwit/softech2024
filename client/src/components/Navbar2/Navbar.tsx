@@ -17,7 +17,7 @@ const Navbar = () => {
             Welcome, {user?.name}
           </p> */}
           <div>
-            
+              
           </div>
           <span
             className="cursor-pointer"
