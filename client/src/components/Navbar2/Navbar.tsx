@@ -56,10 +56,14 @@ const Navbar = () => {
                 <DropdownMenuItem>Hello, {user?.name}</DropdownMenuItem>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
                 {
-                  user?.businessId &&
-                  < Link to={'/panel'}>
-                    <DropdownMenuItem>Dashboard</DropdownMenuItem>
-                  </Link>
+                  user?.businessId ?
+                    < Link to={'/panel'}>
+                      <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                    </Link>
+                    :
+                    < Link to={'/business-form'}>
+                      <DropdownMenuItem>Become a travel agent</DropdownMenuItem>
+                    </Link>
                 }
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => logout()}>Logout</DropdownMenuItem>
