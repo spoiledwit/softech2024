@@ -31,7 +31,7 @@ export const getForum = async (req, res) => {
             populate: {
                 path: "userId",
             },
-        });
+        }).populate('userId');
         if (!forum) {
             return res.status(500).json({ error: "Forum not found!" });
         }

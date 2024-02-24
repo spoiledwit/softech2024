@@ -29,9 +29,7 @@ const Reply = ({ reply }: { reply: ReplyType }) => {
         }
     }
 
-    useEffect(() => {
-        likeReply();
-    }, [])
+    
 
 
     return (

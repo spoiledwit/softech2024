@@ -1,5 +1,6 @@
 import Reply from '../models/reply.js';
 import Forum from '../models/forum.js';
+import mongoose from 'mongoose';
 
 export const createReply = async (req, res) => {
     const { content, userId, forumId } = req.body;
@@ -82,17 +83,15 @@ export const likeReply = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).send(`No reply with id: ${id}`);
         }
-        const reply = Reply.findById(id);
+        const reply = await Reply.findById(id);
         if (!reply) {
             return res.status(404).send("Reply not found");
-        }
-        if (reply.likes.includes(userId)) {
-            return res.status(400).send("You already liked this reply");
         }
         reply.likes.push(userId);
         await reply.save();
         res.json(reply);
     } catch (err) {
+        console.log(err);
         res.status(500).json({ error: err.message });
     }
 }
