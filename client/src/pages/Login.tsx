@@ -123,11 +123,6 @@ const Login = () => {
                 Register
               </Link>
             </p>
-            <p className="text-gray-500 text-sm">
-              <Link to={"/forgot-password"} className="text-primary">
-                Forgot Password?
-              </Link>
-            </p>
           </span>
         </div>
       </div>
