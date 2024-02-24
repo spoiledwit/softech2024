@@ -4,12 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useAuthStore from "@/store/authStore";
 import axios from "axios";
+import { sampleCats } from "@/constants";
 
 import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
   const { user } = useAuthStore();
   const [name, setName] = useState<string>(user?.name ? user?.name : "");
+  const [preferences, setPreferences] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -27,6 +29,7 @@ const ProfilePage = () => {
         {
           name: name,
           picture: images[0],
+          preferences: preferences,
         },
         {
           headers: {
@@ -63,6 +66,28 @@ const ProfilePage = () => {
             onChange={setImages}
           />
         </Label>
+        <div className="flex flex-col gap-3 w-full">
+          <span className="text-gray-500 font-medium">Preferences</span>
+          <div className="flex gap-3 flex-wrap">
+            {sampleCats.map((cat) => (
+              <div
+                key={cat}
+                onClick={() => {
+                  if (preferences.includes(cat)) {
+                    setPreferences(preferences.filter((p) => p !== cat));
+                  } else {
+                    setPreferences([...preferences, cat]);
+                  }
+                }}
+                className={`p-2 whitespace-nowrap border-2 border-gray-300 rounded-md cursor-pointer ${
+                  preferences.includes(cat) ? "bg-gray-100 border-black" : ""
+                }`}
+              >
+                {cat}
+              </div>
+            ))}
+          </div>
+        </div>
         <Button
           variant="default"
           className="w-full"
