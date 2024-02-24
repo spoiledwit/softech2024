@@ -6,12 +6,16 @@ import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
+import useLanguageStore from "@/store/languageStore";
 interface Props {
   title: React.ReactNode;
   description: string;
 }
 
 const Recommendations = ({ title, description }: Props) => {
+  const language = useLanguageStore((state) => state.language);
+  const isEnglish = language === "en";
+
   const [items, setItems] = useState<any[]>([]);
   const { user, appendToWishlist, removeFromWishlist } = useAuthStore();
   const [updating, setUpdating] = useState(false);
@@ -80,7 +84,7 @@ const Recommendations = ({ title, description }: Props) => {
           href="/category/all"
           className="text-sm md:block hidden font-medium text-yellow-600 hover:text-yellow-500 transition-colors"
         >
-          View All
+          {isEnglish ? "View all" : "سب دیکھیں"}
         </a>
       </div>
       <p className="text-gray-600 mb-6 text-sm max-w-[550px]">{description}</p>

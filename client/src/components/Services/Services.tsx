@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import bkdrop1 from "@/assets/backdrops/1.png";
 import bkdrop2 from "@/assets/backdrops/2.png";
 import bkdrop3 from "@/assets/backdrops/3.png";
@@ -7,15 +8,19 @@ import burj from "@/assets/1-burj-al-arab3.webp";
 import cruise from "@/assets/cruise.png";
 import waterslide from "@/assets/waterslide-398249_1280.jpg";
 import sampleimg from "@/assets/desert.png";
+import useLanguageStore from "@/store/languageStore";
 
 const Services = () => {
+  const language = useLanguageStore((state) => state.language);
+  const isEnglish = language === "en";
+
   const sampleCats = [
     "Historical Sites",
     "Natural Wonders",
     "Cultural Attractions",
     "Adventure Spots",
     "Hajj and Umrah",
-  ]
+  ];
 
   const navigate = useNavigate();
   const bkdrops = [
@@ -45,6 +50,37 @@ const Services = () => {
     },
   ];
 
+  const bkdropsUrdu = [
+    {
+      id: 1,
+      img: bkdrop3,
+      title: "تاریخی مقامات", // Historical Sites
+      img2: sampleimg,
+    },
+    {
+      id: 2,
+      img: bkdrop2,
+      title: "قدرتی عجائبات", // Natural Wonders
+      img2: burj,
+    },
+    {
+      id: 3,
+      img: bkdrop1,
+      title: "ثقافتی مقامات", // Cultural Attractions
+      img2: cruise,
+    },
+    {
+      id: 4,
+      img: bkdrop4,
+      title: "مہم جوئی کے مقامات", // Adventure Spots
+      img2: waterslide,
+    },
+  ];
+
+  const [drops, setDrops] = useState(
+    isEnglish ? bkdrops : bkdropsUrdu
+  );
+
   const handleMouseEnter = (id: any) => {
     const element = document.getElementById(`img-${id}`);
     if (element) {
@@ -62,21 +98,40 @@ const Services = () => {
   return (
     <div className="min-h-[400px] py-10 px-8 md:px-16">
       <h2 className="text-2xl">
-        Our{" "}
+        {isEnglish ? (
+          <>Our </>
+        ) : (
+          <>ہمارے </>
+        )}
         <span className="bg-yellow-500 px-2 italic text-white">
-          Experiences!
+          {isEnglish ? (
+            <>Experiences!</>
+          ) : (
+            <>تجربے</>
+          )}
         </span>
       </h2>
       <p className="mt-3 text-sm max-w-[500px] text-gray-700">
-        Embark on an epic journey with us—award-winning desert safaris and
-        iconic global attractions await!
+        {isEnglish ? (
+          <>
+            Embark on an epic journey with us—award-winning desert safaris and
+            iconic global attractions await!
+          </>
+        ) : (
+          <>
+            ہمارے ساتھ ایک شاندار سفر پر سفر کریں - ایوارڈ جیتنے والے صحرا
+            سفاریاں اور عالمی مقامات کا انتظار ہے!
+          </>
+        )}
       </p>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 grid-flow-row  mt-6"> */}
       <div className="flex flex-row justify-evenly flex-wrap gap-4  mt-6">
         {bkdrops.map((item) => (
           <div
             onClick={() => {
-              navigate(`/category/${item.title.toLowerCase().split(' ').join('-')}`)
+              navigate(
+                `/category/${item.title.toLowerCase().split(" ").join("-")}`
+              );
             }}
             key={item.id}
             className="relative cursor-pointer h-[50vh] md:h-[480px] w-full md:w-[350px] lg:w-[450px] lg:h-[520px] xl:w-[350px] xl:h-[480px]  bg-gray-200 rounded-xl overflow-hidden"

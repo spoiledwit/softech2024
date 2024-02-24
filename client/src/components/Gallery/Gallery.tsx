@@ -1,16 +1,11 @@
-import img1 from "@/assets/gallery/IF-17908819094789253_640x640.jpg";
-import img2 from "@/assets/gallery/IF-17957199353558427_640x640.jpg";
-import img3 from "@/assets/gallery/IF-17960663666413890_640x640.jpg";
-import img4 from "@/assets/gallery/IF-17982860675308923_640x640.jpg";
-import img5 from "@/assets/gallery/IF-18008282528310259_640x640.jpg";
-import img6 from "@/assets/gallery/IF-18020960185843421_640x640.jpg";
-import img7 from "@/assets/gallery/IF-18029363257583018_640x640.jpg";
-import img8 from "@/assets/gallery/IF-18085596118378272_640x640.jpg";
-import {
-  FaHeart,
-} from "react-icons/fa";
+import useLanguageStore from "@/store/languageStore";
+
+import { FaHeart } from "react-icons/fa";
 
 const Gallery = () => {
+  const language = useLanguageStore((state) => state.language);
+  const isEnglish = language === "en";
+
   const images = [
     {
       id: 1,
@@ -77,11 +72,25 @@ const Gallery = () => {
   return (
     <div className="mb-8">
       <h2 className="text-2xl">
-        Your{" "}
-        <span className="text-white italic bg-yellow-500 px-2">moments!</span>
+        {isEnglish ? <>Your </> : <>آپ کے </>}
+        <span className="text-white italic bg-yellow-500 px-2">
+          {isEnglish ? <>Gallery</> : <>گیلری</>}
+        </span>
       </h2>
       <p className="mt-3 text-sm max-w-[500px] text-gray-700">
-        Each frame captures a story, a memory, and the timeless beauty of our destinations.
+        {isEnglish ? (
+          <>
+            {" "}
+            Each frame captures a story, a memory, and the timeless beauty of
+            our destinations.
+          </>
+        ) : (
+          <>
+            {" "}
+            ہر فریم ایک کہانی، ایک یاد، اور ہمارے منزلوں کی دائمی خوبصورتی کو
+            کھینچتا ہے۔
+          </>
+        )}
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 gap-6">
         {images.map((image) => (
