@@ -13,10 +13,11 @@ import {
 const Customers = () => {
     return (
         <>
+            <h1 className='text-2xl font-semibold mb-3'>Orders</h1>
             <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
-                <TableHeader>
-                    <TableRow>
+                <TableCaption>A list of your orders</TableCaption>
+                <TableHeader className='hover:bg-secondary bg-secondary'>
+                    <TableRow className='bg-secondary hover:bg-secondary'>
                         <TableHead className="w-[100px]">Invoice</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Method</TableHead>
@@ -24,7 +25,7 @@ const Customers = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
+                    <TableRow className=''>
                         <TableCell className="font-medium">INV001</TableCell>
                         <TableCell>Paid</TableCell>
                         <TableCell>Credit Card</TableCell>
