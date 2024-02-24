@@ -2,7 +2,7 @@ import { useState } from "react";
 import Calendar from "./Calender";
 import PersonSelector from "./PersonSelector";
 import useAuthStore from "@/store/authStore";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { addToCart } from "@/lib/cart";
 
@@ -11,7 +11,7 @@ const Booking = ({ item }: { item: any }) => {
   const { user, appendToCart, cart } = useAuthStore();
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [booking, setBooking] = useState<boolean>(false);
-  const router = useRouter();
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
@@ -19,7 +19,7 @@ const Booking = ({ item }: { item: any }) => {
 
   const handleAddToCart = async () => {
     if (!user) {
-      router.push("/login");
+      navigate("/login")
       return;
     }
 

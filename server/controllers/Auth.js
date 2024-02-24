@@ -49,7 +49,7 @@ export const register = async (req, res) => {
     const token = jwt.sign(
       { email: AuthModel.email, id: AuthModel._id },
       process.env.JWT_SECRET,
-      { expiresIn: "5h" }
+      { expiresIn: "10h" }
     );
 
     res.status(201).json({ user, token });
@@ -84,8 +84,10 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { email: AuthModel.email, id: AuthModel._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "10h" }
     );
+
+    console.log(token)
 
     res.status(200).json({ user, token });
   } catch (err) {

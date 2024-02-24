@@ -20,8 +20,8 @@ const Item = () => {
 
   const fetchItem = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/items/${id}`);
-      setItem(res.data.result);
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/${id}`);
+      setItem(res.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -30,7 +30,7 @@ const Item = () => {
   };
 
   return (
-    <div className="min-h-screen pt-28 px-8 md:px-16 ">
+    <div className="min-h-screen pt-6 px-8 md:px-16 ">
       {loading ? (
         <div className="flex justify-center items-center mt-32">
           <img src={loadinganimation} alt="loading" />

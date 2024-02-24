@@ -61,10 +61,10 @@ const Layout = () => {
   }, [user, socket]);
 
   return (
-    <>
+    <div className=" min-h-screen">
     <Toaster />
     <Outlet />
-    </>
+    </div>
   );
 };
 
