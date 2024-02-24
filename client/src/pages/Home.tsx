@@ -1,35 +1,27 @@
-import Navbar from "@/components/Navbar/Navbar";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import desert from "@/assets/desert.png";
 import img2 from "@/assets/cruise.png";
 import img3 from "@/assets/waterslide-398249_1280.jpg";
 import img4 from "@/assets/burj.jpg";
-// import { FaLocationDot } from "react-icons/fa";
-import { IoIosBookmark } from "react-icons/io";
 import locator from "@/assets/locator.png";
 import { motion } from "framer-motion";
-// import SearchBar from "@/components/Home/SearchBar";
-import {
-  MdOutlineKeyboardArrowLeft,
-  MdOutlineKeyboardArrowRight,
-} from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { GoArrowRight } from "react-icons/go";
-import Services from "@/components/Services/Services";
-import Recommendations from "@/components/Item/Recommendations";
-import Gallery from "@/components/Gallery/Gallery";
+import Services from '@/components/Services/Services';
+import Recommendations from '@/components/Item/Recommendations';
+import Gallery from '@/components/Gallery/Gallery';
 
 const Home = () => {
+
   const slides = [
     {
       id: 0,
-      title: "Embark on a Dazzling Odyessy in Pakistan",
+      title: "Embark on a Dazzling Desert Odyssey in Dubai",
       description:
-        "Embark on a thrilling journey through Pakistan's golden deserts, where adventure and serenity await.",
+        "Embark on an exhilarating journey across the golden dunes of Dubai. Our Desert Safari invites you into the heart of the Arabian desert, where adventure meets serenity. ",
       link: "/desert-safari-dubai",
       location: "Dubai, UAE",
-      image:
-        "https://images.unsplash.com/flagged/photo-1558113118-e42e558b352a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: desert,
       highlights: [
         "Dune Bashing Thrills",
         "Sunset Photography Sessions",
@@ -42,9 +34,9 @@ const Home = () => {
     },
     {
       id: 1,
-      title: "Set Sail on a Luxurious Karachi Beach",
+      title: "Set Sail on a Luxurious Dubai Marina Cruise",
       description:
-        "Explore Pakistan's waterways on elegant boats, soaking in the beauty of its cities, an Indus River experience.",
+        "Drift along the Venice of the Middle East on our elegant cruise boats. Immerse yourself in the opulence of Dubai's skyline as you navigate through the glistening waters of the Dubai Marina.",
       link: "/dubai-marina-cruise",
       location: "Dubai Marina, UAE",
       image: img2,
@@ -60,9 +52,9 @@ const Home = () => {
 
     {
       id: 2,
-      title: "Sozo's Thrilling Water Slide Escape",
+      title: "Dubai's Thrilling Water Slide Escape",
       description:
-        "Plunge into the excitement of Pakistan's most thrilling water slides! Experience adrenaline-pumping aquatic adventures amidst scenic beauty.",
+        "Dive into the thrill of Dubai's most spectacular water slides! Feel the rush as you zoom down our adrenaline-pumping aquatic marvels, wrapped in the scenic embrace of our water park.",
       link: "/dubai-water-park",
       location: "Dubai, UAE",
       image: img3,
@@ -77,12 +69,12 @@ const Home = () => {
     },
     {
       id: 3,
-      title: "Pakistan's Iconic Landmarks Tour",
+      title: "Dubai's Iconic Landmarks Tour",
       description:
-        "Plunge into the excitement of Pakistan's most thrilling water slides! Experience adrenaline-pumping aquatic adventures amidst scenic beauty.",
+        "Witness the grandeur of Dubai with our curated tour of the city's most iconic attractions. Marvel at the architectural splendor of Burj Al Arab and explore the historic quarters of Dubai Creek.",
       link: "/dubai-landmarks-tour",
       location: "Dubai, UAE",
-      image: "https://images.unsplash.com/photo-1550586678-f7225f03c44b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: img4,
       highlights: [
         "Guided Tours of Burj Al Arab",
         "Exclusive Access to Heritage Sites",
@@ -168,11 +160,10 @@ const Home = () => {
                 {slides.map((slide, index) => (
                   <div
                     key={index}
-                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${
-                      index === currentSlide
-                        ? "bg-white"
-                        : "bg-gray-400 bg-opacity-75"
-                    }`}
+                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${index === currentSlide
+                      ? "bg-white"
+                      : "bg-gray-400 bg-opacity-75"
+                      }`}
                     onClick={() => setCurrentSlide(index)}
                   />
                 ))}
@@ -183,7 +174,9 @@ const Home = () => {
         </div>
       </div>
       <Services />
-      <div className="px-8 md:px-16">
+      <div
+        className="px-8 md:px-16"
+      >
         <Recommendations
           title={
             <>
@@ -201,7 +194,7 @@ const Home = () => {
         <Gallery />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

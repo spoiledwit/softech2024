@@ -89,7 +89,7 @@ export const login = async (req, res) => {
 
     res.status(200).json({ user, token });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -126,24 +126,59 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const toggleWishlistItem = async (req, res) => {
+export const updateUser = async (req, res) => {
+  try {
+    const { name, picture } = req.body;
+    const user = await AuthModel.findById(req.userId);
+    if (name) {
+      user.name = name;
+    }
+    if (picture) {
+      user.picture = picture;
+    }
+    await user.save();
+    res.status(201).send("User has been updated!");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const removeFromWishlist = async (req, res) => {
   try {
     const { itemId } = req.params;
+    console.log(itemId);
     const user = await AuthModel.findById(req.userId);
 
     if (!user) {
       return res.status(404).send("User doesn't exist");
     }
-
-    const index = user.wishlist.findIndex((id) => id === String(itemId));
-    if (index === -1) {
-      user.wishlist.push(itemId);
+    if (!user.wishlist.includes(itemId.toString())) {
+      return res.status(400).send("Item not found in wishlist!");
     } else {
-      user.wishlist = user.wishlist.filter((id) => id !== String(itemId));
+      user.wishlist = user.wishlist.filter(
+        (id) => id.toString() !== itemId.toString()
+      );
     }
 
     await user.save();
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
-}
+};
+
+export const appendToWishlist = async (req, res) => {
+  try {
+    const { itemId } = req.params;
+
+    const user = await AuthModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).send("User doesn't exist");
+    }
+    if (user.wishlist.includes(itemId)) {
+      return res.status(400).send("Item already in wishlist!");
+    }
+    user.wishlist.push(itemId);
+    await user.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

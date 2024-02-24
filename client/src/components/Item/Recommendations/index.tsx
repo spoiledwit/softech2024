@@ -5,7 +5,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { toggleWishlist as toggleWishlistBackend } from "@/lib/wishlist";
 import useAuthStore from "@/store/authStore";
 interface Props {
   title: React.ReactNode;
@@ -14,24 +13,49 @@ interface Props {
 
 const Recommendations = ({ title, description }: Props) => {
   const [items, setItems] = useState<any[]>([]);
-  const { user, toggleWishlist } = useAuthStore();
+  const { user, appendToWishlist, removeFromWishlist } = useAuthStore();
+  const [updating, setUpdating] = useState(false);
 
   const checkIfInWishlist = (id: string) => {
     if (!user) return false;
+    //@ts-ignore
     const isWishlisted = user.wishlist.includes(id);
     return isWishlisted;
   };
 
   const handleWishlist = async (id: string) => {
+    setUpdating(true);
     if (!user?._id) return;
     try {
-      console.log("id", id);
-      const res = await toggleWishlistBackend(id);
-      if (res) {
-        toggleWishlist(id);
+      if (checkIfInWishlist(id)) {
+        removeFromWishlist(id);
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URI}/auth/wishlist/remove/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setUpdating(false);
+      } else {
+        appendToWishlist(id);
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URI}/auth/wishlist/append/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setUpdating(false);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -78,13 +102,14 @@ const Recommendations = ({ title, description }: Props) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-
+                  if (updating) {
+                    // can add a return here;
+                  }
                   handleWishlist(item._id);
                 }}
               >
                 <FaRegHeart
-                  className={`${"block"} text-black text-lg
+                  className={`${"block"}  text-white/80 text-lg
                 }`}
                 />
               </div>

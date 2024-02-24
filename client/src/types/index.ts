@@ -5,8 +5,9 @@ type User = {
     email: string;
     approved: boolean;
     businessId: string;
-    cart: [],
+    cart:[],
     wishlist: [],
+    picture: string,
     createdAt: string;
     updatedAt: string;
 };
@@ -140,29 +141,6 @@ type OrderType = {
     order_status?: string;
 };
 
-type ForumType = {
-    _id?: string;
-    title: string;
-    content: string;
-    likes: [];
-    dislikes: [];
-    replyCount: number;
-    userId: User;
-    replies: ReplyType[];
-    createdAt: string;
-
-}
-
-type ReplyType = {
-    content: string;
-    likes: Array<any>;
-    dislikes: Array<any>;
-    userId: User;
-    createdAt: string;
-    forumId: ForumType;
-    _id: string;
-}
-
 export type {
     CategoryType,
     userType,
@@ -174,7 +152,5 @@ export type {
     cartItemType,
     BigCartItemType,
     OrderType,
-    User,
-    ForumType,
-    ReplyType
+    User
 };

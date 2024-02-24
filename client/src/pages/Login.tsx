@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import loginBg from '@/assets/loginBg2.jpg';
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -74,8 +73,7 @@ const Login = () => {
 
   return (
     <Form {...form}>
-      <div className="flex flex-col w-full h-screen items-center justify-center border-black">
-        <img src={loginBg} className="object-cover -z-20 absolute" />
+      <div className="flex flex-col w-full h-screen items-center justify-center border-black bg-primary/20">
         <div className="p-10 rounded-lg bg-white shadow-sm border">
           <form
             onSubmit={form.handleSubmit(onSubmit)}
