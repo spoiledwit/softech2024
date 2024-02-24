@@ -20,19 +20,19 @@ const Services = () => {
       id: 2,
       img: bkdrop2,
       title: "Tours & Sightseeing",
-      img2: burj,
+      img2: "https://images.unsplash.com/photo-1622626484839-c1ee989db061?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 3,
       img: bkdrop1,
-      title: "Cruises & Sailing",
-      img2: cruise,
+      title: "Winter Fiesta",
+      img2: "https://images.unsplash.com/photo-1584732200355-486a95263014?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 4,
       img: bkdrop4,
       title: "Water Sports",
-      img2: waterslide,
+      img2: "https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
 
