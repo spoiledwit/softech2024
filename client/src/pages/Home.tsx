@@ -5,13 +5,59 @@ import img3 from "@/assets/waterslide-398249_1280.jpg";
 import img4 from "@/assets/burj.jpg";
 import locator from "@/assets/locator.png";
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
-import Services from '@/components/Services/Services';
-import Recommendations from '@/components/Item/Recommendations';
-import Gallery from '@/components/Gallery/Gallery';
+import Services from "@/components/Services/Services";
+import Recommendations from "@/components/Item/Recommendations";
+import Gallery from "@/components/Gallery/Gallery";
+import useLanguageStore from "@/store/languageStore";
 
 const Home = () => {
+  const language = useLanguageStore((state) => state.language);
+  const isEnglish = language === "en";
+
+  const slidesUrdu = [
+    {
+      id: 0,
+      title: "دُبئی میں ایک چمچماتے صحرائی سفر کا آغاز کریں",
+      description:
+        "دُبئی کے سنہری ریت کے ٹیلوں کے پار ایک دلچسپ سفر کا آغاز کریں۔ ہماری صحرائی سیاحت آپ کو عرب صحرا کے دل میں لے جاتی ہے، جہاں مہم جوئی سکون سے ملتی ہے۔",
+      link: "/desert-safari-dubai",
+      location: "دُبئی، متحدہ عرب امارات",
+      image: desert,
+      ctaText: "صحرائی جادو دریافت کریں",
+    },
+    {
+      id: 1,
+      title: "دُبئی مارینا کروز پر ایک شاندار سفر کا آغاز کریں",
+      description:
+        "ہماری پرکشش کشتیوں پر مشرق وسطیٰ کے وینس کے ساتھ ساتھ چلیں۔ دُبئی مارینا کے چمکتے پانیوں کے ذریعے سفر کرتے ہوئے، دُبئی کی شاندار اسٹائل میں ڈوب جائیں۔",
+      link: "/dubai-marina-cruise",
+      location: "دُبئی مارینا، متحدہ عرب امارات",
+      image: img2,
+      ctaText: "شائستگی میں کروزر",
+    },
+    {
+      id: 2,
+      title: "دُبئی کا دلچسپ واٹر سلائڈز فرار",
+      description:
+        "دُبئی کے سب سے شاندار واٹر سلائڈز کے ولن میں غوطہ لگائیں! ہمارے ایڈرینالین سے بھرے آبی عجائب گھروں میں نیچے کی طرف زوم کرتے ہوئے تیز رفتار محسوس کریں، جو ہمارے واٹر پارک کے خوبصورت ماحول میں لپیٹے ہیں۔",
+      link: "/dubai-water-park",
+      location: "دُبئی، متحدہ عرب امارات",
+      image: img3,
+      ctaText: "مذاق میں سلائڈ کریں",
+    },
+    {
+      id: 3,
+      title: "دُبئی کے مشہور مقامات کا ٹور",
+      description:
+        "دُبئی کے شہر کے سب سے مشہور پرکشش مقامات کے ہمارے منصوبہ بند دورے کے ساتھ دُبئی کی عظمت کا مشاہدہ کریں۔ برج العرب کی تعمیراتی شان و شوکت کو دیکھیں اور دُبئی کریک کے تاریخی محلوں کی سیر کریں۔",
+      link: "/dubai-landmarks-tour",
+      location: "دُبئی، متحدہ عرب امارات",
+      image: img4,
+      ctaText: "دُبئی کے عجائبات دریافت کریں",
+    },
+  ];
 
   const slides = [
     {
@@ -22,14 +68,6 @@ const Home = () => {
       link: "/desert-safari-dubai",
       location: "Dubai, UAE",
       image: desert,
-      highlights: [
-        "Dune Bashing Thrills",
-        "Sunset Photography Sessions",
-        "Starlit BBQ Feast",
-        "Cultural Performances",
-        "Falconry Demonstrations",
-        "Overnight Stay Options",
-      ],
       ctaText: "Discover the Desert Magic",
     },
     {
@@ -40,13 +78,6 @@ const Home = () => {
       link: "/dubai-marina-cruise",
       location: "Dubai Marina, UAE",
       image: img2,
-      highlights: [
-        "Gourmet Dining on Water",
-        "Breathtaking Views of Iconic Landmarks",
-        "Live Entertainment on Deck",
-        "Sunset and Moonlight Cruises Available",
-        "Private Charter Options",
-      ],
       ctaText: "Cruise into Elegance",
     },
 
@@ -58,13 +89,6 @@ const Home = () => {
       link: "/dubai-water-park",
       location: "Dubai, UAE",
       image: img3,
-      highlights: [
-        "High-Speed Water Slides",
-        "Family-Friendly Attractions",
-        "Wave Pools and Lazy Rivers",
-        "Private Cabanas and Sun Loungers",
-        "Diverse Range of Dining Options",
-      ],
       ctaText: "Slide into Fun",
     },
     {
@@ -75,18 +99,13 @@ const Home = () => {
       link: "/dubai-landmarks-tour",
       location: "Dubai, UAE",
       image: img4,
-      highlights: [
-        "Guided Tours of Burj Al Arab",
-        "Exclusive Access to Heritage Sites",
-        "Panoramic Views from Burj Khalifa",
-        "Luxury Transport Options",
-        "Personalized Group Itineraries",
-      ],
       ctaText: "Discover Dubai's Wonders",
     },
   ];
 
-  const [selectedSlides, setSelectedSlides] = useState(slides);
+  const [selectedSlides, setSelectedSlides] = useState(
+    language === "en" ? slides : slidesUrdu
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -137,7 +156,7 @@ const Home = () => {
                   to={selectedSlides[currentSlide].link}
                   className="text-white font-medium mt-12 md:mt-4 bg-yellow-500 transition-all duration-200 hover:bg-yellow-600 text-center items-center flex justify-center text-sm w-fit px-5 h-[45px] min-w-[170px] rounded-md"
                 >
-                  {slides[currentSlide].ctaText}
+                  {selectedSlides[currentSlide].ctaText}
                   <GoArrowRight className="text-xl ml-2" />
                 </Link>
               </div>
@@ -160,10 +179,11 @@ const Home = () => {
                 {slides.map((slide, index) => (
                   <div
                     key={index}
-                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${index === currentSlide
-                      ? "bg-white"
-                      : "bg-gray-400 bg-opacity-75"
-                      }`}
+                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${
+                      index === currentSlide
+                        ? "bg-white"
+                        : "bg-gray-400 bg-opacity-75"
+                    }`}
                     onClick={() => setCurrentSlide(index)}
                   />
                 ))}
@@ -174,27 +194,29 @@ const Home = () => {
         </div>
       </div>
       <Services />
-      <div
-        className="px-8 md:px-16"
-      >
+      <div className="px-8 md:px-16">
         <Recommendations
           title={
             <>
               <h2 className="text-2xl font-medium text-yellow-600">
                 <span className="bg-yellow-500 text-white px-2 italic">
-                  Recommended
+                  {isEnglish ? <>Recommended</> : <>تجویز کردہ</>}
                 </span>{" "}
-                for you!
+                {isEnglish ? <>for you!</> : <>آپ کے لئے</>}
               </h2>
             </>
           }
-          description="Dive into a world of discovery, with handpicked experiences that promise
-        to delight, surprise, and inspire."
+          description={
+            isEnglish
+              ? `Dive into a world of discovery, with handpicked experiences that promise
+            to delight, surprise, and inspire`
+              : "ایک دنیا کی دریافت میں ڈوبیں، ہاتھ سے منتخب تجربات کے ساتھ جو وعدہ کرتے ہیں کہ خوشی، حیرت اور توجہ پیدا کریں گے۔"
+          }
         />
         <Gallery />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
