@@ -13,11 +13,16 @@ import { IoMdClose } from "react-icons/io";
 import { FaRegMap } from "react-icons/fa";
 import {io} from "socket.io-client";
 
+const socketConnect = io("http://localhost:4000");
+
 const Layout = () => {
   const { user } = useAuthStore();
   const { setSocket, socket } = useSocketStore();
   const { setUser, setToken } = useAuthStore();
   const { toast } = useToast();
+  useEffect(()=>{
+    setSocket(socketConnect);
+  }, [socketConnect]);
   useEffect(() => {
     handleLoginBack();
   }, []);
@@ -46,15 +51,6 @@ const Layout = () => {
       });
     }
   };
-
-  useEffect(() => {
-    try {
-      const socketConnect = io("http://localhost:4000");
-      setSocket(socketConnect);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   useEffect(() => {
     if (user && socket) {

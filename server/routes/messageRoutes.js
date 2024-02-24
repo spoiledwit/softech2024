@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/", createMessage);
+router.post("/:conversationId", createMessage);
 router.get("/:conversationId", getMessages);
 
 export default router;

@@ -7,6 +7,7 @@ import { logout } from "@/hooks/auth";
 import { FiShoppingBag } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa";
 import Notification from "../notifications";
+import { RiMessage3Line } from "react-icons/ri";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,19 +45,31 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-
-          <Link to={"/cart"} className="relative md:block xl:block lg:block hidden w-fit p-2">
-            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px]  h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
+          <Link
+            to={"/chat"}
+            className="relative md:block lg:block xl:block hidden w-fit p-2"
+          >
+            <RiMessage3Line className="text-3xl text-black" />
+          </Link>
+          <Link
+            to={"/cart"}
+            className="relative md:block xl:block lg:block hidden w-fit p-2"
+          >
+            <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.cart ? user.cart.length : 0}
             </span>
             <FiShoppingBag className="text-2xl text-black dark:text-white" />
           </Link>
-          <Link to={"/wishlist"} className="relative md:block lg:block xl:block hidden w-fit p-2">
+          <Link
+            to={"/wishlist"}
+            className="relative md:block lg:block xl:block hidden w-fit p-2"
+          >
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
               {user?.wishlist ? user.wishlist.length : 0}
             </span>
             <FaRegHeart className="text-2xl text-black dark:text-white" />
           </Link>
+
           <div>
             <Notification />
           </div>
@@ -81,8 +94,8 @@ const Navbar = () => {
                   top: "50px",
                   width: "200px",
                   zIndex: 1000,
-
-                }}>
+                }}
+              >
                 <DropdownMenuItem>
                   <Link to={"/profile"}>Profile</Link>
                 </DropdownMenuItem>
@@ -146,13 +159,10 @@ const Navbar = () => {
                 {
                   user &&
                   <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
-
                 }
               </DropdownMenuContent>
             </DropdownMenu>
-            <div>
-
-            </div>
+            <div></div>
             <span className="cursor-pointer items-center xl:flex lg:flex md:flex hidden">
               {theme == "dark" ? (
                 <BiMoon

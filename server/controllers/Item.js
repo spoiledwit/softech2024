@@ -104,18 +104,27 @@ export const getItems = async (req, res) => {
 export const getItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const item = await Item.findById(id).populate({
+    let item = await Item.findById(id).populate({
       path: "reviews.user_id",
       select: "name _id picture email",
     });
     if (!item) {
-      return res.status(500).json({ error: "Item not found!" });
+      return res.status(404).json({ error: "Item not found!" });
     }
+    const user = await AuthModel.findOne({
+      businessId: item.businessId,
+    });
+    if (!user) {
+      return res.status(404).json({ error: "Seller not found!" });
+    }
+    item = item.toObject(); // Convert the mongoose document to a plain JavaScript object
+    item.sellerId = user._id; // Attach sellerId to the item
     res.status(200).send(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 export const deleteItem = async (req, res) => {
   try {

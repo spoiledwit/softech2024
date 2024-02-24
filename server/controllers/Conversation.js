@@ -1,14 +1,17 @@
 import Conversation from "../models/Conversation.js";
+import AuthModel from "../models/Auth.js";
 
 export const getMyConversations = async (req, res) => {
     try {
         const userId = req.userId;
-        const conversation = await Conversation.find({
+        let conversations = await Conversation.find({
             members: {
                 $in: [userId],
             },
         });
-        res.status(200).json(conversation);
+        const receiverId = conversations.map((c) => c.members.find((m) => m !== userId));
+        const user = await AuthModel.findById(receiverId);
+        res.status(200).json({conversations, user});
     } catch (err) {
         res.status(500).json(err);
     }
@@ -16,7 +19,7 @@ export const getMyConversations = async (req, res) => {
 
 export const createConversation = async (req, res) => {
     const newConversation = new Conversation({
-        members: [req.params.senderId, req.params.receiverId],
+        members: [req.body.senderId, req.body.receiverId],
     });
     try {
         const savedConversation = await newConversation.save();

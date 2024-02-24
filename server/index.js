@@ -42,10 +42,22 @@ const onlineUsers = [];
 io.on("connection", (socket) => {
   console.log("User connected");
 
+  socket.on("sendMessage", (data) => {
+    const receiver = onlineUsers.find(
+      (user) => user.userId === data.receiverId
+    );
+    if (receiver) {
+      io.to(receiver.socketId).emit("message", data);
+    }
+  });
+
   socket.on("addUser", (userId) => {
     if (!onlineUsers.some((user) => user.userId === userId)) {
       onlineUsers.push({ userId, socketId: socket.id });
     }
+  });
+
+  socket.on("getOnlineUsers", () => {
     io.emit("onlineUsers", onlineUsers);
   });
 
@@ -55,7 +67,6 @@ io.on("connection", (socket) => {
       onlineUsers.splice(index, 1);
     }
     console.log("User disconnected");
-    io.emit("onlineUsers", onlineUsers);
   });
 });
 
@@ -89,6 +100,8 @@ app.use("/forum", forumRoutes);
 app.use("/reply", replyRoutes);
 app.use("/notification", notificationRoutes);
 app.use("/complaint", complaintRouter);
+app.use("/conversation", conversationRoutes);
+app.use("/message", messageRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");

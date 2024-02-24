@@ -20,6 +20,7 @@ import CreateForum from "./components/forum/CreateForum";
 import ForumDetails from "./components/forum/ForumDetails";
 import CategoryPage from "./pages/CategoryPage";
 import Complaints from "./components/business/complaints/Complaints";
+import ChatPage from "./pages/Chat";
 import Orders from "./pages/Business/Orders";
 import BusinessDashboard from "./pages/Business/BusinessDashboard";
 import SurpriseMe from "./pages/SurpriseMe/SurpriseMe";
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<CartPage />} />
+        <Route path="chat" element={<ChatPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="/category/:category" element={<CategoryPage />} />
