@@ -21,9 +21,10 @@ import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import useAuthStore from '@/store/authStore';
 import { toReadableDate } from '@/lib/utils';
+import { useParams } from 'react-router-dom';
 
 interface Props {
-    params: {
+    params?: {
         slug: string;
     }
 }
@@ -32,14 +33,14 @@ const formSchema = z.object({
     content: z.string().min(8),
 });
 
-const page = ({ params }: Props) => {
+const ForumDetails = ({ params }: Props) => {
 
     const [forum, setForum] = useState<ForumType>();
     const [replies, setReplies] = useState<ReplyType[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useAuthStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const id = params.slug;
+    const { id } = useParams();
     const { toast } = useToast();
 
     async function getForum() {
@@ -48,8 +49,9 @@ const page = ({ params }: Props) => {
             if (!res.data) {
                 console.log(res.data);
             }
-            setForum(res.data.result);
-            setReplies(res.data.result.replies);
+            console.log(res.data);
+            setForum(res.data);
+            setReplies(res.data.replies);
             setIsLoading(false);
         }
         catch (error) {
@@ -78,8 +80,10 @@ const page = ({ params }: Props) => {
         try {
             setIsSubmitting(true);
             const { content } = values;
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}comment/${forum?._id}`, {
-                content
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/reply`, {
+                content,
+                userId: user._id,
+                forumId: forum?._id
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -88,7 +92,8 @@ const page = ({ params }: Props) => {
             if (!res) {
                 throw new Error("An error occurred");
             }
-            getForum();
+            console.log(res.data);
+            // getForum();
 
         } catch (error: any) {
             console.log(error);
@@ -110,7 +115,11 @@ const page = ({ params }: Props) => {
                 })
                 return;
             }
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/like/${forum?._id}`);
+            const res = await axios.patch(`${import.meta.env.VITE_BASE_URI}/forum/${forum?._id}/likeForum`, {}, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
             if (!res.data) {
                 console.log(res.data);
             }
@@ -128,7 +137,7 @@ const page = ({ params }: Props) => {
 
     return (
         <>
-            <div className='mt-32 px-32 '>
+            <div className='mt-12 px-32 '>
                 <div className='flex flex-row  gap-2 items-baseline'>
                     {
                         isLoading ?
@@ -231,4 +240,4 @@ const page = ({ params }: Props) => {
     )
 }
 
-export default page
+export default ForumDetails

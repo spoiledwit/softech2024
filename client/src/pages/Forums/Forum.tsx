@@ -15,7 +15,8 @@ const Forums = () => {
     async function getForums() {
         await axios.get(`${import.meta.env.VITE_BASE_URI}/forum`)
             .then((res) => {
-                setForums(res.data.result);
+                console.log(res.data);
+                setForums(res.data);
                 setIsLoading(false);
             })
             .catch(error => {

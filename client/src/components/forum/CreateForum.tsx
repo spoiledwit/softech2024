@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import axios from 'axios';
 import { Textarea } from '../ui/textarea';
 import useAuthStore from '@/store/authStore';
+import { useToast } from '../ui/use-toast';
 
 const formSchema = z.object({
     title: z.string(),
@@ -26,6 +27,7 @@ const CreateForum = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useAuthStore();
+    const { toast } = useToast();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -43,9 +45,10 @@ const CreateForum = () => {
             }
             setIsSubmitting(true);
             const { title, content } = values;
-            const res = await axios.post(`${import.meta.env.VITE_Base_URI}/forum`, {
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/forum`, {
                 title,
-                content
+                content,
+                userId: user._id
             },
                 {
                     headers: {
@@ -56,10 +59,18 @@ const CreateForum = () => {
             if (!res) {
                 throw new Error("An error occurred");
             }
-            console.log(res);
+            toast({
+                title: "Created forum",
+                description: "You have successfully created a forum"
+            })
 
         } catch (error: any) {
             console.log(error);
+            toast({
+                title: "Error occurred",
+                description: "An error occurred while creating the forum",
+                variant: "destructive"
+            })
             return;
         }
         finally {
