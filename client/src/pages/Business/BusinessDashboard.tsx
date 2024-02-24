@@ -1,5 +1,8 @@
 import SolidCard from "@/components/Cards/SolidCard";
 import { Button } from "@/components/ui/button";
+import useAuthStore from "@/store/authStore";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const data = [
@@ -48,6 +51,45 @@ const data = [
 ];
 
 const BusinessDashboard = () => {
+
+    const { user } = useAuthStore();
+    const [complaintCount, setComplaintCount] = useState<number>(0);
+    const [itemCount, setItemCount] = useState<number>(0);
+
+    async function getItems() {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/analytics/${user?.businessId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            setItemCount(res.data);
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getOrders() {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/complaint/analytics/${user?.businessId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            console.log(res.data);
+            setComplaintCount(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getItems();
+        getOrders();
+    })
 
     return (
         <div className="min-h-screen bg-[#fff09e] dark:bg-white bg-opacity-30 pb-16">
@@ -116,10 +158,8 @@ const BusinessDashboard = () => {
                 </div>
 
                 <div className="w-1/2 flex flex-col gap-3 pt-10 pr-5">
-                    <SolidCard title="Total Users" data={1000} bgStyle="bg-[#FAD79C]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
-                    <SolidCard title="Active Users" data={"2k+"} bgStyle="bg-white  border-2 border-[#fad79c]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
-                    <SolidCard title="Mobile Unverified Users" data={350} bgStyle="bg-[#FAD79C]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
-                    <SolidCard title="Email Unverifed Users" data={500} bgStyle="bg-white border-2 border-[#fad79c]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
+                    <SolidCard title="Total Items" data={itemCount} bgStyle="bg-[#FAD79C]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
+                    <SolidCard title="Total Complaints" data={complaintCount} bgStyle="bg-white  border-2 border-[#fad79c]" titleStyle="text-[#D29125]" dataStyle="text-[#D29125]" />
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ const router = express.Router()
 router.post("/", verifyToken, createComplaint)
 router.get("/", verifyToken, getComplaintsByUser)
 router.delete("/", verifyToken, deleteComplaint)
-router.get("/analytics", verifyToken, analytics)
+router.get("/analytics/:id", verifyToken, analytics)
 router.get("/:id", verifyToken, getComplaintsByBusiness)
 
 export default router;

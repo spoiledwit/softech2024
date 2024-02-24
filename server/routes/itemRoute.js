@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", getItems);
 router.get("/:id", getItem);
-router.get("/analytics", verifyToken, analytics);
+router.get("/analytics/:id", verifyToken, analytics);
 router.get("/business/:businessId", getItemByBusiness);
 router.post("/", verifyToken, createItem);
 router.post("/review", verifyToken, addReview);
