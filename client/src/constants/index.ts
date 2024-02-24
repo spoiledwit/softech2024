@@ -74,6 +74,14 @@ export const categories: CategoryType[] = [
   },
 ];
 
+export const sampleCats = [
+  "Historical Sites",
+  "Natural Wonders",
+  "Cultural Attractions",
+  "Adventure Spots",
+  "Hajj and Umrah",
+]
+
 export const otherNavItems = [
   {
     title: "Blog",

@@ -17,7 +17,6 @@ import { useState } from "react";
 
 const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
-  const [openNotification, setOpenNotification] = useState(false);
 
   return (
     <>
@@ -38,20 +37,6 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          {/* {user ? (
-            <p
-              onClick={() => {
-                logout();
-              }}
-              className=" whitespace-nowrap mr-6 cursor-pointer"
-            >
-              Sign Out {user?.name}
-            </p>
-          ) : (
-            <Link className="mr-6" to={"/login"}>
-              Login
-            </Link>
-          )} */}
 
           <Link to={"/cart"} className="relative md:block hidden w-fit p-2">
             <span className="absolute right-0 top-[-2px] bg-red-500 w-[20px] h-[20px] text-center font-light flex justify-center items-center text-[10px] text-white rounded-full">
@@ -75,7 +60,7 @@ const Navbar = () => {
                   <>
                     <img
                       src={user.picture}
-                      className="w-[80px] h-[37px] object-cover rounded-full"
+                      className="w-[60px] h-[37px] object-cover rounded-full"
                       alt=""
                     />
                   </>
@@ -83,7 +68,14 @@ const Navbar = () => {
                   <BiUser size={25} />
                 )}
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="">
+              <DropdownMenuContent
+              style={{
+                right: 0,
+                top: "50px",
+                width: "200px",
+                zIndex: 1000,
+              
+              }}>
                 <DropdownMenuItem>
                   <Link to={"/profile"}>Profile</Link>
                 </DropdownMenuItem>
