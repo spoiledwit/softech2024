@@ -108,6 +108,9 @@ const Navbar = () => {
                     <DropdownMenuItem>Dashboard</DropdownMenuItem>
                   </Link>
                 )}
+                <DropdownMenuItem>
+                  <Link to={"/video-call"}>Video Call</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="xl:hidden lg:hidden md:hidden block" onClick={(e) => e.preventDefault()}>
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1" className="border-0 p-0">

@@ -25,6 +25,7 @@ import Orders from "./pages/Business/Orders";
 import BusinessDashboard from "./pages/Business/BusinessDashboard";
 import SurpriseMe from "./pages/SurpriseMe/SurpriseMe";
 import Wishlist from "./pages/Wishlist";
+import VideoCall from "./pages/VideoCall";
 
 const App = () => {
   const { user, theme } = useAuthStore();
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="chat" element={<ChatPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="video-call" element={<VideoCall />} />
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
