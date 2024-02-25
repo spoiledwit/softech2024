@@ -128,6 +128,7 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { name, picture, preferences } = req.body;
+    console.log(name, picture, preferences)
     const user = await AuthModel.findById(req.userId);
     if (name) {
       user.name = name;

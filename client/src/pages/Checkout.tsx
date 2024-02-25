@@ -11,9 +11,6 @@ const CheckoutPage = () => {
           <BookerDetails />
         </div>
       </div>
-      <div className="mt-6 md:mt-20 border h-fit p-6">
-        <h2>Payment Methods to be added in here</h2>
-      </div>
     </div>
   );
 };

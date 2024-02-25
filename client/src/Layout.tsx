@@ -9,8 +9,10 @@ import "./layout.css";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import ItemsMap from "./components/maps/itemsMaps";
+import Bot from "./components/Bot";
 import { IoMdClose } from "react-icons/io";
 import { FaRegMap } from "react-icons/fa";
+import { SiRobotframework } from "react-icons/si";
 import {io} from "socket.io-client";
 
 const socketConnect = io("http://localhost:4000");
@@ -59,6 +61,7 @@ const Layout = () => {
   }, [user, socket]);
 
   const [showMap, setShowMap] = useState(false);
+  const [showBot, setShowBot] = useState(false);
 
   return (
     <>
@@ -66,6 +69,18 @@ const Layout = () => {
         <div>
           <Navbar />
         </div>
+      )}
+      {showBot && <Bot setOpen={setShowBot}/>}
+      {!showBot && (
+        <button
+          style={{
+            zIndex: 1000,
+          }}
+          onClick={() => setShowBot(true)}
+          className="fixed bottom-28 right-10 bg-white p-3 rounded-full shadow-md"
+        >
+          <SiRobotframework className="text-4xl text-yellow-500" />
+        </button>
       )}
       <div
         style={{
@@ -101,6 +116,7 @@ const Layout = () => {
             <IoMdClose className="text-4xl text-yellow-500" />
           </button>
         )}
+        
         <Outlet />
       </div>
       {user && <Footer />}

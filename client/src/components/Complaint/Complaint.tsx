@@ -1,10 +1,6 @@
-import { ForumType, ItemType, ReplyType } from '@/types';
+import {  ItemType, } from '@/types';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { Skeleton } from "@/components/ui/skeleton"
-import { BiMessageSquare, BiMessage, BiLike } from 'react-icons/bi'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
-import { Input } from "@/components/ui/input"
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { useToast } from '@/components/ui/use-toast';
 import {
@@ -12,7 +8,6 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 import { z } from 'zod';
@@ -102,7 +97,7 @@ const Complaint = ({ item }: { item: ItemType }) => {
                                         <Textarea
                                             disabled={user ? false : true}
                                             placeholder={user ? "Leave a message..." : "Please login to submit a query"}
-                                            className="resize-none"
+                                            className="resize-none border border-primary w-full p-2 rounded-lg focus:outline-none"
                                             {...field}
                                         />
                                     </FormControl>
