@@ -47,6 +47,15 @@ const Home = () => {
       image: img4,
       ctaText: "پاکستان کے عجائبات دریافت کریں",
     },
+    {
+      id: 99,
+      title: "حج اور عمرہ",
+      description: "ہمارے حج اور عمرہ پیکیجز کے ساتھ زندگی کے سفر کا تجربہ کریں۔ ہمارے ماہر ہدایت گار عمرہ اور حج کے مقدس شہروں کا بے درد سفر یقینی بنائیں گے۔",
+      link: "/pakistan-landmarks-tour",
+      location: "KSA",
+      image: "https://www.islamic-relief.org.uk/wp-content/uploads/2022/11/hajj-umrah-hero.jpg",
+      ctaText: "مزید دریافت کریں"
+    },
   ];
 
   const slides = [
@@ -57,7 +66,7 @@ const Home = () => {
         "Embark on an exhilarating journey across the magnificent northern areas of Pakistan. Our Northern Safari invites you into the heart of the Himalayas, where adventure meets serenity.",
       link: "/northern-areas-safari-pakistan",
       location: "Pakistan",
-      image: desert,
+      image: "https://hunzaguidespakistan.com/wp-content/uploads/2023/12/Derawar-Fort-Bahawalpur.jpg",
       ctaText: "Discover the Northern Magic",
     },
     {
@@ -77,8 +86,17 @@ const Home = () => {
         "Witness the grandeur of Pakistan with our curated tour of the city's most iconic attractions. Marvel at the architectural splendor of the Shahi Qila and explore the historic quarters of Lahore.",
       link: "/pakistan-landmarks-tour",
       location: "Pakistan",
-      image: img4,
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Blue_Hour_at_Pakistan_Monument.jpg/1200px-Blue_Hour_at_Pakistan_Monument.jpg",
       ctaText: "Discover Pakistan's Wonders",
+    },
+    {
+      id: 99,
+      title: "Hajj and Umrah",
+      description: "Experience the spiritual journey of a lifetime with our Hajj and Umrah packages. Our expert guides will ensure a seamless pilgrimage to the holy cities of Mecca and Medina.",
+      link: "/pakistan-landmarks-tour",
+      location: "KSA",
+      image: "https://www.islamic-relief.org.uk/wp-content/uploads/2022/11/hajj-umrah-hero.jpg",
+      ctaText: "Discover more"
     },
   ];
 

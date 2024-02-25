@@ -29,19 +29,19 @@ const Services = () => {
       id: 1,
       img: bkdrop3,
       title: "Historical Sites",
-      img2: sampleimg,
+      img2: "https://pkvogue.com/wp-content/uploads/2022/09/Pakistan-Historical-Places-With-Information-In-Urdu-Names-And-Images-11.jpg",
     },
     {
       id: 2,
       img: bkdrop2,
       title: "Natural Wonders",
-      img2: burj,
+      img2: "https://cdn-v2.theculturetrip.com/1200x630/wp-content/uploads/2017/11/great_nature_landscape_pakistan.webp",
     },
     {
       id: 3,
       img: bkdrop1,
       title: "Cultural Attractions",
-      img2: cruise,
+      img2: "https://qph.cf2.quoracdn.net/main-qimg-40c5803005b471055974556e221761b6.webp",
     },
     {
       id: 4,
