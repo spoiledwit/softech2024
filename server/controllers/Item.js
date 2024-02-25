@@ -240,12 +240,21 @@ export const generateSurprise = async (req, res) => {
     const userId = req.userId;
 
     const user = await AuthModel.findById(userId);
-    const items = await Item.find(
-      cat ? (cat !== "all" ? { category: cat } : {}) : {}
-    );
+    const pref = user.preferences;
+    // parsing the categories
+    const arr = [];
+    pref.forEach(element => {
+      arr.push(element.replace(/\s+/g, '-').toLowerCase());
+    });
+    const items = await Item.find();
+    // filter once to get the right categories
+    const filteredItems = await items.filter((item) => arr.includes(item.category));
+    // filter again to get the right budget
+    const evenMoreFilteredItems = filteredItems.filter((item) => item.price <= budget);
 
-    res.status(200).send(items);
+    res.status(200).send(evenMoreFilteredItems);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };

@@ -49,7 +49,7 @@ const Navbar = () => {
             to={"/chat"}
             className="relative md:block lg:block xl:block hidden w-fit p-2"
           >
-            <RiMessage3Line className="text-3xl text-black" />
+            <RiMessage3Line className="text-3xl text-black dark:text-white" />
           </Link>
           <Link
             to={"/cart"}
