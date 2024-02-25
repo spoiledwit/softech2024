@@ -42,6 +42,7 @@ const onlineUsers = [];
 
 io.on("connection", (socket) => {
   console.log("User connected");
+  socket.emit("me", socket.id);
 
   socket.on("sendMessage", (data) => {
     const receiver = onlineUsers.find(
@@ -62,11 +63,24 @@ io.on("connection", (socket) => {
     io.emit("onlineUsers", onlineUsers);
   });
 
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("callUser", {
+      signal: data.signalData,
+      from: data.from,
+      name: data.name,
+    });
+  });
+
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
+  });
+
   socket.on("disconnect", () => {
     const index = onlineUsers.findIndex((user) => user.socketId === socket.id);
     if (index !== -1) {
       onlineUsers.splice(index, 1);
     }
+    socket.broadcast.emit("callended");
     console.log("User disconnected");
   });
 });
