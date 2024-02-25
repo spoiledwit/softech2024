@@ -92,7 +92,7 @@ const BusinessDashboard = () => {
     })
 
     return (
-        <div className="min-h-screen bg-[#fff09e] dark:bg-white bg-opacity-30 pb-16">
+        <div className="min-h-screen  dark:bg-white bg-opacity-30 pb-16">
             <div className="flex justify-center ">
                 <div className="w-full py-10 px-5 flex flex-col gap-8">
                     <div className="w-full flex flex-row justify-between gap-5 border bg-white rounded-lg p-5 shadow-xl">

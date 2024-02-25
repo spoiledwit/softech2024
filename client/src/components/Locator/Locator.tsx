@@ -294,9 +294,9 @@ const Locator = ({
               )}
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-md ">
             <DialogHeader>
-              <DialogTitle>Get your Location</DialogTitle>
+              <DialogTitle className="text-black dark:text-white">Get your Location</DialogTitle>
               <DialogDescription>
                 We use your location to show you the nearest stores
               </DialogDescription>
@@ -313,6 +313,7 @@ const Locator = ({
                   defaultValue="Cairo, Egypt"
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Enter your location"
+                  className="text-black dark:text-white"
                   value={address}
                 />
                 {address.length > 0 && showPredictions && (

@@ -85,6 +85,10 @@ const Wishlist = () => {
     })();
   }, [user]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
@@ -139,11 +143,10 @@ const Wishlist = () => {
               <div className="absolute right-4 top-4">
                 {item?._id && (
                   <FaHeart
-                    className={`${
-                      checkIfInWishlist(item._id?.toString())
+                    className={`${checkIfInWishlist(item._id?.toString())
                         ? "text-red-500"
                         : "text-black opacity-50"
-                    } text-lg`}
+                      } text-lg`}
                   />
                 )}
               </div>
@@ -160,11 +163,10 @@ const Wishlist = () => {
                   {Array.from({ length: 5 }, (_, index) => (
                     <FaStar
                       key={index}
-                      className={`text-yellow-500 text-xs ${
-                        index < Math.round(4.5)
+                      className={`text-yellow-500 text-xs ${index < Math.round(4.5)
                           ? "text-yellow-500"
                           : "text-gray-300"
-                      }`}
+                        }`}
                     />
                   ))}
                   <p className="text-xs text-gray-600 ml-2">

@@ -26,6 +26,10 @@ const CartPage = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const fetchCartItems = async () => {
     try {
       setLoading(true);
