@@ -49,7 +49,7 @@ const CartItem = ({
           {cartItem.itemId.title}
         </h3>
         <p className="text-sm font-medium text-gray-500">
-          AED {cartItem.itemId.price}
+          PKR {cartItem.itemId.price}
         </p>
         <p className="text-sm text-gray-500">
           {cartItem.persons.adults} Adults, {cartItem.persons.children}{" "}

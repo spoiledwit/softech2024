@@ -138,7 +138,7 @@ const CategoryPage = () => {
                   : item.title}
               </h3>
               <div className="flex items-center justify-between">
-                <p className="text-yellow-600 font-medium">AED {item.price}</p>
+                <p className="text-yellow-600 font-medium">PKR {item.price}</p>
                 <div className="flex items-center">
                   {Array.from({ length: 5 }, (_, index) => (
                     <FaStar

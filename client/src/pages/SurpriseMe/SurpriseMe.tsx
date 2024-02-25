@@ -237,7 +237,7 @@ const SurpriseMe = () => {
                                     : items[selectedItem]?.title}
                             </h3>
                             <div className="flex items-center justify-between">
-                                <p className="text-yellow-600 font-medium">AED {items[selectedItem]?.price}</p>
+                                <p className="text-yellow-600 font-medium">PKR {items[selectedItem]?.price}</p>
                                 <div className="flex items-center">
                                     {Array.from({ length: 5 }, (_, index) => (
                                         <FaStar

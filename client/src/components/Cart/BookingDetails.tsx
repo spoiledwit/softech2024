@@ -22,7 +22,7 @@ const BookingDetails = ({ cart }: { cart: any[] }) => {
       <div className="flex justify-between items-center">
         <h1 className="text-lg font-medium">Total</h1>
         <h1 className="text-lg font-medium">
-          AED{" "}
+          PKR{" "}
           {cart
             .map((item) => item.totalPrice)
             .reduce((prev, curr) => prev + curr, 0)}
