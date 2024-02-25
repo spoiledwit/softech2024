@@ -37,10 +37,10 @@ const Complaints = () => {
         }
     }
 
-    const deleteItem = async (id: string) => {
+    const deleteComplaint = async (id: string) => {
         setDeleting(true);
         try {
-            await axios.delete(`${import.meta.env.VITE_BASE_URI}/item/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_BASE_URI}/complaint/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -61,15 +61,11 @@ const Complaints = () => {
         <>
             <div className="flex w-full flex-row mb-3 justify-between">
                 <h1 className="text-2xl font-semibold mb-3">Complaints</h1>
-                {/* <Link to={`/panel/create-item`}>
-                    <Button className="">Create item</Button>
-                </Link> */}
             </div>
             <Table>
                 <TableCaption>A list of all complaints submitted to your business</TableCaption>
                 <TableHeader className="hover:bg-secondary bg-secondary">
                     <TableRow className="bg-secondary hover:bg-secondary">
-                        {/* <TableHead className="w-[100px]">Cover</TableHead> */}
                         <TableHead className="w-[100px]">ID</TableHead>
                         <TableHead className="w-[100px]">User name</TableHead>
                         <TableHead className="w-[100px]">Message</TableHead>
@@ -81,13 +77,6 @@ const Complaints = () => {
                 <TableBody>
                     {complaints?.map((item: any) => (
                         <TableRow key={item._id} className="">
-                            {/* <TableCell className="font-medium">
-                                <img
-                                    className="w-10 h-10 object-cover rounded-full"
-                                    src={item.images[0]}
-                                    alt=""
-                                />
-                            </TableCell> */}
                             <TableCell className="font-medium">{item?._id}</TableCell>
                             <TableCell className="font-medium">{item.userId.name}</TableCell>
                             <TableCell className="font-medium">{item.message}</TableCell>
@@ -96,14 +85,7 @@ const Complaints = () => {
                             <div className="grid grid-2 grid-cols-2 gap-2 justify-start items-start p-1">
                                 <Button
                                     disabled={deleting}
-                                    // onClick={() => deleteItem(item._id)}
-                                    className="border border-black bg-transparent hover:text-white  text-black"
-                                >
-                                    {deleting ? "Chatting..." : "Chat"}
-                                </Button>
-                                <Button
-                                    disabled={deleting}
-                                    onClick={() => deleteItem(item._id)}
+                                    onClick={() => deleteComplaint(item._id)}
                                     className="bg-red-500 text-white hover:bg-red-600"
                                 >
                                     {deleting ? "Deleting..." : "Delete"}

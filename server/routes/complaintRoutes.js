@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.post("/", verifyToken, createComplaint)
 router.get("/", verifyToken, getComplaintsByUser)
-router.delete("/", verifyToken, deleteComplaint)
+router.delete("/:id", verifyToken, deleteComplaint)
 router.get("/analytics/:id", verifyToken, analytics)
 router.get("/:id", verifyToken, getComplaintsByBusiness)
 

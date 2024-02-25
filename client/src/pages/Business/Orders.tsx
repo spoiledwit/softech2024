@@ -31,10 +31,10 @@ const Orders = () => {
     }
   }
 
-  const deleteItem = async (id: string) => {
+  const deleteOrder = async (id: string) => {
     setDeleting(true);
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URI}/item/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_BASE_URI}/order/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -84,7 +84,7 @@ const Orders = () => {
               <div className="p-1">
                 <Button
                   disabled={deleting}
-                  onClick={() => deleteItem(item._id)}
+                  onClick={() => deleteOrder(item._id)}
                   className="bg-red-500 text-white"
                 >
                   {deleting ? "Deleting..." : "Delete"}

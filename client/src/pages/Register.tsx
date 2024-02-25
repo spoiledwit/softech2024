@@ -126,7 +126,8 @@ const Register = () => {
 
   return (
     <Form {...form}>
-      <div className="flex w-full h-screen items-center justify-center bg-primary/20">
+      <div className="flex w-full h-screen items-center justify-center ">
+        <img src="https://images.unsplash.com/photo-1520597191538-5c333fd1c980?q=80&w=1898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="object-cover absolute z-[-10]" />
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-[500px] space-y-2 max-h-[900px] shadow bg-white border rounded-xl p-10"

@@ -34,7 +34,7 @@ const Navbar = () => {
         style={{
           zIndex: 1000,
         }}
-        className="w-full top-0 border-b shadow fixed flex flex-row items-center justify-between p-2 xl:px-16 lg:px-16 md:px-16 px-5 bg-white dark:bg-dark transition-all py-3"
+        className="w-full top-0  shadow fixed flex flex-row items-center justify-between p-2 xl:px-16 lg:px-16 md:px-16 px-5 bg-white dark:bg-dark transition-all py-3"
       >
         <div className="flex flex-row items-center justify-between w-full">
           <Link to={"/"}>
