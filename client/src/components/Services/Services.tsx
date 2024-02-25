@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bkdrop1 from "@/assets/backdrops/1.png";
 import bkdrop2 from "@/assets/backdrops/2.png";
 import bkdrop3 from "@/assets/backdrops/3.png";
@@ -77,9 +78,17 @@ const Services = () => {
     },
   ];
 
-  const [drops, setDrops] = useState(
+  const [drops, setDrops] = useState<any>(
     isEnglish ? bkdrops : bkdropsUrdu
   );
+
+  useEffect(() => {
+    if (isEnglish) {
+      setDrops(bkdrops);
+    } else {
+      setDrops(bkdropsUrdu);
+    }
+  }, [isEnglish]);
 
   const handleMouseEnter = (id: any) => {
     const element = document.getElementById(`img-${id}`);
@@ -98,17 +107,9 @@ const Services = () => {
   return (
     <div className="min-h-[400px] py-10 px-8 md:px-16">
       <h2 className="text-2xl">
-        {isEnglish ? (
-          <>Our </>
-        ) : (
-          <>ہمارے </>
-        )}
+        {isEnglish ? <>Our </> : <>ہمارے </>}
         <span className="bg-yellow-500 px-2 italic text-white">
-          {isEnglish ? (
-            <>Experiences!</>
-          ) : (
-            <>تجربے</>
-          )}
+          {isEnglish ? <>Experiences!</> : <>تجربے</>}
         </span>
       </h2>
       <p className="mt-3 text-sm max-w-[500px] text-gray-700">
@@ -126,7 +127,7 @@ const Services = () => {
       </p>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 grid-flow-row  mt-6"> */}
       <div className="flex flex-row    justify-evenly items-center flex-wrap gap-4  mt-6">
-        {bkdrops.map((item) => (
+        {drops.map((item) => (
           <div
             onClick={() => {
               navigate(

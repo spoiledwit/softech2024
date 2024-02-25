@@ -104,9 +104,14 @@ const Home = () => {
   ];
 
   const [selectedSlides, setSelectedSlides] = useState(
-    language === "en" ? slides : slidesUrdu
+    isEnglish ? slides : slidesUrdu
   );
+
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    setSelectedSlides(isEnglish ? slides : slidesUrdu);
+  }, [isEnglish, slides, slidesUrdu]);
 
   useEffect(() => {
     const interval = setInterval(() => {
