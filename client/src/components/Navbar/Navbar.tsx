@@ -26,13 +26,15 @@ const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
   const { language, setLanguage } = useLanguageStore();
 
+  console.log(user?.picture)
+
   return (
     <>
       <div
         style={{
           zIndex: 1000,
         }}
-        className="w-full top-0 fixed flex flex-row items-center justify-between p-2 xl:px-16 lg:px-16 md:px-16 px-5 bg-white dark:bg-dark transition-all py-3"
+        className="w-full top-0 border-b shadow fixed flex flex-row items-center justify-between p-2 xl:px-16 lg:px-16 md:px-16 px-5 bg-white dark:bg-dark transition-all py-3"
       >
         <div className="flex flex-row items-center justify-between w-full">
           <Link to={"/"}>
@@ -108,6 +110,9 @@ const Navbar = () => {
                     <DropdownMenuItem>Dashboard</DropdownMenuItem>
                   </Link>
                 )}
+                <DropdownMenuItem>
+                  <Link to={"/video-call"}>Video Call</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="xl:hidden lg:hidden md:hidden block" onClick={(e) => e.preventDefault()}>
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1" className="border-0 p-0">

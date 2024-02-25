@@ -18,6 +18,9 @@ const AuthSchema = new mongoose.Schema(
     birthday: {
       type: Date,
     },
+    picture:{
+      type: String,
+    },
     postalCode: {
       type: String,
     },

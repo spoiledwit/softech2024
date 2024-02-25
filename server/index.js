@@ -12,6 +12,7 @@ import forumRoutes from "./routes/forumRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import complaintRouter from "../server/routes/complaintRoutes.js";
+import botRoutes from "../server/routes/botRoutes.js";
 import conversationRoutes from "./routes/conversationRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
@@ -41,6 +42,7 @@ const onlineUsers = [];
 
 io.on("connection", (socket) => {
   console.log("User connected");
+  socket.emit("me", socket.id);
 
   socket.on("sendMessage", (data) => {
     const receiver = onlineUsers.find(
@@ -61,11 +63,24 @@ io.on("connection", (socket) => {
     io.emit("onlineUsers", onlineUsers);
   });
 
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("callUser", {
+      signal: data.signalData,
+      from: data.from,
+      name: data.name,
+    });
+  });
+
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
+  });
+
   socket.on("disconnect", () => {
     const index = onlineUsers.findIndex((user) => user.socketId === socket.id);
     if (index !== -1) {
       onlineUsers.splice(index, 1);
     }
+    socket.broadcast.emit("callended");
     console.log("User disconnected");
   });
 });
@@ -102,6 +117,7 @@ app.use("/notification", notificationRoutes);
 app.use("/complaint", complaintRouter);
 app.use("/conversation", conversationRoutes);
 app.use("/message", messageRoutes);
+app.use("/bot", botRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");

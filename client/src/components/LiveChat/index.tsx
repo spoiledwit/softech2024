@@ -9,7 +9,7 @@ const LiveChat = ({ item }: { item: any }) => {
   const { socket } = useSocketStore();
   const [onlineUsers, setOnlineUsers] = useState<any>([]);
   const [loading, setLoading] = useState(false);
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,18 +22,22 @@ const LiveChat = ({ item }: { item: any }) => {
     };
   }, []);
 
-  const handleCreateConversation  = async () => {
+  const handleCreateConversation = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URI}/conversation`, {
-        receiverId: item.sellerId,
-        senderId: user?._id,
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URI}/conversation`,
+        {
+          receiverId: item.sellerId,
+          senderId: user?._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
-      navigate(`/chat/${res.data._id}`);
+      );
+      navigate(`/chat`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -41,19 +45,19 @@ const LiveChat = ({ item }: { item: any }) => {
     }
   };
 
- if (onlineUsers.find((user: any) => user.userId === item.sellerId)) {
-   return (
-     <div>
-      <Button
-      onClick={handleCreateConversation}
-      className="w-full"
-      >
-        {loading ? ("Loading...") : ("Start Live Chat")}
-      </Button>
-     </div>
-   );
-  
- }
+  if (
+    onlineUsers.find((user: any) => user.userId === item.sellerId) &&
+    user?._id !== item.sellerId
+  ) {
+    return (
+      <div className="relative">
+        <Button onClick={handleCreateConversation} className="w-full">
+          {loading ? "Loading..." : "Start Live Chat"}
+        </Button>
+        <div className="absolute top-[-2px] right-[-3px] bg-green-500 w-3 h-3 rounded-full" />
+      </div>
+    );
+  }
 };
 
 export default LiveChat;

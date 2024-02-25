@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { addToCart } from "@/lib/cart";
 import Complaint from "@/components/Complaint/Complaint";
 import LiveChat from "@/components/LiveChat";
+import VideoCall from "@/components/VideoCall";
 
 const Booking = ({ item }: { item: any }) => {
 
@@ -105,7 +106,10 @@ const Booking = ({ item }: { item: any }) => {
         {booking ? "Adding to cart..." : "Add to cart"}
       </button>
       <Complaint item={item} />
+      {/* @ts-ignore */}
       <LiveChat item={item} />
+      {/* @ts-ignore */}
+      <VideoCall item={item} />
     </div>
   );
 };

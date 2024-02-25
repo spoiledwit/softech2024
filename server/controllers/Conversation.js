@@ -18,6 +18,12 @@ export const getMyConversations = async (req, res) => {
 };
 
 export const createConversation = async (req, res) => {
+    const conversation = await Conversation.findOne({
+        members: { $all: [req.body.senderId, req.body.receiverId] },
+    });
+    if (conversation) {
+        return res.status(200).json("Conversation already exists");
+    }
     const newConversation = new Conversation({
         members: [req.body.senderId, req.body.receiverId],
     });
