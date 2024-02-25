@@ -44,7 +44,7 @@ const ProfilePage = () => {
     }
   };
   return (
-    <div className="w-full flex min-h-screen items-center flex-col pt-28">
+    <div className="w-full flex min-h-screen items-center flex-col md:pt-28 pt-24 md:px-0 px-7">
       <h1 className="text-3xl mb-10 font-semibold">Update your profile</h1>
       <div className="flex gap-3 items-center flex-col justify-center max-w-2xl">
         <Input
@@ -79,9 +79,8 @@ const ProfilePage = () => {
                     setPreferences([...preferences, cat]);
                   }
                 }}
-                className={`p-2 whitespace-nowrap border-2 border-gray-300 rounded-md cursor-pointer ${
-                  preferences.includes(cat) ? "bg-gray-100 border-black" : ""
-                }`}
+                className={`p-2 whitespace-nowrap md:border-2 border border-gray-300 md:text-md text-sm rounded-md cursor-pointer ${preferences.includes(cat) ? "bg-gray-100 border-black" : ""
+                  }`}
               >
                 {cat}
               </div>
