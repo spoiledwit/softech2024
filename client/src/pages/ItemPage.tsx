@@ -8,6 +8,7 @@ import Booking from "@/components/Item/Booking";
 import Content from "@/components/Item/Content";
 import { useParams } from "react-router-dom";
 import Recommendations from "@/components/Item/Recommendations";
+import ItemMap from "@/components/maps/itemMap";
 
 const Item = () => {
   const [item, setItem] = useState<any>();
@@ -86,6 +87,10 @@ const Item = () => {
                 <Booking item={item} />
               </div>
             </div>
+            <ItemMap 
+            lat={item.location.lat}
+            lng={item.location.lng}
+            />
             <hr className="mt-6 md:block" />
             <Recommendations
               title={
