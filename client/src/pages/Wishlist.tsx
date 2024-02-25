@@ -19,6 +19,18 @@ const Wishlist = () => {
     return isWishlisted;
   };
 
+  const appendToWishlist = (id: string) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    user.wishlist.push(id);
+  };
+
+  const removeFromWishlist = (id: string) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    user.wishlist = user.wishlist.filter((item) => item !== id);
+  };
+
   const handleWishlist = async (id: string) => {
     setUpdating(true);
     if (!user?._id) return;
