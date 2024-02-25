@@ -26,6 +26,8 @@ const Navbar = () => {
   const { user, theme, setTheme } = useAuthStore();
   const { language, setLanguage } = useLanguageStore();
 
+  console.log(user?.picture)
+
   return (
     <>
       <div
