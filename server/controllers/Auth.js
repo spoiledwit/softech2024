@@ -185,3 +185,12 @@ export const appendToWishlist = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getWishlist = async (req, res) => {
+  try {
+    const user = await AuthModel.findById(req.userId).populate("wishlist");
+    res.status(200).json(user.wishlist);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

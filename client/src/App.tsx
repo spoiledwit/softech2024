@@ -24,6 +24,7 @@ import ChatPage from "./pages/Chat";
 import Orders from "./pages/Business/Orders";
 import BusinessDashboard from "./pages/Business/BusinessDashboard";
 import SurpriseMe from "./pages/SurpriseMe/SurpriseMe";
+import Wishlist from "./pages/Wishlist";
 
 const App = () => {
   const { user, theme } = useAuthStore();
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="item/:id" element={<Item />} />
         <Route path="forgot-password" element={<ForgotPass />} />
         <Route path="forums" element={<Forums />} />
+        <Route path="wishlist" element={<Wishlist />} />
         <Route path="surprise-me" element={<SurpriseMe />} />
         <Route path="create-forum" element={<CreateForum />} />
         <Route path="forums/details/:id" element={<ForumDetails />} />

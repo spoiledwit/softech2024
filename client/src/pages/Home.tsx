@@ -19,94 +19,78 @@ const Home = () => {
   const slidesUrdu = [
     {
       id: 0,
-      title: "دُبئی میں ایک چمچماتے صحرائی سفر کا آغاز کریں",
+      title: "پاکستان میں ایک شاندار شمالی سفر کا آغاز کریں",
       description:
-        "دُبئی کے سنہری ریت کے ٹیلوں کے پار ایک دلچسپ سفر کا آغاز کریں۔ ہماری صحرائی سیاحت آپ کو عرب صحرا کے دل میں لے جاتی ہے، جہاں مہم جوئی سکون سے ملتی ہے۔",
-      link: "/desert-safari-dubai",
-      location: "دُبئی، متحدہ عرب امارات",
+        "پاکستان کے شاندار شمالی علاقہ جات کے پار ایک دلچسپ سفر کا آغاز کریں۔ ہماری شمالی سیاحت آپ کو ہمالیہ کے دل میں لے جاتی ہے، جہاں مہم جوئی سکون سے ملتی ہے۔",
+      link: "/northern-areas-safari-pakistan",
+      location: "پاکستان",
       image: desert,
-      ctaText: "صحرائی جادو دریافت کریں",
+      ctaText: "شمالی جادو دریافت کریں",
     },
     {
       id: 1,
-      title: "دُبئی مارینا کروز پر ایک شاندار سفر کا آغاز کریں",
+      title: "کراچی کے ساحل پر ایک شاندار سفر کا آغاز کریں",
       description:
-        "ہماری پرکشش کشتیوں پر مشرق وسطیٰ کے وینس کے ساتھ ساتھ چلیں۔ دُبئی مارینا کے چمکتے پانیوں کے ذریعے سفر کرتے ہوئے، دُبئی کی شاندار اسٹائل میں ڈوب جائیں۔",
-      link: "/dubai-marina-cruise",
-      location: "دُبئی مارینا، متحدہ عرب امارات",
+        "ہماری پرکشش کشتیوں پر بحیرہ عرب کے ساتھ ساتھ چلیں۔ کراچی کے ساحل کے چمکتے پانیوں کے ذریعے سفر کرتے ہوئے، کراچی کی شاندار اسٹائل میں ڈوب جائیں۔",
+      link: "/karachi-beach-cruise",
+      location: "کراچی، پاکستان",
       image: img2,
       ctaText: "شائستگی میں کروزر",
     },
     {
       id: 2,
-      title: "دُبئی کا دلچسپ واٹر سلائڈز فرار",
+      title: "پاکستان کے دلچسپ تفریحی مقامات کا دورہ",
       description:
-        "دُبئی کے سب سے شاندار واٹر سلائڈز کے ولن میں غوطہ لگائیں! ہمارے ایڈرینالین سے بھرے آبی عجائب گھروں میں نیچے کی طرف زوم کرتے ہوئے تیز رفتار محسوس کریں، جو ہمارے واٹر پارک کے خوبصورت ماحول میں لپیٹے ہیں۔",
-      link: "/dubai-water-park",
-      location: "دُبئی، متحدہ عرب امارات",
-      image: img3,
-      ctaText: "مذاق میں سلائڈ کریں",
-    },
-    {
-      id: 3,
-      title: "دُبئی کے مشہور مقامات کا ٹور",
-      description:
-        "دُبئی کے شہر کے سب سے مشہور پرکشش مقامات کے ہمارے منصوبہ بند دورے کے ساتھ دُبئی کی عظمت کا مشاہدہ کریں۔ برج العرب کی تعمیراتی شان و شوکت کو دیکھیں اور دُبئی کریک کے تاریخی محلوں کی سیر کریں۔",
-      link: "/dubai-landmarks-tour",
-      location: "دُبئی، متحدہ عرب امارات",
+        "پاکستان کے شہر کے سب سے مشہور پرکشش مقامات کے ہمارے منصوبہ بند دورے کے ساتھ پاکستان کی عظمت کا مشاہدہ کریں۔ شاندار شاہی قلعہ دیکھیں اور لاہور کے تاریخی محلوں کی سیر کریں۔",
+      link: "/pakistan-landmarks-tour",
+      location: "پاکستان",
       image: img4,
-      ctaText: "دُبئی کے عجائبات دریافت کریں",
+      ctaText: "پاکستان کے عجائبات دریافت کریں",
     },
   ];
 
   const slides = [
     {
       id: 0,
-      title: "Embark on a Dazzling Desert Odyssey in Dubai",
+      title: "Embark on a Dazzling Northern Odyssey in Pakistan",
       description:
-        "Embark on an exhilarating journey across the golden dunes of Dubai. Our Desert Safari invites you into the heart of the Arabian desert, where adventure meets serenity. ",
-      link: "/desert-safari-dubai",
-      location: "Dubai, UAE",
+        "Embark on an exhilarating journey across the magnificent northern areas of Pakistan. Our Northern Safari invites you into the heart of the Himalayas, where adventure meets serenity.",
+      link: "/northern-areas-safari-pakistan",
+      location: "Pakistan",
       image: desert,
-      ctaText: "Discover the Desert Magic",
+      ctaText: "Discover the Northern Magic",
     },
     {
       id: 1,
-      title: "Set Sail on a Luxurious Dubai Marina Cruise",
+      title: "Set Sail on a Luxurious Karachi Beach Cruise",
       description:
-        "Drift along the Venice of the Middle East on our elegant cruise boats. Immerse yourself in the opulence of Dubai's skyline as you navigate through the glistening waters of the Dubai Marina.",
-      link: "/dubai-marina-cruise",
-      location: "Dubai Marina, UAE",
+        "Drift along the Arabian Sea on our elegant cruise boats. Immerse yourself in the opulence of Karachi's skyline as you navigate through the glistening waters of the Karachi coast.",
+      link: "/karachi-beach-cruise",
+      location: "Karachi, Pakistan",
       image: img2,
       ctaText: "Cruise into Elegance",
     },
-
     {
       id: 2,
-      title: "Dubai's Thrilling Water Slide Escape",
+      title: "Pakistan's Thrilling Landmarks Tour",
       description:
-        "Dive into the thrill of Dubai's most spectacular water slides! Feel the rush as you zoom down our adrenaline-pumping aquatic marvels, wrapped in the scenic embrace of our water park.",
-      link: "/dubai-water-park",
-      location: "Dubai, UAE",
-      image: img3,
-      ctaText: "Slide into Fun",
-    },
-    {
-      id: 3,
-      title: "Dubai's Iconic Landmarks Tour",
-      description:
-        "Witness the grandeur of Dubai with our curated tour of the city's most iconic attractions. Marvel at the architectural splendor of Burj Al Arab and explore the historic quarters of Dubai Creek.",
-      link: "/dubai-landmarks-tour",
-      location: "Dubai, UAE",
+        "Witness the grandeur of Pakistan with our curated tour of the city's most iconic attractions. Marvel at the architectural splendor of the Shahi Qila and explore the historic quarters of Lahore.",
+      link: "/pakistan-landmarks-tour",
+      location: "Pakistan",
       image: img4,
-      ctaText: "Discover Dubai's Wonders",
+      ctaText: "Discover Pakistan's Wonders",
     },
   ];
 
   const [selectedSlides, setSelectedSlides] = useState(
-    language === "en" ? slides : slidesUrdu
+    isEnglish ? slides : slidesUrdu
   );
+
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    setSelectedSlides(isEnglish ? slides : slidesUrdu);
+  }, [isEnglish, slides, slidesUrdu]);
 
   useEffect(() => {
     const interval = setInterval(() => {
