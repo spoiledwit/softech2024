@@ -137,7 +137,7 @@ const Home = () => {
                   {selectedSlides[currentSlide].description}
                 </p>
                 <Link
-                  to={selectedSlides[currentSlide].link}
+                  to={"/category/all"}
                   className="text-white font-medium mt-12 md:mt-4 bg-yellow-500 transition-all duration-200 hover:bg-yellow-600 text-center items-center flex justify-center text-sm w-fit px-5 h-[45px] min-w-[170px] rounded-md"
                 >
                   {selectedSlides[currentSlide].ctaText}

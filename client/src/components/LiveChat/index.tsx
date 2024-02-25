@@ -37,7 +37,7 @@ const LiveChat = ({ item }: { item: any }) => {
           },
         }
       );
-      navigate(`/chat/${res.data._id}`);
+      navigate(`/chat`);
     } catch (error) {
       console.log(error);
     } finally {
