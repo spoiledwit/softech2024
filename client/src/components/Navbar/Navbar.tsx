@@ -152,9 +152,9 @@ const Navbar = () => {
                 </Link>
                 {
                   language == 'en' ?
-                    <DropdownMenuItem onClick={() => setLanguage("urdu")}>Switch language to Urdu</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage("urdu")}>Switch to Urdu</DropdownMenuItem>
                     :
-                    <DropdownMenuItem onClick={() => setLanguage("en")}>Switch language to English</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage("en")}>Switch to English</DropdownMenuItem>
                 }
                 {
                   user &&
