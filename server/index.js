@@ -12,6 +12,7 @@ import forumRoutes from "./routes/forumRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import complaintRouter from "../server/routes/complaintRoutes.js";
+import botRoutes from "../server/routes/botRoutes.js";
 import conversationRoutes from "./routes/conversationRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
@@ -102,6 +103,7 @@ app.use("/notification", notificationRoutes);
 app.use("/complaint", complaintRouter);
 app.use("/conversation", conversationRoutes);
 app.use("/message", messageRoutes);
+app.use("/bot", botRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");

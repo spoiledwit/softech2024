@@ -19,8 +19,10 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
+    "langchain": "^0.0.51",
     "nodemailer": "^6.9.9",
     "nodemon": "^2.0.20",
+    "openai": "^4.28.0",
     "socket.io": "^4.6.1",
     "stripe": "^12.7.0"
   }
