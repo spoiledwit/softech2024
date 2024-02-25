@@ -7,46 +7,16 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 
 const data = [
     {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
+        count: 0,
+        itemName: "Dubai Tour"
     },
     {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
+        count: 2,
+        itemName: "Minare Pakistan"
     },
     {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
+        count: 5,
+        itemName: "Dubai Umrah Package"
     },
 ];
 
@@ -83,11 +53,12 @@ const BusinessDashboard = () => {
                 });
             setItems(res.data);
             let arr = res.data;
-            await arr.forEach(item => {
+            arr.forEach(element => {
                 items?.push({
-                    itemName: item?.title,
-                    count: item?.reviews?.length
+                    itemName: element.title,
+                    count: element.reviews?.length
                 })
+
             });
             console.log(items);
             setLoading(false);
@@ -112,16 +83,11 @@ const BusinessDashboard = () => {
 
 
     useEffect(() => {
-
         getItemAnalytics();
         getItems();
         getOrders();
 
     }, [])
-    if (loading == false && items.length == 0) {
-        console.log("no items");
-        return 1;
-    }
 
     return (
         <div className="min-h-screen  dark:bg-white bg-opacity-30 pb-16">
@@ -133,7 +99,7 @@ const BusinessDashboard = () => {
                             <LineChart
                                 width={500}
                                 height={300}
-                                data={items}
+                                data={data}
                                 className="mt-5"
                             >
                                 <CartesianGrid strokeDasharray="2 2" />
