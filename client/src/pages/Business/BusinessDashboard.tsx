@@ -55,8 +55,9 @@ const BusinessDashboard = () => {
     const { user } = useAuthStore();
     const [complaintCount, setComplaintCount] = useState<number>(0);
     const [itemCount, setItemCount] = useState<number>(0);
+    const [items, setItems] = useState<any>(null);
 
-    async function getItems() {
+    async function getItemAnalytics() {
         try {
             const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/analytics/${user?.businessId}`,
                 {
@@ -65,6 +66,22 @@ const BusinessDashboard = () => {
                     }
                 });
             setItemCount(res.data);
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getItems() {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URI}/item/business/${user?.businessId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            console.log(res.data);
+            setItems(res.data);
             console.log(res.data);
         } catch (error) {
             console.log(error);
@@ -86,10 +103,24 @@ const BusinessDashboard = () => {
         }
     }
 
+    async function parseItems() {
+        await getItems();
+        let arr = [];
+        items.forEach(item => {
+            arr.push({
+                itemName: item.title,
+                count: item.reviews
+            })
+        });
+        setItems(arr);
+        console.log("herere:", arr);
+    }
+
     useEffect(() => {
-        getItems();
+        getItemAnalytics();
+        parseItems();
         getOrders();
-    })
+    }, [])
 
     return (
         <div className="min-h-screen  dark:bg-white bg-opacity-30 pb-16">
@@ -101,7 +132,7 @@ const BusinessDashboard = () => {
                             <LineChart
                                 width={500}
                                 height={300}
-                                data={data}
+                                data={items}
                                 className="mt-5"
                             >
                                 <CartesianGrid strokeDasharray="2 2" />
@@ -109,7 +140,7 @@ const BusinessDashboard = () => {
                                 <YAxis fontSize={12} />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="pv" stroke="#EAB308" strokeWidth={2} dot={false} />
+                                <Line type="monotone" dataKey="count" stroke="#EAB308" strokeWidth={2} dot={false} />
                             </LineChart>
                         </div>
                         <div className="w-1/3 flex flex-col justify-between">

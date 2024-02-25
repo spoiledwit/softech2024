@@ -98,9 +98,11 @@ const Navbar = () => {
                   zIndex: 1000,
                 }}
               >
-                <DropdownMenuItem>
-                  <Link to={"/profile"}>Profile</Link>
-                </DropdownMenuItem>
+                <Link to={"/profile"}>
+                  <DropdownMenuItem>
+                    Profile
+                  </DropdownMenuItem>
+                </Link>
                 {user?.businessId == null ? (
                   <Link to={"/business-form"}>
                     <DropdownMenuItem>Become a travel agent</DropdownMenuItem>
