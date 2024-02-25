@@ -55,7 +55,8 @@ const BusinessDashboard = () => {
     const { user } = useAuthStore();
     const [complaintCount, setComplaintCount] = useState<number>(0);
     const [itemCount, setItemCount] = useState<number>(0);
-    const [items, setItems] = useState<any>(null);
+    const [items, setItems] = useState<any>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     async function getItemAnalytics() {
         try {
@@ -80,9 +81,16 @@ const BusinessDashboard = () => {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
-            console.log(res.data);
             setItems(res.data);
-            console.log(res.data);
+            let arr = res.data;
+            await arr.forEach(item => {
+                items?.push({
+                    itemName: item?.title,
+                    count: item?.reviews?.length
+                })
+            });
+            console.log(items);
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -96,31 +104,24 @@ const BusinessDashboard = () => {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
-            console.log(res.data);
             setComplaintCount(res.data);
         } catch (error) {
             console.log(error);
         }
     }
 
-    async function parseItems() {
-        await getItems();
-        let arr = [];
-        items.forEach(item => {
-            arr.push({
-                itemName: item.title,
-                count: item.reviews
-            })
-        });
-        setItems(arr);
-        console.log("herere:", arr);
-    }
 
     useEffect(() => {
+
         getItemAnalytics();
-        parseItems();
+        getItems();
         getOrders();
+
     }, [])
+    if (loading == false && items.length == 0) {
+        console.log("no items");
+        return 1;
+    }
 
     return (
         <div className="min-h-screen  dark:bg-white bg-opacity-30 pb-16">
@@ -128,7 +129,7 @@ const BusinessDashboard = () => {
                 <div className="w-full py-10 px-5 flex flex-col gap-8">
                     <div className="w-full flex flex-row justify-between gap-5 border bg-white rounded-lg p-5 shadow-xl">
                         <div>
-                            <h1 className="px-5 text-4xl font-semibold">$8,185</h1>
+
                             <LineChart
                                 width={500}
                                 height={300}
@@ -136,7 +137,7 @@ const BusinessDashboard = () => {
                                 className="mt-5"
                             >
                                 <CartesianGrid strokeDasharray="2 2" />
-                                <XAxis dataKey="name" fontSize={12} />
+                                <XAxis dataKey="itemName" fontSize={12} />
                                 <YAxis fontSize={12} />
                                 <Tooltip />
                                 <Legend />
@@ -145,47 +146,15 @@ const BusinessDashboard = () => {
                         </div>
                         <div className="w-1/3 flex flex-col justify-between">
                             <div>
-                                <p className="text-2xl font-semibold">Total Deposits</p>
-                                <p className=" opacity-50 mt-3">Total amount deposited this month by all the users</p>
+                                <p className="text-2xl font-semibold">Total Reviews</p>
+                                <p className=" opacity-50 mt-3">Total amount reviews this month by all the users</p>
                                 <div className="flex flex-col mt-2 opacity-80 ">
-                                    <p>Pending Deposits: 40</p>
-                                    <p>Rejected Deposits: 100</p>
-                                    <p>Desposited Charge: $500</p>
                                 </div>
                             </div>
                             <Button className="bg-primary text-white dark:text-white dark:hover:bg-hover dark:bg-primary hover:bg-hover mb-6">View Deposits</Button>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row bg-white justify-between gap-5 border rounded-lg p-5 shadow-xl">
-                        <div>
-                            <h1 className="px-5 text-4xl font-semibold">$5,395</h1>
-                            <LineChart
-                                width={500}
-                                height={300}
-                                data={data}
-                                className="mt-5"
-                            >
-                                <CartesianGrid strokeDasharray="2 2" />
-                                <XAxis dataKey="name" fontSize={12} />
-                                <YAxis fontSize={12} />
-                                <Tooltip />
-                                <Legend />
-                                <Line type="monotone" dataKey="pv" stroke="#EAB308" strokeWidth={2} dot={false} />
-                            </LineChart>
-                        </div>
-                        <div className="w-1/3 flex flex-col justify-between">
-                            <div>
-                                <p className="text-2xl font-semibold">Total Withdrawals</p>
-                                <p className=" opacity-50 mt-3">Total amount withdrawed this month by all the users</p>
-                                <div className="flex flex-col mt-2 opacity-80 ">
-                                    <p>Pending Withdrawals: <span className="font-medium">32</span></p>
-                                    <p>Rejected Withdrawals: <span className="font-medium">130</span></p>
-                                    <p>Withdrawal Charge: <span className="font-medium">$142</span></p>
-                                </div>
-                            </div>
-                            <Button className="bg-primary text-white dark:text-white dark:hover:bg-hover dark:bg-primary hover:bg-hover mb-6">View Withdrawals</Button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div className="w-1/2 flex flex-col gap-3 pt-10 pr-5">

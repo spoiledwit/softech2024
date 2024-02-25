@@ -90,7 +90,7 @@ const Home = () => {
 
   useEffect(() => {
     setSelectedSlides(isEnglish ? slides : slidesUrdu);
-  }, [isEnglish, slides, slidesUrdu]);
+  }, [isEnglish]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -101,7 +101,7 @@ const Home = () => {
       }
     }, 5000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   return (
     <>
@@ -163,11 +163,10 @@ const Home = () => {
                 {slides.map((slide, index) => (
                   <div
                     key={index}
-                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${
-                      index === currentSlide
-                        ? "bg-white"
-                        : "bg-gray-400 bg-opacity-75"
-                    }`}
+                    className={`h-2 w-2 rounded-full mx-1 cursor-pointer ${index === currentSlide
+                      ? "bg-white"
+                      : "bg-gray-400 bg-opacity-75"
+                      }`}
                     onClick={() => setCurrentSlide(index)}
                   />
                 ))}
