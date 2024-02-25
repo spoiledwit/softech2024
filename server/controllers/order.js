@@ -137,7 +137,7 @@ export const getOrdersByBusiness = async (req, res) => {
 
     orders.forEach((order) => {
       order.items.forEach((item) => {
-        if (item.itemId.businessId === businessId) {
+        if (item.itemId && item.itemId.businessId === businessId) {
           businessOrder.push(order);
         }
       });
@@ -145,6 +145,7 @@ export const getOrdersByBusiness = async (req, res) => {
 
     res.status(200).json(businessOrder);
   } catch (error) {
+    console.log(error)
     res.status(404).json({ message: error.message });
   }
 };
