@@ -41,7 +41,7 @@ const LiveChat = ({ item }: { item: any }) => {
     }
   };
 
- if (onlineUsers.find((user: any) => user.userId === item.sellerId)) {
+ if (onlineUsers.find((user: any) => user.userId === item.sellerId) && user?._id !== item.sellerId) {
    return (
      <div>
       <Button
@@ -52,7 +52,6 @@ const LiveChat = ({ item }: { item: any }) => {
       </Button>
      </div>
    );
-  
  }
 };
 
